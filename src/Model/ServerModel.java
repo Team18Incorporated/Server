@@ -87,6 +87,7 @@ public class ServerModel {
 		users.get(userFromAuthToken.getUsername()).join(gameID);
 		GameInfo temp = gameInfo.get(gameID);
 		temp.addPlayer(new Player(userFromAuthToken.getID(), userFromAuthToken.getUsername(), temp.getNextColor()));
+		userFromAuthToken.join(gameID);
 		gameInfo.put(gameID, temp);
 	}
 	
@@ -100,7 +101,7 @@ public class ServerModel {
 
 	public Object getOpenGames() {
 		// TODO Auto-generated method stub
-		return joinableGames;
+		return joinableGames.toArray();
 	}
 
 
@@ -112,5 +113,9 @@ public class ServerModel {
 			Player p = gameInfoTemp.getPlayers()[i];
 			users.get(p.getPlayerID()).startGame(gameID);
 		}
+	}
+	
+	public GameInfo getGameInfo(String id) {
+		return gameInfo.get(id);
 	}
 }

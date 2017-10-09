@@ -1,6 +1,7 @@
 package Commands;
 
 import Common.ICommand;
+import Server.ServerFacade;
 
 /**
  * Created by abram on 10/2/2017.
@@ -34,9 +35,9 @@ public class RegisterCommand implements ICommand{
     }
 
 	@Override
-	public void execute() {
+	public Object execute() {
 		// TODO Auto-generated method stub
-		
+		return ServerFacade.getSingleton().registerUser(username, password);
 	}
 
 

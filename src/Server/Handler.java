@@ -1,3 +1,4 @@
+package Server;
 
 
 import java.io.IOException;
@@ -32,7 +33,7 @@ public class Handler implements HttpHandler {
 		Object req = null;
 		try {
 			req = gson.fromJson(inputStreamReader, Class.forName("Commands." + path.substring(1)+"Command"));
-			((ICommand)req).execute();
+			Object result = ((ICommand)req).execute();
 		} catch (JsonSyntaxException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -44,7 +45,7 @@ public class Handler implements HttpHandler {
 			e.printStackTrace();
 		}
 		PrintWriter printWriter = new PrintWriter(exchange.getResponseBody());
-		gson.toJson(req,printWriter);
+		gson.toJson(result,printWriter);
 		
 		exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
 		

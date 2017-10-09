@@ -4,6 +4,6 @@ package Common;
 public interface ICommand {
 
 
-	void execute();
+	Object execute();
 
 }

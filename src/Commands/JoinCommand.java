@@ -2,6 +2,7 @@ package Commands;
 
 import Common.ICommand;
 import Model.AuthToken;
+import Server.ServerFacade;
 
 /**
  * Created by abram on 10/2/2017.
@@ -45,9 +46,9 @@ public class JoinCommand implements ICommand{
     }
 
 	@Override
-	public void execute() {
+	public Object execute() {
 		// TODO Auto-generated method stub
-		
+		return ServerFacade.getSingleton().join(token, gameID);
 	}
 
 }

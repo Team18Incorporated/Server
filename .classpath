@@ -2,8 +2,6 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="C:/Users/Tesla/Documents/GitHub/Team18/Server/lib/gson-2.8.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Tesla/Documents/GitHub/Team18/Server/lib/junit-4.12.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Tesla/Documents/GitHub/Team18/Server/lib/sqlite-jdbc-3.8.7.jar"/>
+	<classpathentry kind="lib" path="C:/Users/price/Documents/GitHub/Team18/Server/lib/gson-2.8.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

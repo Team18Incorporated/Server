@@ -1,3 +1,5 @@
+package Server;
+import java.util.ArrayList;
 import java.util.UUID;
 
 import Common.IServer;
@@ -7,6 +9,13 @@ import Model.ServerModel;
 import Model.User;
 
 public class ServerFacade implements IServer{
+	
+	private static ServerFacade singleton;
+	
+	public static ServerFacade getSingleton(){
+		if(singleton == null) singleton = new ServerFacade();
+		return singleton;
+	}
 
 	public ServerFacade() {
 		
@@ -50,7 +59,12 @@ public class ServerFacade implements IServer{
 	@Override
 	public Object openGames() {
 		// TODO Auto-generated method stub
-		return ServerModel.getSingleton().getOpenGames();
+		String[] ids = (String[]) ServerModel.getSingleton().getOpenGames();
+		ArrayList<GameInfo> games = new ArrayList<GameInfo>();
+		for(int i = 0; i < ids.length; i++){
+			games.add(ServerModel.getSingleton().getGameInfo(ids[i]));
+		}
+		return games;
 	}
 
 	@Override
