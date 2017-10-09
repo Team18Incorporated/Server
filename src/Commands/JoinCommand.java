@@ -1,7 +1,7 @@
 package Commands;
 
-import Common.AuthToken;
 import Common.ICommand;
+import Model.AuthToken;
 
 /**
  * Created by abram on 10/2/2017.

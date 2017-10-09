@@ -1,5 +1,7 @@
 package Common;
 
+import Model.AuthToken;
+import Model.GameInfo;
 
 public interface IServer {
 	/*

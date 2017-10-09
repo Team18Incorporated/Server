@@ -1,6 +1,10 @@
 package Common;
 
-
+import Model.Game;
+import Model.GameInfo;
+import Model.GameList;
+import Model.Player;
+import Model.User;
 
 public interface IClient {
 

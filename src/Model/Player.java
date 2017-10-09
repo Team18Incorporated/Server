@@ -1,17 +1,17 @@
-package Common;
+package Model;
 
 
 public class Player {
 
-    private int playerID; //we may not need this if we just use the userID
+    private String playerID; //we may not need this if we just use the userID
     private String playerName;
-    private enum Color{RED, BLUE, GREEN, YELLOW, BLACK}
+    public enum Color{RED, BLUE, GREEN, YELLOW, BLACK}
     private Color color;
 
     //CONSTRUCTOR-----------------------------------------------------------------------------------
 
 
-    public Player(int playerID, String playerName, Color color) {
+    public Player(String playerID, String playerName, Color color) {
         this.playerID = playerID;
         this.playerName = playerName;
         this.color = color;
@@ -32,7 +32,9 @@ public class Player {
 	return playerName;
     }
 
-    public int getPlayerID(){
+    public String getPlayerID(){
 	return playerID;
     }
+
+    
 }

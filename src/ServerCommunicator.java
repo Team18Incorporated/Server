@@ -2,7 +2,6 @@
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
-import java.sql.Connection;
 
 import com.sun.net.httpserver.HttpServer;
 
@@ -10,7 +9,6 @@ public class ServerCommunicator {
 
 	public static  int SERVER_PORT_NUMBER = 8080;
 	private static final int MAX_WAITING_CONNECTIONS = 10;
-	private static boolean CommandStructure = false;
 	
 	public static final String HTTP_ROOT = "public_html";
 	
@@ -60,7 +58,7 @@ public class ServerCommunicator {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		if(args.length > 0) CommandStructure = true;
+		if(args.length > 0) SERVER_PORT_NUMBER = Integer.parseInt(args[0]);
 		new ServerCommunicator().run();
 	}
 
