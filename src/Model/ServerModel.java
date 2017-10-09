@@ -16,16 +16,6 @@ public class ServerModel {
 	
 	
 	/*
-	 * ToDo:
-	 * Singleton
-	 * Joinable Games (list)
-	 * Users (hash?)
-	 * Games (hash)
-	 * GameInfo (all games as a hash)
-	 * AuthTokens (and associated users)
-	 */
-	
-	/*
 	 * Users
 	 * -username
 	 * -password
@@ -35,6 +25,10 @@ public class ServerModel {
 	public ServerModel() {
 		// TODO Auto-generated constructor stub
 		users = new HashMap<String, User>();
+		gameInfo = new HashMap<String, GameInfo>();
+		games = new Vector<String>();
+		joinableGames = new Vector<String>();
+		authTokens = new HashMap<String, User>();
 	}
 	
 	
