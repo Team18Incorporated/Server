@@ -38,7 +38,8 @@ public class StartCommand implements ICommand{
 	@Override
 	public Object execute() {
 		// TODO Auto-generated method stub
-		return ServerFacade.getSingleton().startGame(gameID);
+		ServerFacade.getSingleton().startGame(gameID);
+		return null;
 	}
 
 }

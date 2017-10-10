@@ -48,7 +48,8 @@ public class JoinCommand implements ICommand{
 	@Override
 	public Object execute() {
 		// TODO Auto-generated method stub
-		return ServerFacade.getSingleton().join(token, gameID);
+		ServerFacade.getSingleton().join(token, gameID);
+		return null;
 	}
 
 }

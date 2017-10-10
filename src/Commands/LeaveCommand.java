@@ -16,8 +16,8 @@ public class LeaveCommand implements ICommand{
 	@Override
 	public Object execute() {
 		// TODO Auto-generated method stub
-		return ServerFacade.getSingleton().leave(token, gameID);
-		
+		ServerFacade.getSingleton().leave(token, gameID);
+		return null;
 	}
 
 }
