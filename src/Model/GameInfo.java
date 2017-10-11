@@ -1,21 +1,27 @@
 package Model;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 
 public class GameInfo {
 
     private String gameID;
+    private String gameName;
     private int numPlayers;
     private ArrayList<Player> playerList;
     private ArrayList<String> playerNames;
+    private boolean hasStarted = false;
+    private boolean maxPlayers=false;
 
     //CONSTRUCTOR-----------------------------------------------------------------------------------
 
-    public GameInfo(String gameID, ArrayList<Player> playerList) {
-        this.gameID = gameID;
-        this.playerList=(ArrayList<Player>) playerList;
+    public GameInfo(String gameName, ArrayList<Player> playerList) {
+        this.gameName = gameName;
+        this.gameID = UUID.randomUUID().toString();
+        this.playerList= playerList;
         numPlayers=this.playerList.size();
+        playerNames = new ArrayList<String>();
         for(int i=0; i<numPlayers; i++)
         {
             playerNames.add(this.playerList.get(i).getPlayerName());
@@ -37,11 +43,22 @@ public class GameInfo {
 
 	public void addPlayer(Player player) {
 		// TODO Auto-generated method stub
-		if(numPlayers <=5){
-			numPlayers++;
-			playerList.add(player);
-			playerNames.add(player.getPlayerName());
+		if(numPlayers<5){
+			if(checkPlayer(player))
+			{
+				numPlayers++;
+				playerList.add(player);
+				playerNames.add(player.getPlayerName());
+				
+			}
+				
+			
 		}
+		else
+		{
+			maxPlayers=true;
+		}
+		
 	}
 	
 	public Player.Color getNextColor(){
@@ -69,5 +86,22 @@ public class GameInfo {
 	public Player[] getPlayers() {
 		// TODO Auto-generated method stub
 		return (Player[]) playerList.toArray();
+	}
+	
+	public void start()
+	{
+		hasStarted=true;
+	}
+	
+	private boolean checkPlayer(Player newPlayer)
+	{
+		for(int i= 0; i<playerList.size(); i++)
+		{
+			if(playerList.get(i).getPlayerID()==newPlayer.getPlayerID())
+			{
+				return false;
+			}
+		}
+		return true;
 	}
 }

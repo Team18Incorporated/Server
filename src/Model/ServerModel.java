@@ -10,8 +10,8 @@ public class ServerModel {
 	private static ServerModel singleton;
 	private HashMap<String, User> users;
 	private HashMap<String, GameInfo> gameInfo;
-	private Vector<String> games;
-	private Vector<String> joinableGames;
+	private ArrayList<String> games;
+	private ArrayList<String> joinableGames;
 	private HashMap<String, User> authTokens;
 	
 	
@@ -26,8 +26,8 @@ public class ServerModel {
 		// TODO Auto-generated constructor stub
 		users = new HashMap<String, User>();
 		gameInfo = new HashMap<String, GameInfo>();
-		games = new Vector<String>();
-		joinableGames = new Vector<String>();
+		games = new ArrayList<String>();
+		joinableGames = new ArrayList<String>();
 		authTokens = new HashMap<String, User>();
 	}
 	
@@ -65,7 +65,8 @@ public class ServerModel {
 		players.add(new Player(user.getID(), user.getUsername(), Player.Color.RED));
 		GameInfo temp = new GameInfo(name, players);
 		gameInfo.put(temp.getID(), temp);
-		users.get(user.getUsername()).join(temp.getID());
+		user.join(temp.getID());
+		users.put(user.getID(), user);
 		joinableGames.add(temp.getID());
 		return temp;
 	}
@@ -83,13 +84,16 @@ public class ServerModel {
 	}
 
 
-	public void join(String gameID, User userFromAuthToken) {
+	public GameInfo join(String gameID, User userFromAuthToken) {
 		// TODO Auto-generated method stub
 		users.get(userFromAuthToken.getUsername()).join(gameID);
 		GameInfo temp = gameInfo.get(gameID);
 		temp.addPlayer(new Player(userFromAuthToken.getID(), userFromAuthToken.getUsername(), temp.getNextColor()));
 		userFromAuthToken.join(gameID);
 		gameInfo.put(gameID, temp);
+		
+		return temp;	
+		
 	}
 	
 	public void leave(String gameID, User userFromAuthToken) {
@@ -102,18 +106,28 @@ public class ServerModel {
 
 	public Object getOpenGames() {
 		// TODO Auto-generated method stub
-		return joinableGames.toArray();
+		return joinableGames;
 	}
 
 
-	public void startGame(String gameID) {
+	public StartedGameResult startGame(String gameID) {
 		// TODO Auto-generated method stub
+		StartedGameResult result;
 		GameInfo gameInfoTemp = gameInfo.get(gameID);
-		joinableGames.removeElement(gameID);
+		if(gameInfoTemp.getNumPlayers()<2)
+		{
+			result= new StartedGameResult(false);
+			return result;
+		}
+		gameInfoTemp.start();
+		joinableGames.remove(gameID);
 		for(int i = 0; i < gameInfoTemp.getNumPlayers(); i++){
 			Player p = gameInfoTemp.getPlayers()[i];
 			users.get(p.getPlayerID()).startGame(gameID);
 		}
+		result= new StartedGameResult(true);
+
+		return result;
 	}
 	
 	public GameInfo getGameInfo(String id) {

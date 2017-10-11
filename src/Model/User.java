@@ -1,6 +1,8 @@
 package Model;
 
+import java.util.ArrayList;
 import java.util.Vector;
+
 import Common.*;
 
 public class User {
@@ -8,16 +10,19 @@ public class User {
 	private String username;
 	private String password;
 	private String id;
-	private Vector<AuthToken> authtokens;
-	private Vector<String> startedGames;
-	private Vector<String> gameLobbys;
+	private ArrayList<AuthToken> authTokens;
+	private ArrayList<String> startedGames;
+	private ArrayList<String> gameLobbys;
 
 	public User(String user, String password, String id) {
 		// TODO Auto-generated constructor stub
 		username = user;
 		this.password = password;
 		this.id = id;
-	}
+		authTokens = new ArrayList<>();
+		startedGames = new ArrayList<>();
+		gameLobbys = new ArrayList<>();
+		}
 	
 	public String getUsername(){
 		return username;
@@ -35,7 +40,8 @@ public class User {
 
 	public void join(String gameID) {
 		// TODO Auto-generated method stub
-		gameLobbys.add(gameID);
+		if(!gameLobbys.contains(gameID))
+			gameLobbys.add(gameID);
 	}
 
 	public void leave(String gameID) {
@@ -45,12 +51,12 @@ public class User {
 
 	public Object getInProgressGames() {
 		// TODO Auto-generated method stub
-		return startedGames.toArray();
+		return  startedGames;
 	}
 
 	public Object getUnstartedGames() {
 		// TODO Auto-generated method stub
-		return gameLobbys.toArray();
+		return gameLobbys;
 	}
 
 	public void startGame(String gameID) {

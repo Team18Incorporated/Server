@@ -6,7 +6,7 @@ import Server.ServerFacade;
 
 public class UpdateUnstartedCommand implements ICommand{
 	
-	AuthToken authToken;
+	AuthToken token;
 
 	public UpdateUnstartedCommand() {
 		// TODO Auto-generated constructor stub
@@ -15,7 +15,7 @@ public class UpdateUnstartedCommand implements ICommand{
 	@Override
 	public Object execute() {
 		// TODO Auto-generated method stub
-		return ServerFacade.getSingleton().unstartedGames(authToken);
+		return ServerFacade.getSingleton().unstartedGames(token);
 	}
 
 }

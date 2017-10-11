@@ -2,6 +2,7 @@ package Common;
 
 import Model.AuthToken;
 import Model.GameInfo;
+import Model.StartedGameResult;
 
 public interface IServer {
 	/*
@@ -28,7 +29,7 @@ public interface IServer {
 	 * @Pre: 0 < authToken&&gameID < 10000
 	 * @Post: None
 	 */
-	public void join(AuthToken authToken, String gameID);
+	public GameInfo join(AuthToken authToken, String gameID);
 	/*
 	 * removes authToken user from gameID game
 	 * @Pre: 0 < authToken&&gameID < 10000
@@ -58,6 +59,6 @@ public interface IServer {
 	 * @Pre: 0 < gameID < 10000
 	 * @Post: None
 	 */
-	public void startGame(String gameID);
+	public StartedGameResult startGame(String gameID);
 
 }

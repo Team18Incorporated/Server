@@ -5,7 +5,9 @@ import java.util.UUID;
 import Common.IServer;
 import Model.AuthToken;
 import Model.GameInfo;
+import Model.GameList;
 import Model.ServerModel;
+import Model.StartedGameResult;
 import Model.User;
 
 public class ServerFacade implements IServer{
@@ -39,14 +41,17 @@ public class ServerFacade implements IServer{
 		if(ServerModel.getSingleton().checkAuthToken(authToken)){
 			return ServerModel.getSingleton().newGame(name, ServerModel.getSingleton().getUserFromAuthToken(authToken));
 		}
-		return null;
+		else
+			return null;
 	}
 
 	@Override
-	public void join(AuthToken authToken, String gameID) {
+	public GameInfo join(AuthToken authToken, String gameID) {
 		// TODO Auto-generated method stub
 		if(ServerModel.getSingleton().checkAuthToken(authToken))
-			ServerModel.getSingleton().join(gameID, ServerModel.getSingleton().getUserFromAuthToken(authToken));
+			return ServerModel.getSingleton().join(gameID, ServerModel.getSingleton().getUserFromAuthToken(authToken));
+		else
+			return null;
 	}
 
 	@Override
@@ -59,30 +64,41 @@ public class ServerFacade implements IServer{
 	@Override
 	public Object openGames() {
 		// TODO Auto-generated method stub
-		String[] ids = (String[]) ServerModel.getSingleton().getOpenGames();
+		ArrayList<String> ids =  (ArrayList<String>) ServerModel.getSingleton().getOpenGames();
 		ArrayList<GameInfo> games = new ArrayList<GameInfo>();
-		for(int i = 0; i < ids.length; i++){
-			games.add(ServerModel.getSingleton().getGameInfo(ids[i]));
+		for(int i = 0; i < ids.size(); i++){
+			games.add(ServerModel.getSingleton().getGameInfo(ids.get(i)));
 		}
-		return games;
+		return new GameList(games);
 	}
 
 	@Override
 	public Object inProgressGames(AuthToken authToken) {
 		// TODO Auto-generated method stub
-		return ServerModel.getSingleton().getUserFromAuthToken(authToken).getInProgressGames();
+		ArrayList<String> ids =  (ArrayList<String>) ServerModel.getSingleton().getUserFromAuthToken(authToken).getInProgressGames();
+		ArrayList<GameInfo> games = new ArrayList<GameInfo>();
+		for(int i = 0; i < ids.size(); i++){
+			games.add(ServerModel.getSingleton().getGameInfo(ids.get(i)));
+		}
+		return new GameList(games);
 	}
 
 	@Override
 	public Object unstartedGames(AuthToken authToken) {
 		// TODO Auto-generated method stub
-		return ServerModel.getSingleton().getUserFromAuthToken(authToken).getUnstartedGames();
+		ArrayList<String> ids =  (ArrayList<String>) ServerModel.getSingleton().getUserFromAuthToken(authToken).getUnstartedGames();
+		ArrayList<GameInfo> games = new ArrayList<GameInfo>();
+		for(int i = 0; i < ids.size(); i++){
+			games.add(ServerModel.getSingleton().getGameInfo(ids.get(i)));
+		}
+		return new GameList(games);
 	}
 
 	@Override
-	public void startGame(String gameID) {
+	public StartedGameResult startGame(String gameID) {
 		// TODO Auto-generated method stub
-		ServerModel.getSingleton().startGame(gameID);
+		Object result = ServerModel.getSingleton().startGame(gameID);
+		return (StartedGameResult) result;
 	}
 
 }
