@@ -121,11 +121,12 @@ public class ServerModel {
 		}
 		gameInfoTemp.start();
 		joinableGames.remove(gameID);
-		for(int i = 0; i < gameInfoTemp.getNumPlayers(); i++){
-			Player p = gameInfoTemp.getPlayers()[i];
+		for(int i = 0; i < gameInfoTemp.getPlayers().size(); i++){
+			Player p = gameInfoTemp.getPlayers().get(i);
 			users.get(p.getPlayerID()).startGame(gameID);
 		}
 		result= new StartedGameResult(true);
+		System.out.println("Here");
 
 		return result;
 	}

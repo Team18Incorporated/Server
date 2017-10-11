@@ -3,6 +3,8 @@ package Model;
 import java.util.ArrayList;
 import java.util.UUID;
 
+import com.sun.xml.internal.bind.v2.schemagen.xmlschema.List;
+
 
 public class GameInfo {
 
@@ -83,9 +85,9 @@ public class GameInfo {
 		numPlayers--;
 	}
 
-	public Player[] getPlayers() {
+	public ArrayList<Player> getPlayers() {
 		// TODO Auto-generated method stub
-		return (Player[]) playerList.toArray();
+		return playerList;
 	}
 	
 	public void start()

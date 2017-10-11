@@ -61,7 +61,7 @@ public class User {
 
 	public void startGame(String gameID) {
 		// TODO Auto-generated method stub
-		gameLobbys.remove(gameID);
+		if(gameLobbys.contains(gameID)) gameLobbys.remove(gameID);
 		startedGames.add(gameID);
 	}
 
