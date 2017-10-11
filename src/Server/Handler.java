@@ -31,9 +31,10 @@ public class Handler implements HttpHandler {
 		
 		InputStreamReader inputStreamReader = new InputStreamReader(exchange.getRequestBody());
 		Object req = null;
+		Object result =null;
 		try {
 			req = gson.fromJson(inputStreamReader, Class.forName("Commands." + path.substring(1)+"Command"));
-			Object result = ((ICommand)req).execute();
+			result = ((ICommand)req).execute();
 		} catch (JsonSyntaxException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -44,10 +45,12 @@ public class Handler implements HttpHandler {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
 		PrintWriter printWriter = new PrintWriter(exchange.getResponseBody());
 		gson.toJson(result,printWriter);
 		
-		exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
+		
 		
 		printWriter.close();
 		

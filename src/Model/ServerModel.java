@@ -52,11 +52,12 @@ public class ServerModel {
 	
 	public AuthToken login(String username, String password){
 		User temp = (User) users.get(username);
-		if(password == temp.getPassword()){
-			AuthToken tempAuth = new AuthToken();
+		AuthToken tempAuth = null;
+		if(temp!=null && password.equals(temp.getPassword())){
+			tempAuth = new AuthToken();
 			authTokens.put(tempAuth.getToken(), temp);
 		}
-		return null;
+		return tempAuth;
 	}
 	
 	public GameInfo newGame(String name, User user){
