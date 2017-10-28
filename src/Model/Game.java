@@ -9,44 +9,87 @@ public class Game {
 
     private List<Player> playerList;
     private String gameID; //could make ID's into something other than Strings
-    private int status=0;  //We could change these to enums or something but for now 0=in lobby/waiting   1= started
+    private GameMap map;
+    private ArrayList<TrainCard> faceUpCards;
+    private Deck trainCardDeck;
+    private Deck destinationDeck;
+    private int playerTurn;
 
     //CONSTRUCTOR-----------------------------------------------------------------------------------
-    public Game(Player player1)
+    public Game(List<Player> playerList)
     {
-        playerList = new ArrayList<Player>();
-        playerList.add(player1);
-        status=0;
+        this.playerList=playerList;
+        startGame();
     }
 
     //METHODS---------------------------------------------------------------------------------------
 
-    /*addPlayer adds a Player to the game while in the lobby
-    *
-    *@pre playerList cannot be null, newPlayer cannot be null, playerList.size < 5 , status ==0 (in lobby)
-    *@post adds newPlayer to the playerList of the Game being created. Returns boolean to indicate if the Player was successfully added
-    * */
-    public boolean addPlayer(Player newPlayer)
+
+    public List<Player> getPlayerList() {
+        return playerList;
+    }
+
+    public String getGameID() {
+        return gameID;
+    }
+
+    public GameMap getMap() {
+        return map;
+    }
+
+    public ArrayList<TrainCard> getFaceUpCards() {
+        return faceUpCards;
+    }
+
+    public int getNumTrainDeck() {
+        return TrainDeck.getSize();
+    }
+
+    public int getNumDestinationDeck() {
+        return DestinationDeck.getSize();
+    }
+
+    public int getPlayerTurn() {
+        return playerTurn;
+    }
+
+    public void setPlayerList(List<Player> playerList) {
+        this.playerList = playerList;
+    }
+
+    public void setGameID(String gameID) {
+        this.gameID = gameID;
+    }
+
+    public void setMap(GameMap map) {
+        this.map = map;
+    }
+
+    public void setNumTrainDeck(int numTrainDeck) {
+        this.numTrainDeck = numTrainDeck;
+    }
+    public void setPlayerTurn(int playerTurn) {
+        this.playerTurn = playerTurn;
+    }
+
+    private void startGame()
     {
-        if (playerList.size()<5 && status==0 )
+        for(int i=0; i<playerList.size(); i++)
         {
-            playerList.add(newPlayer);
-            return true;
-        }
-        else
-        {
-            return false;
+            playerList.get(i).addCardstoHand(trainCardDeck.drawCards(4));
+            playerList.get(i).addDestinationCards(destinationDeck.drawCards(3));
+            faceUpCards=trainCardDeck.drawCards(4);
         }
     }
 
-
-    /*startGame sets the Game status to started
-    *
-    * @pre status==0
-    * @post status=1
-    * */
-    public void startGame()
+    public Card drawFaceUpCard(int index)
     {
-        status=1;
+        Card card = visibleCards.get(index);
+        Card newCard = trainCardDeck.drawCards(1).get(0);
+        visibleCards.add(index, newCard);
+        return card;
     }
+
+
+
 }

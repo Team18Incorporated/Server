@@ -61,4 +61,36 @@ public interface IServer {
 	 */
 	public StartedGameResult startGame(String gameID);
 
+	/*
+	* @pre route is not null
+	* @pre 0 < authToken&&gameID < 10000
+	* @post returns a list of commands to be executed on the client.
+	 */
+	public CommandList claimRoute(AuthToken authToken, String gameID, Route route);
+
+	/*
+	* @pre 0 < authToken&&gameID < 10000
+	* @post returns a list of commands (UpdateTrainHand and UpdateTrainDeckSize)
+	 */
+	public CommandList drawTrainCard(AuthToken authToken, String gameID);
+
+	/*
+	* @pre 0 < authToken&&gameID < 10000
+	* @post returns a command that displays the player's choosable destination cards.
+ 	*/
+	public ShowDestinationChoicesCommand drawDestinationCard(AuthToken authToken, String gameID);
+
+	/*
+	* @pre 0 < authToken&&gameID < 10000
+	* @post returns a list of commands
+	 */
+	public CommandList sendBackDestinations(AuthToken authToken, String gameID, List<DestinationCard> list);
+
+	/*
+	* @pre 0 < authToken&&gameID < 10000
+	* @pre card is not null
+	* @post returns a list containing an update hand command and update
+	 */
+	public UpdateFaceUpCommand drawFromFaceUp(AuthToken authToken, String gameID, TrainCard card);
+}
 }
