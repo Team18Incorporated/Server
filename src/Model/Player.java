@@ -1,6 +1,8 @@
 package Model;
 
 
+import java.util.ArrayList;
+
 import com.sun.xml.internal.bind.v2.schemagen.xmlschema.List;
 
 import edu.byu.cs.team18.tickettoride.Common.DestinationCard;

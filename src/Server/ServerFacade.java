@@ -1,13 +1,20 @@
 package Server;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
+import Commands.CommandList;
+import Commands.ShowDestinationChoicesCommand;
+import Commands.UpdateFaceUpCommand;
 import Common.IServer;
 import Model.AuthToken;
+import Model.DestinationCard;
 import Model.GameInfo;
 import Model.GameList;
+import Model.Route;
 import Model.ServerModel;
 import Model.StartedGameResult;
+import Model.TrainCard;
 import Model.User;
 
 public class ServerFacade implements IServer{
@@ -99,6 +106,36 @@ public class ServerFacade implements IServer{
 		// TODO Auto-generated method stub
 		Object result = ServerModel.getSingleton().startGame(gameID);
 		return (StartedGameResult) result;
+	}
+
+	@Override
+	public CommandList claimRoute(AuthToken authToken, String gameID, Route route) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public CommandList drawTrainCard(AuthToken authToken, String gameID) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ShowDestinationChoicesCommand drawDestinationCard(AuthToken authToken, String gameID) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public CommandList sendBackDestinations(AuthToken authToken, String gameID, List<DestinationCard> list) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public UpdateFaceUpCommand drawFromFaceUp(AuthToken authToken, String gameID, TrainCard card) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
