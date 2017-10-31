@@ -1,9 +1,11 @@
 package Model;
 
 
+import java.util.ArrayList;
+
 import com.sun.xml.internal.bind.v2.schemagen.xmlschema.List;
 
-import edu.byu.cs.team18.tickettoride.Common.DestinationCard;
+
 
 public class Player {
 
@@ -82,15 +84,15 @@ public class Player {
         claimedRoutes.add(route);
     }
 
-
-    public void addCardstoHand(List<TrainCard> cards)
+    
+    public void addCardstoHand(ArrayList<TrainCard> cards)
     {
-        hand.add(cards);
+        hand.addAll(cards);
     }
 
-    public void addDestinationCards(List<DestinationCard> cards)
+    public void addDestinationCards(ArrayList<DestinationCard> cards)
     {
-        destinationCards.add(cards);
+        destinationCards.addAll(cards);
     }
 
     

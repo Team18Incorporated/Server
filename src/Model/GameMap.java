@@ -1,6 +1,5 @@
 package Model;
 
-import android.util.Pair;
 
 import java.io.File;
 import java.io.FileNotFoundException;

@@ -1,8 +1,16 @@
 package Common;
 
+import java.util.List;
+
 import Model.AuthToken;
 import Model.GameInfo;
+import Model.Route;
 import Model.StartedGameResult;
+import Commands.CommandList;
+import Commands.ShowDestinationChoicesCommand;
+import Commands.UpdateFaceUpCommand;
+import Model.DestinationCard;
+import Model.TrainCard;
 
 public interface IServer {
 	/*
@@ -92,5 +100,5 @@ public interface IServer {
 	* @post returns a list containing an update hand command and update
 	 */
 	public UpdateFaceUpCommand drawFromFaceUp(AuthToken authToken, String gameID, TrainCard card);
-}
+
 }
