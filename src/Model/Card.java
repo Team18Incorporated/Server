@@ -1,4 +1,4 @@
 package Model;
 
-public class Card {
+public interface Card {
 }

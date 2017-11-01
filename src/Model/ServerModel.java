@@ -14,6 +14,8 @@ public class ServerModel {
 	private ArrayList<String> joinableGames;
 	private HashMap<String, User> authTokens;
 	
+	private HashMap<String, Game> game;
+	
 	
 	/*
 	 * Users
@@ -29,6 +31,7 @@ public class ServerModel {
 		games = new ArrayList<String>();
 		joinableGames = new ArrayList<String>();
 		authTokens = new HashMap<String, User>();
+		game = new HashMap<String, Game>();
 	}
 	
 	
@@ -125,8 +128,8 @@ public class ServerModel {
 			Player p = gameInfoTemp.getPlayers().get(i);
 			users.get(p.getPlayerID()).startGame(gameID);
 		}
+		
 		result= new StartedGameResult(true);
-		System.out.println("Here");
 
 		return result;
 	}

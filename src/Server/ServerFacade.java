@@ -5,9 +5,11 @@ import java.util.UUID;
 
 import Commands.CommandList;
 import Commands.ShowDestinationChoicesCommand;
+import Commands.UpdateChatHistoryCommand;
 import Commands.UpdateFaceUpCommand;
 import Common.IServer;
 import Model.AuthToken;
+import Model.ChatMessage;
 import Model.DestinationCard;
 import Model.GameInfo;
 import Model.GameList;
@@ -134,6 +136,12 @@ public class ServerFacade implements IServer{
 
 	@Override
 	public UpdateFaceUpCommand drawFromFaceUp(AuthToken authToken, String gameID, TrainCard card) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public UpdateChatHistoryCommand sendChat(AuthToken authToken, ChatMessage chatMessage) {
 		// TODO Auto-generated method stub
 		return null;
 	}

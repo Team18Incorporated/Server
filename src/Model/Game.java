@@ -10,7 +10,7 @@ public class Game {
     private List<Player> playerList;
     private String gameID; //could make ID's into something other than Strings
     private GameMap map;
-    private ArrayList<TrainCard> faceUpCards;
+    private List<Card> faceUpCards;
     private Deck trainCardDeck;
     private Deck destinationDeck;
     private int playerTurn;
@@ -23,6 +23,7 @@ public class Game {
         destinationDeck = new Deck(1);
         trainCardDeck.shuffle();
         destinationDeck.shuffle();
+        faceUpCards = new ArrayList<TrainCard>();
         startGame();
     }
 
@@ -69,9 +70,6 @@ public class Game {
         this.map = map;
     }
 
-    public void setNumTrainDeck(int numTrainDeck) {
-        this.numTrainDeck = numTrainDeck;
-    }
     public void setPlayerTurn(int playerTurn) {
         this.playerTurn = playerTurn;
     }
@@ -83,14 +81,14 @@ public class Game {
             playerList.get(i).addCardstoHand(trainCardDeck.drawCards(4));
             playerList.get(i).addDestinationCards(destinationDeck.drawCards(3));
         }
-        faceUpCards=trainCardDeck.drawCards(4);
+        faceUpCards= trainCardDeck.drawCards(4);
     }
 
     public Card drawFaceUpCard(int index)
     {
-        Card card = visibleCards.get(index);
+        Card card = faceUpCards.get(index);
         Card newCard = trainCardDeck.drawCards(1).get(0);
-        visibleCards.add(index, newCard);
+        faceUpCards.add(index, newCard);
         return card;
     }
 

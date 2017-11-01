@@ -2,10 +2,9 @@ package Model;
 
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
-import com.sun.xml.internal.bind.v2.schemagen.xmlschema.List;
-
-import edu.byu.cs.team18.tickettoride.Common.DestinationCard;
 
 public class Player {
 
@@ -85,14 +84,14 @@ public class Player {
     }
 
 
-    public void addCardstoHand(List<TrainCard> cards)
+    public void addCardstoHand(List<Card> list)
     {
-        hand.add(cards);
+        hand.addAll((Collection<? extends TrainCard>) list);
     }
 
-    public void addDestinationCards(List<DestinationCard> cards)
+    public void addDestinationCards(List<Card> list)
     {
-        destinationCards.add(cards);
+        destinationCards.addAll((Collection<? extends DestinationCard>) list);
     }
 
     

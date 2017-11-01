@@ -3,7 +3,7 @@ package Model;
 
 import java.util.ArrayList;
 
-public class DestinationCard extends Card {
+public class DestinationCard implements Card {
 
     City startCity;
     City endCity;
