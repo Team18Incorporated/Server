@@ -1,10 +1,8 @@
 package Common;
 
-import Model.*;
-
-import java.util.List;
-
-import Commands.*;
+import Model.AuthToken;
+import Model.GameInfo;
+import Model.StartedGameResult;
 
 public interface IServer {
 	/*
@@ -94,6 +92,5 @@ public interface IServer {
 	* @post returns a list containing an update hand command and update
 	 */
 	public UpdateFaceUpCommand drawFromFaceUp(AuthToken authToken, String gameID, TrainCard card);
-	
-	public UpdateChatHistoryCommand sendChat(AuthToken authToken, ChatMessage chatMessage);
+}
 }

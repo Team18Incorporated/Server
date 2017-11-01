@@ -128,9 +128,4 @@ public class Deck {
         }
         return cards;
     }
-
-	public int getSize() {
-		// TODO Auto-generated method stub
-		return deckList.size();
-	}
 }

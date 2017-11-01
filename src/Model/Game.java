@@ -19,10 +19,6 @@ public class Game {
     public Game(List<Player> playerList)
     {
         this.playerList=playerList;
-        trainCardDeck = new Deck(0);
-        destinationDeck = new Deck(1);
-        trainCardDeck.shuffle();
-        destinationDeck.shuffle();
         startGame();
     }
 
@@ -46,11 +42,11 @@ public class Game {
     }
 
     public int getNumTrainDeck() {
-        return trainCardDeck.getSize();
+        return TrainDeck.getSize();
     }
 
     public int getNumDestinationDeck() {
-        return destinationDeck.getSize();
+        return DestinationDeck.getSize();
     }
 
     public int getPlayerTurn() {
@@ -82,8 +78,8 @@ public class Game {
         {
             playerList.get(i).addCardstoHand(trainCardDeck.drawCards(4));
             playerList.get(i).addDestinationCards(destinationDeck.drawCards(3));
+            faceUpCards=trainCardDeck.drawCards(4);
         }
-        faceUpCards=trainCardDeck.drawCards(4);
     }
 
     public Card drawFaceUpCard(int index)

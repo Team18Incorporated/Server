@@ -2,7 +2,7 @@ package Model;
 
 
 
-public class TrainCard implements Card {
+public class TrainCard extends Card {
 
     private CardColor color;
 
