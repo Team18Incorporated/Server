@@ -128,6 +128,7 @@ public class ServerModel {
 			Player p = gameInfoTemp.getPlayers().get(i);
 			users.get(p.getPlayerID()).startGame(gameID);
 		}
+		gameList.put(gameID, new Game(gameInfoTemp.getPlayers()));
 		result= new StartedGameResult(true);
 		System.out.println("Here");
 

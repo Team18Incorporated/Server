@@ -109,36 +109,37 @@ public class ServerFacade implements IServer{
 	}
 
 	@Override
-	public CommandList claimRoute(AuthToken authToken, String gameID,Route route) {
+	public void claimRoute(AuthToken authToken, String gameID, Route route) {
 		// TODO IMPLEMENT THIS METHOD
-		return null;
+		// check 
+		// get game from ServerModel
+		// get routes
+		// 
 	}
 
 	@Override
-	public CommandList drawTrainCard(AuthToken authToken, String gameID) {
+	public void drawTrainCard(AuthToken authToken, String gameID) {
 		// TODO IMPLEMENT THIS METHOD
-		return null;
+		//check if user in game
+		//get game and draw card 
 	}
 
 	@Override
-	public ShowDestinationChoicesCommand drawDestinationCard(
+	public void drawDestinationCard(
 			AuthToken authToken, String gameID) {
 		// TODO IMPLEMENT THIS METHOD
-		return null;
 	}
 
 	@Override
-	public CommandList sendBackDestinations(AuthToken authToken, String gameID,
+	public void sendBackDestinations(AuthToken authToken, String gameID,
 			List<DestinationCard> list) {
 		// TODO IMPLEMENT THIS METHOD
-		return null;
 	}
 
 	@Override
-	public UpdateFaceUpCommand drawFromFaceUp(AuthToken authToken,
+	public void drawFromFaceUp(AuthToken authToken,
 			String gameID, TrainCard card) {
 		// TODO IMPLEMENT THIS METHOD
-		return null;
 	}
 
 }

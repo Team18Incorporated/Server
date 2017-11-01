@@ -2,6 +2,10 @@ package Model;
 
 
 import java.util.ArrayList;
+import java.util.Date;
+
+import Commands.CommandList;
+import Common.ICommand;
 
 import com.sun.xml.internal.bind.v2.schemagen.xmlschema.List;
 
@@ -18,6 +22,8 @@ public class Player {
     private int points;
     private ArrayList<Route> claimedRoutes = new ArrayList<>();
     private int numTrainPieces;
+    
+    private PlayerCommandList commands = new PlayerCommandList();
 
     //CONSTRUCTOR-----------------------------------------------------------------------------------
 
@@ -93,6 +99,14 @@ public class Player {
     public void addDestinationCards(ArrayList<DestinationCard> cards)
     {
         destinationCards.addAll(cards);
+    }
+    
+    public void addCommand(ICommand command){
+    	commands.addCommand(command);
+    }
+    
+    public CommandList getCommands(Date latest){
+    	return commands.getCommands(latest);
     }
 
     
