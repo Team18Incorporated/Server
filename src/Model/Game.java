@@ -11,12 +11,12 @@ public class Game {
     private String gameID; //could make ID's into something other than Strings
     private GameMap map;
     private ArrayList<TrainCard> faceUpCards;
-    private Deck trainCardDeck;
-    private Deck destinationDeck;
+    private TrainDeck trainCardDeck;
+    private DestinationDeck destinationDeck;
     private int playerTurn;
 
     //CONSTRUCTOR-----------------------------------------------------------------------------------
-    public Game(List<Player> playerList)
+    public Game(ArrayList<Player> playerList)
     {
         this.playerList=playerList;
         startGame();
@@ -42,11 +42,11 @@ public class Game {
     }
 
     public int getNumTrainDeck() {
-        return TrainDeck.getSize();
+        return trainCardDeck.getSize();
     }
 
     public int getNumDestinationDeck() {
-        return DestinationDeck.getSize();
+        return destinationDeck.getSize();
     }
 
     public int getPlayerTurn() {
@@ -65,9 +65,7 @@ public class Game {
         this.map = map;
     }
 
-    public void setNumTrainDeck(int numTrainDeck) {
-        this.numTrainDeck = numTrainDeck;
-    }
+    
     public void setPlayerTurn(int playerTurn) {
         this.playerTurn = playerTurn;
     }
@@ -82,11 +80,11 @@ public class Game {
         }
     }
 
-    public Card drawFaceUpCard(int index)
+    public TrainCard drawFaceUpCard(int index)
     {
-        Card card = visibleCards.get(index);
-        Card newCard = trainCardDeck.drawCards(1).get(0);
-        visibleCards.add(index, newCard);
+        TrainCard card = faceUpCards.get(index);
+        TrainCard newCard = trainCardDeck.drawCards(1).get(0);
+        faceUpCards.add(index, newCard);
         return card;
     }
 

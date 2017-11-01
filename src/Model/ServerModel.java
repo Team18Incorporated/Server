@@ -10,6 +10,7 @@ public class ServerModel {
 	private static ServerModel singleton;
 	private HashMap<String, User> users;
 	private HashMap<String, GameInfo> gameInfo;
+	private HashMap<String, Game> gameList;
 	private ArrayList<String> games;
 	private ArrayList<String> joinableGames;
 	private HashMap<String, User> authTokens;
@@ -22,6 +23,8 @@ public class ServerModel {
 	 * -joined games
 	 */
 	
+	
+	//mostrecent
 	public ServerModel() {
 		// TODO Auto-generated constructor stub
 		users = new HashMap<String, User>();

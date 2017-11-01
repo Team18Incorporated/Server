@@ -6,64 +6,19 @@ import java.util.List;
 
 
 
-public class Deck {
+public class DestinationDeck {
 
-    ArrayList<Card> deckList;
-    ArrayList<Card> discardList;
+    ArrayList<DestinationCard> deckList;
+    ArrayList<DestinationCard> discardList;
 
-    public Deck(int type)
+    public DestinationDeck()
     {
-        if(type==0)
-        {
-            createTrainDeck();
-        }
-        else
-        {
+       
             createDestinationDeck();
-        }
+        
     }
 
-    private void createTrainDeck()
-    {
-        deckList=new ArrayList<>();
-        for(int i=0; i<12; i++)
-        {
-            deckList.add(new TrainCard("red"));
-        }
-        for(int i=0; i<12; i++)
-        {
-            deckList.add(new TrainCard("blue"));
-        }
-        for(int i=0; i<12; i++)
-        {
-            deckList.add(new TrainCard("green"));
-        }
-        for(int i=0; i<12; i++)
-        {
-            deckList.add(new TrainCard("yellow"));
-        }
-        for(int i=0; i<12; i++)
-        {
-            deckList.add(new TrainCard("orange"));
-        }
-        for(int i=0; i<12; i++)
-        {
-            deckList.add(new TrainCard("white"));
-        }
-        for(int i=0; i<12; i++)
-        {
-            deckList.add(new TrainCard("black"));
-        }
-        for(int i=0; i<12; i++)
-        {
-            deckList.add(new TrainCard("purple"));
-        }
-
-        for(int i=0; i<14; i++)
-        {
-            deckList.add(new TrainCard("wild"));
-        }
-    }
+    
 
     private void createDestinationDeck()
     {
@@ -106,7 +61,7 @@ public class Deck {
         Collections.shuffle(deckList);
     }
 
-    public void discard(List<Card> list)
+    public void discard(List<DestinationCard> list)
     {
         discardList.addAll(list);
     }
@@ -118,14 +73,19 @@ public class Deck {
         Collections.shuffle(deckList);
     }
 
-    public List<Card> drawCards(int num)
+    public ArrayList<DestinationCard> drawCards(int num)
     {
-        ArrayList<Card> cards = new ArrayList<>();
+        ArrayList<DestinationCard> cards = new ArrayList<>();
         for(int i=0; i<num; i++)
         {
             cards.add(deckList.get(0));
             deckList.remove(0);
         }
         return cards;
+    }
+    
+    public int getSize()
+    {
+    	return deckList.size();
     }
 }

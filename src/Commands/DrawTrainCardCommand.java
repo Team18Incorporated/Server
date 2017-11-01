@@ -28,7 +28,7 @@ public class DrawTrainCardCommand implements ICommand{
     }
 
 
-    public CreateCommand(String gameID, AuthToken t)
+    public DrawTrainCardCommand(String gameID, AuthToken t)
     {
 	this.gameID=gameID;
         token = t;
