@@ -76,12 +76,12 @@ public class Game {
     	trainCardDeck.shuffle();
     	destinationDeck = new DestinationDeck();
     	destinationDeck.shuffle();
-        for(int i=0; i<playerList.size(); i++)
+        /*for(int i=0; i<playerList.size(); i++)
         {
             playerList.get(i).addCardstoHand(trainCardDeck.drawCards(4));
             playerList.get(i).addDestinationCards(destinationDeck.drawCards(3));
         }
-        faceUpCards=trainCardDeck.drawCards(4);
+        faceUpCards=trainCardDeck.drawCards(4);*/
         playerTurn = 0;
     }
 
