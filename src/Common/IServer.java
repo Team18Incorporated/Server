@@ -3,6 +3,7 @@ package Common;
 import java.util.List;
 
 import Model.AuthToken;
+import Model.ChatMessage;
 import Model.GameInfo;
 import Model.Route;
 import Model.StartedGameResult;
@@ -56,7 +57,9 @@ public interface IServer {
 	 * @Post: Object gamesList !=null && isType List<String> of gameIDs
 	 */
 	public Object inProgressGames(AuthToken authToken);
-	/*
+	/*public UpdateFaceUpCommand drawFromFaceUp(AuthToken authToken, String gameID, TrainCard card);
+
+	public UpdateChatHistoryCommand sendChat(AuthToken authToken, ChatMessage chatMessage);
 	 * returns a list of unstarted games authToken user is currently in
 	 * @Pre: 0 < authToken < 10000
 	 * @Post: Object gamesList !=null && isType List<String> of gameIDs
@@ -99,6 +102,8 @@ public interface IServer {
 	* @pre card is not null
 	* @post returns a list containing an update hand command and update
 	 */
-	public void drawFromFaceUp(AuthToken authToken, String gameID, TrainCard card);
+	public void drawFromFaceUp(AuthToken authToken, String gameID, int card);
+
+	public void sendChat(AuthToken authToken, ChatMessage chatMessage);
 
 }

@@ -36,8 +36,8 @@ public class DrawTrainCardCommand implements ICommand{
 
 	@Override
 	public Object execute() {
-		// TODO Auto-generated method stub
-		return ServerFacade.getSingleton().drawTrainCard(token, gameID);
+		return null;
+		// TODO Auto-generated method stuff
 		
 	}
 

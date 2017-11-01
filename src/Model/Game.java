@@ -92,6 +92,14 @@ public class Game {
         faceUpCards.add(index, newCard);
         return card;
     }
+    
+    public List<DestinationCard> drawDestinationCards(){
+    	return destinationDeck.drawCards(3);
+    }
+    
+    public TrainCard drawTrainCard(){
+    	return trainCardDeck.drawCard();
+    }
 
 
 

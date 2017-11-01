@@ -138,4 +138,10 @@ public class ServerModel {
 	public GameInfo getGameInfo(String id) {
 		return gameInfo.get(id);
 	}
+
+
+	public Game getGame(String gameID) {
+		// TODO Auto-generated method stub
+		return gameList.get(gameID);
+	}
 }
