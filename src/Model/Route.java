@@ -1,5 +1,7 @@
 package Model;
 
+import java.util.ArrayList;
+
 
 
 public class Route {
@@ -9,6 +11,7 @@ public class Route {
     private int length;
     private CardColor color;
     private String ownerID;
+    private ArrayList<Integer> segments;
 
 
     public Route (String cityName1, String cityName2, int length, CardColor color1)
