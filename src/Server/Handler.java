@@ -27,7 +27,8 @@ public class Handler implements HttpHandler {
 	public void handle(HttpExchange exchange) throws IOException {
 		URI uri = exchange.getRequestURI();
 		String path = uri.getPath();
-		System.out.println("Path: " + path + " URI: " + uri.toString());
+		if(!path.startsWith("/Update"))System.out.println("Path: " + path + " URI: " + uri.toString());
+		
 		
 		InputStreamReader inputStreamReader = new InputStreamReader(exchange.getRequestBody());
 		Object req = null;

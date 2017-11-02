@@ -1,20 +1,22 @@
 package Model;
 
+import Common.ClientGame;
+
 public class StartedGameResult {
 	
 
     private boolean started;
-    private Game game;
+    private ClientGame game;
 
     public StartedGameResult(boolean started)
     {
         this.started=started;
     }
     
-    public StartedGameResult(boolean started, Game game)
+    public StartedGameResult(boolean started, Game game, String playerID)
     {
         this.started=started;
-        this.game=game;
+        this.game = new ClientGame(game, playerID);
     }
 
     public boolean hasStarted()
@@ -22,7 +24,7 @@ public class StartedGameResult {
         return started;
     }
 
-    public Game getGame() {
+    public ClientGame getGame() {
         return game;
     }
 	

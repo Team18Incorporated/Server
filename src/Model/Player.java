@@ -32,6 +32,8 @@ public class Player {
         this.playerID = playerID;
         this.playerName = playerName;
         this.color = color;
+        hand = new ArrayList<TrainCard>();
+        destinationCards = new ArrayList<DestinationCard>();
     }
 
     /*changePlayerColor changes the color of the player

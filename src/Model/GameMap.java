@@ -70,7 +70,6 @@ public class GameMap {
         }
     }
 
-
     private City getCity(String name)
     {
         for(int i=0; i<cityList.size(); i++)

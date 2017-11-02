@@ -7,6 +7,7 @@ import Model.*;
 
 public class ClientGame {
 
+	private Player currentPlayer;
     private List<PlayerInfo> playerList;
     private String gameID; //could make ID's into something other than Strings
     private GameMap map;
@@ -19,11 +20,15 @@ public class ClientGame {
     private boolean startStatus=false;
 
     //CONSTRUCTOR-----------------------------------------------------------------------------------
-    public ClientGame(Game g)
+    public ClientGame(Game g, String playerID)
     {
+    	
     	playerList = new ArrayList<PlayerInfo>();
-    	for(Player p : g.getPlayerList())
+    	for(Player p : g.getPlayerList()){
+    		if(p.getPlayerID()== playerID)
+    			currentPlayer = p;
     		playerList.add(new PlayerInfo(p));
+    	}
     	gameID = g.getGameID();
     	map = g.getMap();
     	visibleCards = g.getFaceUpCards();

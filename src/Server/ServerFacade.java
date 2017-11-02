@@ -114,9 +114,10 @@ public class ServerFacade implements IServer {
 	}
 
 	@Override
-	public StartedGameResult startGame(String gameID) {
+	public StartedGameResult startGame(String gameID, AuthToken token) {
 		// TODO Auto-generated method stub
-		Object result = ServerModel.getSingleton().startGame(gameID);
+		String playerID = ServerModel.getSingleton().getUserFromAuthToken(token).getID();
+		Object result = ServerModel.getSingleton().startGame(gameID, playerID);
 		return (StartedGameResult) result;
 	}
 

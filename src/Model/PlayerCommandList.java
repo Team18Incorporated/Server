@@ -19,6 +19,8 @@ public class PlayerCommandList {
 		for(DateCommand d : commands){
 			if(d.checkAfter(latest))
 				resultList.add(d.getCommand());
+			else
+				commands.remove(d);
 			if(late.before(d.getDate()))
 				late = d.getDate();
 		}

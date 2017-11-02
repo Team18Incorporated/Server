@@ -20,8 +20,9 @@ public class Game {
     private ChatHistory chatHistory;
 
     //CONSTRUCTOR-----------------------------------------------------------------------------------
-    public Game(ArrayList<Player> playerList)
+    public Game(ArrayList<Player> playerList, String gameID)
     {
+    	this.gameID = gameID;
         this.playerList=playerList;
         startGame();
     }
@@ -87,31 +88,21 @@ public class Game {
     	trainCardDeck.shuffle();
     	destinationDeck = new DestinationDeck();
     	destinationDeck.shuffle();
-        faceUpCards=trainCardDeck.drawCards(5);
+    	faceUpCards = new ArrayList<TrainCard>();
+        faceUpCards.addAll(trainCardDeck.drawCards(5));
         for(int i=0; i<playerList.size(); i++)
         {
-        	ClientProxy proxy = new ClientProxy(playerList.get(i).getPlayerID(), gameID);
         	//add all cards to deck
-    		proxy.updateDestinationDeckSize(destinationDeck.getSize());
-    		proxy.updateTrainDeckSize(trainCardDeck.getSize());
-    		proxy.updateFaceUp(faceUpCards);
         	//remove face up cards from deck and update for each client
             playerList.get(i).addCardstoHand(trainCardDeck.drawCards(4));
-    		proxy.updateDestinationHand(playerList.get(i).getDestinationCards());
     		
             //add cards to hand and remove from deck
             playerList.get(i).addDestinationCards(destinationDeck.drawCards(3));
             //add cards to hand and remove from deck
-            for(Player p : playerList){
-    			proxy = new ClientProxy(p.getPlayerID(), gameID);
-    			proxy.updateDestinationDeckSize(-3);
-    			proxy.updateEnemyDestinationHand(playerList.get(i).getPlayerID(), 3);
-    			proxy.updateTrainDeckSize(-3);
-    			proxy.updateEnemyTrainHand(playerList.get(i).getPlayerID(), 4);
-    		}
         }
         playerTurn = 0;
         chatHistory = new ChatHistory();
+        map = new GameMap();
     }
 
     public TrainCard drawFaceUpCard(int index)

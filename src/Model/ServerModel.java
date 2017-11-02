@@ -32,6 +32,7 @@ public class ServerModel {
 		games = new ArrayList<String>();
 		joinableGames = new ArrayList<String>();
 		authTokens = new HashMap<String, User>();
+		gameList = new HashMap<String, Game>();
 	}
 	
 	
@@ -113,8 +114,9 @@ public class ServerModel {
 	}
 
 
-	public StartedGameResult startGame(String gameID) {
+	public StartedGameResult startGame(String gameID, String playerID) {
 		// TODO Auto-generated method stub
+		
 		StartedGameResult result;
 		GameInfo gameInfoTemp = gameInfo.get(gameID);
 		if(gameInfoTemp.getNumPlayers()<2)
@@ -131,8 +133,8 @@ public class ServerModel {
 		//gameList.put(gameID, new Game(gameInfoTemp.getPlayers()));
 		
 		//create new game and add to next function
-		Game g = new Game(gameInfoTemp.getPlayers());
-		result= new StartedGameResult(true, g);
+		Game g = new Game(gameInfoTemp.getPlayers(), gameID);
+		result= new StartedGameResult(true, g, playerID);
 		gameList.put(gameID, g);
 		System.out.println("Here");
 

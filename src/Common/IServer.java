@@ -71,7 +71,7 @@ public interface IServer {
 	 * @Pre: 0 < gameID < 10000
 	 * @Post: None
 	 */
-	public StartedGameResult startGame(String gameID);
+	public StartedGameResult startGame(String gameID, AuthToken token);
 
 	/*
 	* @pre route is not null
