@@ -47,7 +47,7 @@ ElPaso Houston green 6
 ElPaso OklahomaCity yellow 5
 ElPaso SantaFe any 2
 ElPaso Phoenix any 3
-ElPaso LosAngelas black 6
+ElPaso LosAngeles black 6
 Helena Winnipeg blue 4
 Helena Omaha red 5
 Helena SaltLakeCity purple 3
@@ -60,14 +60,14 @@ KansasCity Omaha any 1
 KansasCity OklahomaCity any 2
 KansasCity OklahomaCity any 2
 LasVegas SaltLakeCity orange 3
-LasVegas LosAngelas any 2
+LasVegas LosAngeles any 2
 LittleRock Nashville white 3
 LittleRock SaintLouis any 2
 LittleRock OklahomaCity any 2
 LittleRock NewOrleans green 3
-LosAngelas SanFrancisco purple 3
-LosAngelas SanFrancisco yellow 3
-LosAngelas Phoenix any 3
+LosAngeles SanFrancisco purple 3
+LosAngeles SanFrancisco yellow 3
+LosAngeles Phoenix any 3
 Miami NewOrleans red 6
 Montreal NewYork blue 3
 Montreal Toronto any 3
@@ -79,7 +79,7 @@ NewYork Washington black 2
 NewYork Washington orange 2
 NewYork Pittsburgh white 2
 NewYork Pittsburgh green 2
-Oklahoma SantaFe blue 3
+OklahomaCity SantaFe blue 3
 Phoenix SantaFe any 3
 Pittsburgh Washington any 2
 Pittsburgh Raleigh any 2

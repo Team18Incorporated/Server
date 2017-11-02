@@ -65,9 +65,10 @@ public class GameMap {
             City city2 = getCity(cityname2);
             Route newRoute = new Route(city1, city2, color, length);
             routeList.add(newRoute);
-            city1.addConnectedRoute(newRoute);
-            city2.addConnectedRoute(newRoute);
+            //city1.addConnectedRoute(newRoute);
+            //city2.addConnectedRoute(newRoute);
         }
+        System.out.println("finished routes");
     }
 
     private City getCity(String name)

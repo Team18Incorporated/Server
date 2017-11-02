@@ -14,7 +14,7 @@ public class City {
     }
 
     public String getCityName() {
-        if(cityName.equals("ELPaso"))
+       /* if(cityName.equals("ELPaso"))
         {
             return "El Paso";
         }
@@ -60,7 +60,7 @@ public class City {
         else if(cityName.equals("SaultStMarie"))
         {
             return "Sault St Marie";
-        }
+        }*/
 
         return cityName;
     }
