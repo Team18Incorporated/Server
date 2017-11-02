@@ -10,16 +10,14 @@ import Model.*;
 public class UpdateTrainHandCommand implements ICommand {
 
 	private TrainCard card1;
-	private TrainCard card2;
 
 	@Override
 	public Object execute() {
 		return null;
 	}
 
-	public UpdateTrainHandCommand(TrainCard card1, TrainCard card2) {
+	public UpdateTrainHandCommand(TrainCard card1) {
 		this.card1 = card1;
-		this.card2 = card2;
 	}
 
 	public TrainCard getCard1() {
@@ -30,12 +28,6 @@ public class UpdateTrainHandCommand implements ICommand {
 		this.card1 = card1;
 	}
 
-	public TrainCard getCard2() {
-		return card2;
-	}
 
-	public void setCard2(TrainCard card2) {
-		this.card2 = card2;
-	}
 
 }

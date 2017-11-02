@@ -23,5 +23,11 @@ public class ClaimRouteCommand implements ICommand {
         ServerFacade.getSingleton().claimRoute(authToken, gameID, route);
 		return null;
     }
+    
+    public ClaimRouteCommand(String gameID, String playerID, Route route){
+    	this.gameID = gameID;
+    	this.playerID = playerID;
+    	this.route = route;
+    }
 
 }

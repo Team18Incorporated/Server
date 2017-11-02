@@ -73,6 +73,13 @@ public class Game {
     public void setPlayerTurn(int playerTurn) {
         this.playerTurn = playerTurn;
     }
+    
+    public Player getPlayer(String playerID){
+    	for(Player p : playerList){
+    		if(p.getPlayerID().equals(playerID)) return p;
+    	}
+    	return null;
+    }
 
     private void startGame()
     {
