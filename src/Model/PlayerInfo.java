@@ -10,6 +10,8 @@ public class PlayerInfo {
     private int numTrainCards;
     private int numDestinationCards;
     private int points;
+    
+    private int numTrainPieces;
 
     public PlayerInfo(Player player)
     {
@@ -19,6 +21,7 @@ public class PlayerInfo {
         points=player.getPoints();
         numTrainCards=player.getHand().size();
         numDestinationCards=player.getDestinationCards().size();
+        numTrainPieces = player.getNumTrainPieces();
     }
 
     public String getPlayerID() {

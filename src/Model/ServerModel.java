@@ -129,7 +129,11 @@ public class ServerModel {
 			users.get(p.getPlayerID()).startGame(gameID);
 		}*/
 		//gameList.put(gameID, new Game(gameInfoTemp.getPlayers()));
-		result= new StartedGameResult(true);
+		
+		//create new game and add to next function
+		Game g = new Game(gameInfoTemp.getPlayers());
+		result= new StartedGameResult(true, g);
+		gameList.put(gameID, g);
 		System.out.println("Here");
 
 		return result;

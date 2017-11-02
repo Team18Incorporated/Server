@@ -72,6 +72,9 @@ public class Player {
     public ArrayList<DestinationCard> getDestinationCards() {
         return destinationCards;
     }
+    public void discard(ArrayList<DestinationCard> cards){
+    	destinationCards.removeAll(cards);
+    }
 
     public ArrayList<Route> getClaimedRoutes() {
         return claimedRoutes;

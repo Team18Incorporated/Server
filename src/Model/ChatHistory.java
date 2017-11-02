@@ -1,5 +1,7 @@
 package Model;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -8,7 +10,7 @@ import java.util.List;
 
 public class ChatHistory {
     private List<ChatMessage> history;
-
+    
 
 
     public void add(ChatMessage message)
@@ -20,11 +22,18 @@ public class ChatHistory {
         this.history = history;
     }
 
-    public List<ChatMessage> getHistory() {
+    public ChatHistory() {
+		// TODO Auto-generated constructor stub
+    	history = new ArrayList<ChatMessage>();
+	}
+
+	public List<ChatMessage> getHistory() {
         return history;
     }
 
     public void setHistory(List<ChatMessage> history) {
         this.history = history;
     }
+    
+    
 }

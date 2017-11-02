@@ -79,7 +79,17 @@ public class TrainDeck {
 		discardList.clear();
 		Collections.shuffle(deckList);
 	}
-
+	public ArrayList<TrainCard> drawCards(int num)
+    {
+        ArrayList<TrainCard> cards = new ArrayList<>();
+        for(int i=0; i<num; i++)
+        {
+            cards.add(deckList.get(0));
+            deckList.remove(0);
+        }
+        return cards;
+    }
+	
 	public TrainCard drawCard()
 	{
 		TrainCard card = deckList.get(0);

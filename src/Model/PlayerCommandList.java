@@ -15,11 +15,14 @@ public class PlayerCommandList {
 	
 	public CommandList getCommands(Date latest){
 		ArrayList<ICommand> resultList = new ArrayList<ICommand>();
+		Date late = latest;
 		for(DateCommand d : commands){
 			if(d.checkAfter(latest))
 				resultList.add(d.getCommand());
+			if(late.before(d.getDate()))
+				late = d.getDate();
 		}
-		return new CommandList(resultList);
+		return new CommandList(resultList, late);
 	}
 	
 	private class DateCommand{
@@ -32,6 +35,11 @@ public class PlayerCommandList {
 			this.command = command;
 		}
 		
+		public Date getDate() {
+			// TODO Auto-generated method stub
+			return date;
+		}
+
 		public boolean checkAfter(Date latest){
 			if(date.after(latest))
 				return true;

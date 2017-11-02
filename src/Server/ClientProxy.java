@@ -84,7 +84,7 @@ public class ClientProxy implements IClient {
 	}
 
 	@Override
-	public void updateTrainHand(TrainCard card1, TrainCard card2) {
+	public void updateTrainHand(TrainCard card1) {
 		// TODO Auto-generated method stub
 		
 	}

@@ -90,7 +90,7 @@ public interface IClient {
     * @pre neither card is null
     * @post The player's hand is given the two cards
      */
-    public void updateTrainHand(TrainCard card1, TrainCard card2);
+    public void updateTrainHand(TrainCard card1);
 
     /*updateDestinationHand Gives the player one to three destination cards.
     * @pre 0 < number of cards < 4

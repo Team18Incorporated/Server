@@ -1,5 +1,6 @@
 package Common;
 
+import java.util.Date;
 import java.util.List;
 
 import Model.AuthToken;
@@ -104,6 +105,8 @@ public interface IServer {
 	 */
 	public void drawFromFaceUp(AuthToken authToken, String gameID, int card);
 
-	public void sendChat(AuthToken authToken, ChatMessage chatMessage);
+	public void sendChat(AuthToken authToken, ChatMessage chatMessage, String gameID);
+	
+	public CommandList getHistory(AuthToken authToken, String gameID, Date date);
 
 }
