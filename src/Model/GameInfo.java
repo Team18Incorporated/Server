@@ -95,6 +95,10 @@ public class GameInfo {
 		hasStarted=true;
 	}
 	
+	public boolean hasStarted(){
+		return hasStarted;
+	}
+	
 	private boolean checkPlayer(Player newPlayer)
 	{
 		for(int i= 0; i<playerList.size(); i++)
