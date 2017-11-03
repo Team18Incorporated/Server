@@ -97,7 +97,7 @@ public class Game {
             playerList.get(i).addCardstoHand(trainCardDeck.drawCards(4));
     		
             //add cards to hand and remove from deck
-            playerList.get(i).addDestinationCards(destinationDeck.drawCards(3));
+            playerList.get(i).setDestinationCardChoices(destinationDeck.drawCards(3));
             //add cards to hand and remove from deck
         }
         playerTurn = 0;

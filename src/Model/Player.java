@@ -21,7 +21,8 @@ public class Player {
     private ArrayList<DestinationCard> destinationCards;
     private int points;
     private ArrayList<Route> claimedRoutes = new ArrayList<>();
-    private int numTrainPieces;
+    private int numTrainPieces=45;
+    private ArrayList<DestinationCard> destinationCardChoices = new ArrayList<>();
     
     private PlayerCommandList commands = new PlayerCommandList();
 
@@ -104,6 +105,10 @@ public class Player {
     public void addDestinationCards(ArrayList<DestinationCard> cards)
     {
         destinationCards.addAll(cards);
+    }
+    public void setDestinationCardChoices(ArrayList<DestinationCard> cards)
+    {
+    	destinationCardChoices=cards;
     }
     
     public void addCommand(ICommand command){
