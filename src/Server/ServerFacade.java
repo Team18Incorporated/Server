@@ -152,7 +152,7 @@ public class ServerFacade implements IServer {
 		// remove from faceup
 		// add card to position
 		// call client proxy
-		ClientProxy proxy = new ClientProxy(playerID, gameID);
+		ClientProxy proxy = new ClientProxy(gameID,playerID);
 		proxy.updateTrainHand(trainCard);
 		proxy.updateTrainDeckSize(-1);
 		for(Player id : g.getPlayerList()){
@@ -178,7 +178,7 @@ public class ServerFacade implements IServer {
 			if(p.getPlayerID() == playerID)
 				player = p;
 		player.addDestinationCards((ArrayList<DestinationCard>) cards);
-		ClientProxy proxy = new ClientProxy(playerID, gameID);
+		ClientProxy proxy = new ClientProxy( gameID,playerID);
 		proxy.showDestinationCardChoices(cards);
 		proxy.updateDestinationDeckSize(-3);
 		for(Player id: g.getPlayerList()){
@@ -210,7 +210,7 @@ public class ServerFacade implements IServer {
 			if(p.getPlayerID() == playerID)
 				player = p;
 		player.discard((ArrayList<DestinationCard>)list);
-		ClientProxy proxy = new ClientProxy(playerID, gameID);
+		ClientProxy proxy = new ClientProxy(gameID,playerID);
 		
 		proxy.updateDestinationHand(player.getDestinationCards());
 		for(Player id: g.getPlayerList()){
@@ -244,7 +244,7 @@ public class ServerFacade implements IServer {
 				player = p;
 		player.addCardstoHand(cards);
 		// call client proxy
-		ClientProxy proxy = new ClientProxy(playerID, gameID);
+		ClientProxy proxy = new ClientProxy(gameID,playerID);
 		proxy.updateFaceUp(list);
 		proxy.updateTrainHand(trainCard);
 		proxy.updateTrainDeckSize(-1);

@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Vector;
 
+import Commands.InGameCommands.StartTurnCommand;
+import Server.ClientProxy;
+
 public class ServerModel {
 
 	// Variables
@@ -128,8 +131,13 @@ public class ServerModel {
 
 			// create new game and add to next function
 			g = new Game(gameInfoTemp.getPlayers(), gameID);
+			
 
 			gameList.put(gameID, g);
+			
+			Player p = gameInfoTemp.getPlayers().get(g.getPlayerTurn());
+			ClientProxy proxy = new ClientProxy(g.getGameID(),p.getPlayerID());
+			proxy.startPlayerTurn();
 		}
 		else
 			g = gameList.get(gameID);

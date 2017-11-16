@@ -125,6 +125,12 @@ public class ClientProxy implements IClient {
 		addCommand(new UpdateChatHistoryCommand(chatHistory));
 	}
 	
+	public void startPlayerTurn()
+	{
+		addCommand(new StartTurnCommand());
+	}
+	
+	
 	private void addCommand(ICommand command){
 		ServerModel.getSingleton().getGame(gameID).getPlayer(playerID).addCommand(command);
 	}

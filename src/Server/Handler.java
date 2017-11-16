@@ -8,17 +8,19 @@ import java.net.HttpURLConnection;
 import java.net.URI;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 
 import Common.ICommand;
+import Common.ICommandAdapter;
 
 public class Handler implements HttpHandler {
 	
-	private Gson gson = new Gson();
-
+	private GsonBuilder builder = new GsonBuilder();
+	
 	public Handler() {
 		// TODO Auto-generated constructor stub
 	}
@@ -29,6 +31,9 @@ public class Handler implements HttpHandler {
 		String path = uri.getPath();
 		if(!path.startsWith("/Update"))System.out.println("Path: " + path + " URI: " + uri.toString());
 		
+		builder.registerTypeAdapter(ICommand.class, new ICommandAdapter<ICommand>());
+		Gson gson = builder.create();
+
 		
 		InputStreamReader inputStreamReader = new InputStreamReader(exchange.getRequestBody());
 		Object req = null;
