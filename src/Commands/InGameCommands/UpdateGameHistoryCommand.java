@@ -7,9 +7,12 @@ import Model.AuthToken;
 import Server.ServerFacade;
 
 public class UpdateGameHistoryCommand implements ICommand{
-	AuthToken authToken;
-	String gameID;
-	Date date;
+	private AuthToken authToken;
+	private String gameID;
+	private Date date;
+    private String className=getClass().getName();
+
+	
 	@Override
 	public Object execute() {
 		// TODO Auto-generated method stub

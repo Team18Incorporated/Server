@@ -15,6 +15,8 @@ public class ClaimRouteCommand implements ICommand {
     private String gameID;
     private String playerID;
     private Route route;
+    private String className=getClass().getName();
+
 
 
 

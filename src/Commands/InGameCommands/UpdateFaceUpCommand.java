@@ -10,6 +10,8 @@ import Model.*;
 
 public class UpdateFaceUpCommand implements ICommand {
     private List<TrainCard> list;
+    private String className=getClass().getName();
+
 
     public UpdateFaceUpCommand(List<TrainCard> list) {
         this.list = list;

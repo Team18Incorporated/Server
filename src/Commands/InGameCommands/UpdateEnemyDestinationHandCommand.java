@@ -11,7 +11,9 @@ public class UpdateEnemyDestinationHandCommand implements ICommand {
 
 	private String playerID;
 	private int size;
+    private String className=getClass().getName();
 
+	
 	@Override
 	public Object execute() {
 		return null;

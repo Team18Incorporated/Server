@@ -10,6 +10,8 @@ import Model.*;
 public class UpdateChatHistoryCommand implements ICommand {
 
     private ChatHistory history;
+    private String className=getClass().getName();
+
     //private String gameID;
 
 

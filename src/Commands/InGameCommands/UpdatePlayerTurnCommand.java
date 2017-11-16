@@ -8,6 +8,8 @@ import Model.*;
 
 public class UpdatePlayerTurnCommand implements ICommand {
     private int playerIndex;
+    private String className=getClass().getName();
+
 
     public UpdatePlayerTurnCommand(int playerIndex) {
         this.playerIndex = playerIndex;

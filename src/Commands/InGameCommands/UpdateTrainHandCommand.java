@@ -10,6 +10,8 @@ import Model.*;
 public class UpdateTrainHandCommand implements ICommand {
 
 	private TrainCard card1;
+    private String className=getClass().getName();
+
 
 	@Override
 	public Object execute() {

@@ -12,6 +12,8 @@ public class DrawDestinationCardCommand implements ICommand{
 
     private AuthToken authToken;
     private String gameID;
+    private String className=getClass().getName();
+
 
 
 

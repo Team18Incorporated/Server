@@ -10,6 +10,8 @@ import Model.*;
 public class UpdateTrainDeckSizeCommand implements ICommand {
 
 	private int size;
+    private String className=getClass().getName();
+
 
 	@Override
 	public Object execute() {

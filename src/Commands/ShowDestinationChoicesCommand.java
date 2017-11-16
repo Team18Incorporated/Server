@@ -6,8 +6,8 @@ import Common.ICommand;
 import Model.DestinationCard;
 
 public class ShowDestinationChoicesCommand implements ICommand {
-    List<DestinationCard> list;
-
+    private List<DestinationCard> list;
+    private String className=getClass().getName();
     
 
     @Override

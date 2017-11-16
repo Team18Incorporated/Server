@@ -9,6 +9,7 @@ import Model.*;
 public class UpdateEnemyTrainHandCommand implements ICommand {
     private String playerID;
     private int size;
+    private String className=getClass().getName();
 
 
 

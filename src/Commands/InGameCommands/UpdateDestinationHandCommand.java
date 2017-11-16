@@ -11,7 +11,8 @@ import Model.*;
 
 public class UpdateDestinationHandCommand implements ICommand {
 
-    List<DestinationCard> list;
+    private List<DestinationCard> list;
+    private String className=getClass().getName();
 
 
 

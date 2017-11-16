@@ -11,6 +11,8 @@ import Server.ServerFacade;
 public class DrawTrainCardCommand implements ICommand {
     private AuthToken authToken;
     private String gameID;
+    private String className=getClass().getName();
+
 
 
 

@@ -9,6 +9,7 @@ import Model.*;
 public class UpdateEnemyScoreCommand implements ICommand {
     private String playerID;
     private int points;
+    private String className=getClass().getName();
 
 
 

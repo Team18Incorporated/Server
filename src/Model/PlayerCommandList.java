@@ -7,7 +7,7 @@ import Common.*;
 import Commands.CommandList;
 
 public class PlayerCommandList {
-	private ArrayList<DateCommand> commands;
+	private ArrayList<DateCommand> commands= new ArrayList<>();
 	
 	public void addCommand(ICommand command){
 		commands.add(new DateCommand(command));

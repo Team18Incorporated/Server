@@ -26,6 +26,7 @@ public class CommandList implements ICommand{
 
     public CommandList(List<ICommand> list, Date date) {
         this.list = list;
+        this.date=date;
     }
 
 	public CommandList() {

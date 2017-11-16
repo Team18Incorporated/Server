@@ -9,6 +9,8 @@ import Model.*;
 public class UpdateScoreCommand implements ICommand {
 
     private int points;
+    private String className=getClass().getName();
+
 
 
     @Override

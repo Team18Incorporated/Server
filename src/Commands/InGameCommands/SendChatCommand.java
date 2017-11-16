@@ -13,6 +13,8 @@ public class SendChatCommand implements ICommand {
     private ChatMessage message;
     private AuthToken authToken;
     private String gameID;
+    private String className=getClass().getName();
+
 
 
     @Override

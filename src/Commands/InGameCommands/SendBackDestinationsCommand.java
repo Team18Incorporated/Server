@@ -14,6 +14,8 @@ public class SendBackDestinationsCommand implements ICommand {
     private AuthToken authToken;
     private String gameID;
     private List<DestinationCard> list;
+    private String className=getClass().getName();
+
 
 
     @Override

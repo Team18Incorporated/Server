@@ -12,6 +12,8 @@ public class DrawFromFaceUpCommand implements ICommand {
     private AuthToken authToken;
     private String gameID;
     private int card;
+    private String className=getClass().getName();
+
 
 
 

@@ -262,8 +262,8 @@ public class ServerFacade implements IServer {
 		// check
 		boolean inGame = false;
 		User u = ServerModel.getSingleton().getUserFromAuthToken(authToken);
-		for (String id : (String[]) ((ArrayList<String>) u.getInProgressGames())
-				.toArray()) {
+		ArrayList<String>gameList = (ArrayList<String>) u.getInProgressGames();
+		for (String id : gameList) {
 			if (id.equals(gameID))
 				inGame = true;
 		}
@@ -282,9 +282,10 @@ public class ServerFacade implements IServer {
 		if(g == null) return;
 		g.sendMsg(chatMessage);
 		for(Player id : g.getPlayerList()){
-			ClientProxy proxy = new ClientProxy(id.getPlayerID(), gameID);
+			ClientProxy proxy = new ClientProxy( gameID, id.getPlayerID());
 			proxy.updateChatHistory(g.getChatHistory());
 		}
+		System.out.println("past chat");
 	}
 
 	@Override

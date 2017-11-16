@@ -9,6 +9,7 @@ import Model.*;
 
 public class UpdateDestinationDeckSizeCommand implements ICommand {
     private int size;
+    private String className=getClass().getName();
 
 
     @Override
