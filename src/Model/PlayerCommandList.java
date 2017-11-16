@@ -15,14 +15,19 @@ public class PlayerCommandList {
 	
 	public CommandList getCommands(Date latest){
 		ArrayList<ICommand> resultList = new ArrayList<ICommand>();
+		ArrayList<ICommand> toDelete = new ArrayList<>();
 		Date late = latest;
 		for(DateCommand d : commands){
 			if(d.checkAfter(latest))
 				resultList.add(d.getCommand());
 			else
-				commands.remove(d);
+				toDelete.add(d);
 			if(late.before(d.getDate()))
 				late = d.getDate();
+		}
+		for(DateCommand d : toDelete)
+		{
+			commands.remove(d);
 		}
 		return new CommandList(resultList, late);
 	}
