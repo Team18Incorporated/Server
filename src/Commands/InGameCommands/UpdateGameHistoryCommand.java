@@ -9,14 +9,15 @@ import Server.ServerFacade;
 public class UpdateGameHistoryCommand implements ICommand{
 	private AuthToken authToken;
 	private String gameID;
-	private Date date;
+	//private Date date;
+	private int index;
     private String className=getClass().getName();
 
 	
 	@Override
 	public Object execute() {
 		// TODO Auto-generated method stub
-		return ServerFacade.getSingleton().getHistory(authToken, gameID, date);
+		return ServerFacade.getSingleton().getHistory(authToken, gameID, index);
 	}
 
 }

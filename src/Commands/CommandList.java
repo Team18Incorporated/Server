@@ -8,6 +8,7 @@ import Common.ICommand;
 public class CommandList implements ICommand{
     private List<ICommand> list;
     private Date date;
+    private int index;
     
 
     @Override
@@ -27,6 +28,12 @@ public class CommandList implements ICommand{
     public CommandList(List<ICommand> list, Date date) {
         this.list = list;
         this.date=date;
+    }
+    
+    public CommandList(List<ICommand> list, int index)
+    {
+    	this.list=list;
+    	this.index=index;
     }
 
 	public CommandList() {

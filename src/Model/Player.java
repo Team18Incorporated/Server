@@ -115,8 +115,8 @@ public class Player {
     	commands.addCommand(command);
     }
     
-    public CommandList getCommands(Date latest){
-    	return commands.getCommands(latest);
+    public CommandList getCommands(int index){
+    	return commands.getCommands(index);
     }
 
     

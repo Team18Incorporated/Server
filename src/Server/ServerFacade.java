@@ -154,12 +154,12 @@ public class ServerFacade implements IServer {
 		// call client proxy
 		ClientProxy proxy = new ClientProxy(gameID,playerID);
 		proxy.updateTrainHand(trainCard);
-		proxy.updateTrainDeckSize(-1);
+		proxy.updateTrainDeckSize(g.getNumTrainDeck());
 		for(Player id : g.getPlayerList()){
 			if(!id.getPlayerID().equals(playerID)){
-				proxy = new ClientProxy(id.getPlayerID(), gameID);
-				proxy.updateEnemyTrainHand(playerID, 1);
-				proxy.updateTrainDeckSize(-1);
+				proxy = new ClientProxy(gameID, id.getPlayerID());
+				proxy.updateEnemyTrainHand(playerID, player.getHand().size());
+				proxy.updateTrainDeckSize(g.getNumTrainDeck());
 			}
 		}
 	}
@@ -180,12 +180,12 @@ public class ServerFacade implements IServer {
 		player.addDestinationCards((ArrayList<DestinationCard>) cards);
 		ClientProxy proxy = new ClientProxy( gameID,playerID);
 		proxy.showDestinationCardChoices(cards);
-		proxy.updateDestinationDeckSize(-3);
+		proxy.updateDestinationDeckSize(g.getNumDestinationDeck());
 		for(Player id: g.getPlayerList()){
 			if(!id.getPlayerID().equals(playerID)){
-				proxy = new ClientProxy(id.getPlayerID(), gameID);
-				proxy.updateEnemyDestinationHand(id.getPlayerID(), 3);
-				proxy.updateDestinationDeckSize(-3);
+				proxy = new ClientProxy(gameID, id.getPlayerID());
+				proxy.updateEnemyDestinationHand(id.getPlayerID(), player.getDestinationCards().size());
+				proxy.updateDestinationDeckSize(g.getNumDestinationDeck());
 			}
 
 		}
@@ -216,7 +216,7 @@ public class ServerFacade implements IServer {
 		for(Player id: g.getPlayerList()){
 			if(!id.getPlayerID().equals(playerID)){
 				proxy = new ClientProxy(id.getPlayerID(), gameID);
-				proxy.updateEnemyDestinationHand(id.getPlayerID(), -3);
+				proxy.updateEnemyDestinationHand(id.getPlayerID(), player.getDestinationCards().size());
 			}
 
 		}
@@ -247,13 +247,13 @@ public class ServerFacade implements IServer {
 		ClientProxy proxy = new ClientProxy(gameID,playerID);
 		proxy.updateFaceUp(list);
 		proxy.updateTrainHand(trainCard);
-		proxy.updateTrainDeckSize(-1);
+		proxy.updateTrainDeckSize(g.getNumTrainDeck());
 		for(Player id : g.getPlayerList()){
 			if(!id.getPlayerID().equals(playerID)){
-				proxy = new ClientProxy(id.getPlayerID(), gameID);
+				proxy = new ClientProxy(gameID, id.getPlayerID());
 				proxy.updateFaceUp(list);
-				proxy.updateEnemyTrainHand(playerID, 1);
-				proxy.updateTrainDeckSize(-1);
+				proxy.updateEnemyTrainHand(playerID, player.getHand().size());
+				proxy.updateTrainDeckSize(g.getNumTrainDeck());
 			}
 		}
 	}
@@ -289,7 +289,7 @@ public class ServerFacade implements IServer {
 	}
 
 	@Override
-	public CommandList getHistory(AuthToken authToken, String gameID, Date date) {
+	public CommandList getHistory(AuthToken authToken, String gameID, int index) {
 		// TODO Auto-generated method stub
 		Game g = checkInGame(authToken, gameID);
 		String playerID = ServerModel.getSingleton().getUserFromAuthToken(authToken).getID();
@@ -298,7 +298,7 @@ public class ServerFacade implements IServer {
 		for(Player p : g.getPlayerList())
 			if(p.getPlayerID() == playerID)
 				player = p;
-		return player.getCommands(date);
+		return player.getCommands(index);
 	}
 
 }
