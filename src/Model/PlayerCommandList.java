@@ -15,7 +15,7 @@ public class PlayerCommandList {
 	
 	public CommandList getCommands(Date latest){
 		ArrayList<ICommand> resultList = new ArrayList<ICommand>();
-		ArrayList<ICommand> toDelete = new ArrayList<>();
+		ArrayList<DateCommand> toDelete = new ArrayList<>();
 		Date late = latest;
 		for(DateCommand d : commands){
 			if(d.checkAfter(latest))
@@ -48,9 +48,24 @@ public class PlayerCommandList {
 		}
 
 		public boolean checkAfter(Date latest){
-			if(date.after(latest))
+			/*if(date.equals(latest))
+				return false;
+			else if(date.after(latest))
 				return true;
-			return false;
+			return false;*/
+			long dateunix = date.getTime();
+			long latestunix = latest.getTime();
+			
+			if(dateunix==latestunix)
+			{
+				return false;
+			}
+			else if(dateunix> latestunix)
+			{
+				return true;
+			}
+			else	
+				return false;
 		}
 		
 		public ICommand getCommand(){
