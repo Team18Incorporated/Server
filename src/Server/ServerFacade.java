@@ -121,7 +121,7 @@ public class ServerFacade implements IServer {
 	}
 
 	@Override
-	public void claimRoute(AuthToken authToken, String gameID, Route routeIn) {
+	public void claimRoute(AuthToken authToken, String gameID, Route routeIn, ArrayList<Integer> discard) {
 		// TODO IMPLEMENT THIS METHOD
 		Game g = checkInGame(authToken, gameID);
 		if (g == null)
@@ -133,12 +133,17 @@ public class ServerFacade implements IServer {
 				player = p;
 		Route returnRoute = g.getMap().claimRoute(routeIn, player);
 		ClientProxy proxy = new ClientProxy(gameID,playerID);
+		ArrayList<TrainCard> playerHand=g.discardPlayerCards(playerID,discard);
+		proxy.setPlayerHand(playerHand);
 		proxy.claimRoute(gameID, playerID, returnRoute);
+		proxy.updateNumTrainPieces(playerID, player.getNumTrainPieces());
 
 		for(Player id : g.getPlayerList()){
 			if(!id.getPlayerID().equals(playerID)){
 				proxy = new ClientProxy(gameID, id.getPlayerID());
 				proxy.claimRoute(gameID, playerID, returnRoute);
+				proxy.updateNumTrainPieces(playerID, player.getNumTrainPieces());
+				proxy.updateEnemyTrainHand(player.getPlayerID(), player.getHand().size());
 			}
 		}
 		

@@ -21,6 +21,7 @@ public class TrainDeck {
 	private void createTrainDeck()
 	{
 		deckList=new ArrayList<>();
+		discardList= new ArrayList<>();
 		for(int i=0; i<12; i++)
 		{
 			deckList.add(new TrainCard("red"));

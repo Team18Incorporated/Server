@@ -118,6 +118,63 @@ public class Player {
     public CommandList getCommands(int index){
     	return commands.getCommands(index);
     }
+    
+    public ArrayList<TrainCard> discardTrainCards(ArrayList<Integer> discard)
+    {
+    	ArrayList<TrainCard> discardList= new ArrayList<>();
+    	for(int i=0; i<discard.get(0); i++)
+    	{
+    		discardList.add(getCard("black"));
+    	}
+    	for(int i=0; i<discard.get(1); i++)
+    	{
+    		discardList.add(getCard("red"));
+    	}
+    	for(int i=0; i<discard.get(2); i++)
+    	{
+    		discardList.add(getCard("blue"));
+    	}
+    	for(int i=0; i<discard.get(3); i++)
+    	{
+    		discardList.add(getCard("green"));
+    	}
+    	for(int i=0; i<discard.get(4); i++)
+    	{
+    		discardList.add(getCard("yellow"));
+    	}
+    	for(int i=0; i<discard.get(5); i++)
+    	{
+    		discardList.add(getCard("purple"));
+    	}
+    	for(int i=0; i<discard.get(6); i++)
+    	{
+    		discardList.add(getCard("white"));
+    	}
+    	for(int i=0; i<discard.get(7); i++)
+    	{
+    		discardList.add(getCard("orange"));
+    	}
+    	for(int i=0; i<discard.get(8); i++)
+    	{
+    		discardList.add(getCard("wild"));
+    	}
+    	
+    	return discardList;
+    }
+    
+    public TrainCard getCard(String color)
+    {
+    	TrainCard card=null;
+    	for(TrainCard tc : hand)
+    	{
+    		if(tc.getColorString().equals(color))
+    		{
+    			card=tc;
+    		}
+    	}
+    	hand.remove(card);
+    	return card;
+    }
 
     
 }

@@ -1,5 +1,6 @@
 package Server;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import Common.IClient;
@@ -130,9 +131,18 @@ public class ClientProxy implements IClient {
 		addCommand(new StartTurnCommand());
 	}
 	
+	public void updateNumTrainPieces(String player, int pieces)
+	{
+		addCommand(new UpdateTrainPiecesCommand(player, pieces));
+	}
+	
 	
 	private void addCommand(ICommand command){
 		ServerModel.getSingleton().getGame(gameID).getPlayer(playerID).addCommand(command);
 	}
-
+	
+	public void setPlayerHand(ArrayList<TrainCard> playerHand)
+	{
+		addCommand(new SetPlayerHandCommand(playerHand));
+	}
 }

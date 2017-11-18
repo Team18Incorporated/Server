@@ -74,4 +74,16 @@ public class DestinationCard extends Card {
 
         return false;
     }
+    
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof DestinationCard)) return false;
+
+        DestinationCard that = (DestinationCard) o;
+
+        if (points != that.points) return false;
+        if (!startCity.equals(that.startCity)) return false;
+        return endCity.equals(that.endCity);
+    }
 }

@@ -144,5 +144,13 @@ public class Game {
     		playerTurn++;
     	}
     }
+    
+    public ArrayList<TrainCard> discardPlayerCards(String playerID, ArrayList<Integer> discard)
+    {
+    	Player p= getPlayer(playerID);
+    	trainCardDeck.discard(p.discardTrainCards(discard));
+    	return p.getHand();
+    	
+    }
 
 }

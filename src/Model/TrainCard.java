@@ -22,4 +22,9 @@ public class TrainCard extends Card {
     public void setColor(CardColor color) {
         this.color = color;
     }
+    
+    public String getColorString()
+    {
+    	return color.getColor();
+    }
 }

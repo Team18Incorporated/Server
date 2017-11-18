@@ -1,5 +1,7 @@
 package Commands.InGameCommands;
 
+import java.util.ArrayList;
+
 import Common.*;
 import Model.*;
 import Server.ServerFacade;
@@ -15,6 +17,7 @@ public class ClaimRouteCommand implements ICommand {
     private String gameID;
     private String playerID;
     private Route route;
+    private ArrayList<Integer> discard;
     private String className=getClass().getName();
 
 
@@ -22,7 +25,7 @@ public class ClaimRouteCommand implements ICommand {
 
     @Override
     public Object execute() {
-        ServerFacade.getSingleton().claimRoute(authToken, gameID, route);
+        ServerFacade.getSingleton().claimRoute(authToken, gameID, route, discard);
 		return null;
     }
     
@@ -31,5 +34,10 @@ public class ClaimRouteCommand implements ICommand {
     	this.playerID = playerID;
     	this.route = route;
     }
-
+    
+    public ArrayList<Integer> getDiscard() {
+        return discard;
+    }
+    
+    
 }

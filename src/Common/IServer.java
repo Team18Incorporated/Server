@@ -1,5 +1,6 @@
 package Common;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -78,7 +79,7 @@ public interface IServer {
 	* @pre 0 < authToken&&gameID < 10000
 	* @post returns a list of commands to be executed on the client.
 	 */
-	public void claimRoute(AuthToken authToken, String gameID, Route route);
+	public void claimRoute(AuthToken authToken, String gameID, Route route, ArrayList<Integer> discard);
 
 	/*
 	* @pre 0 < authToken&&gameID < 10000
