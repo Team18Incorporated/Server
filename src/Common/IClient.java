@@ -1,9 +1,10 @@
-package Common;
+package edu.byu.cs.team18.tickettoride.Common;
 
 
 import java.util.List;
 
-import Model.*;
+import edu.byu.cs.team18.tickettoride.Common.Commands.InGameCommands.ShowDestinationChoicesCommand;
+import edu.byu.cs.team18.tickettoride.Common.Commands.InGameCommands.UpdateFaceUpCommand;
 
 public interface IClient {
 
@@ -42,7 +43,7 @@ public interface IClient {
     * @post current game will be updated
     *
     * */
-    public void updateGame(Game game);
+    public void updateGame(ClientGame game);
 
     /*updateGame updates parts of the game without passing over the whole Game object
 
@@ -118,6 +119,27 @@ public interface IClient {
     * @post opponent's score will be displayed with the correct value.
      */
     public void updateEnemyScore(String playerID, int score);
+
+    /*
+    awards longest route to designated player
+    * @pre playerID matches a player in the model's current game.
+    * @post payer displays longest route
+     */
+    public void awardLongestRoute(String playerID);
+
+    /*
+    set's the number of completed routes for playerID
+    * @pre playerID matches a player in the model's current game, complete>=0
+    * @post payer displays number of completed routes
+     */
+    public void setPlayerCompletedDestinations(String playerID, int complete);
+
+    /*
+    sets number of penalties to player
+    * @pre playerID matches a player in the model's current game, penalties>=0
+    * @post payer displays number of penalties
+     */
+    public void setPlayerPenalties(String playerID, int penalties);
 
     /*
 	* @pre 0 < authToken&&gameID < 10000
