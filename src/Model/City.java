@@ -73,4 +73,15 @@ public class City {
     public ArrayList<Route> getConnectRoutes() {
         return connectRoutes;
     }
+    
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof City)) return false;
+
+        City city = (City) o;
+
+        return cityName.equals(city.cityName);
+
+    }
 }

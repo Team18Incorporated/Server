@@ -133,6 +133,16 @@ public class Game {
     	return chatHistory;
     }
 
-
+    public void incrementTurn()
+    {
+    	if(playerTurn==playerList.size()-1)
+    	{
+    		playerTurn=0;
+    	}
+    	else
+    	{
+    		playerTurn++;
+    	}
+    }
 
 }

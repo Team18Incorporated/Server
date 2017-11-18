@@ -19,10 +19,12 @@ public class GameMap {
     }
 
 
-    public void claimRoute(Route route, Player player)
+    public Route claimRoute(Route routeIn, Player player)
     {
+        Route route= getRoute(routeIn);
         route.setOwner(player.getPlayerID());
         player.claimRoute(route);
+        return route;
     }
 
 
@@ -81,5 +83,20 @@ public class GameMap {
             }
         }
         return null;
+    }
+    
+    private Route getRoute(Route routeIn)
+    {
+    	Route returnRoute=null;
+    	
+    	for(Route r : routeList)
+    	{
+    		if(r.equals(routeIn))
+    		{
+    			returnRoute=r;
+    		}
+    	}
+    	
+    	return returnRoute;
     }
 }

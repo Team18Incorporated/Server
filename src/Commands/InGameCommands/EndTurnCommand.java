@@ -1,6 +1,7 @@
 package Commands.InGameCommands;
 
 import Model.AuthToken;
+import Server.ServerFacade;
 import Common.ICommand;
 
 /**
@@ -18,6 +19,7 @@ public class EndTurnCommand implements ICommand {
 
     @Override
     public Object execute() {
+    	ServerFacade.getSingleton().incrementTurn(token, gameID);
 		return null;
 
     }

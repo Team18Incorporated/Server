@@ -121,11 +121,27 @@ public class ServerFacade implements IServer {
 	}
 
 	@Override
-	public void claimRoute(AuthToken authToken, String gameID, Route route) {
+	public void claimRoute(AuthToken authToken, String gameID, Route routeIn) {
 		// TODO IMPLEMENT THIS METHOD
 		Game g = checkInGame(authToken, gameID);
 		if (g == null)
 			return;
+		String playerID = ServerModel.getSingleton().getUserFromAuthToken(authToken).getID();
+		Player player = null;
+		for(Player p : g.getPlayerList())
+			if(p.getPlayerID() == playerID)
+				player = p;
+		Route returnRoute = g.getMap().claimRoute(routeIn, player);
+		ClientProxy proxy = new ClientProxy(gameID,playerID);
+		proxy.claimRoute(gameID, playerID, returnRoute);
+
+		for(Player id : g.getPlayerList()){
+			if(!id.getPlayerID().equals(playerID)){
+				proxy = new ClientProxy(gameID, id.getPlayerID());
+				proxy.claimRoute(gameID, playerID, returnRoute);
+			}
+		}
+		
 		// get routes
 		// "claim route for ServerModel"
 		// "claim route for player"
@@ -299,6 +315,15 @@ public class ServerFacade implements IServer {
 			if(p.getPlayerID() == playerID)
 				player = p;
 		return player.getCommands(index);
+	}
+	
+	public void incrementTurn(AuthToken authToken, String gameID)
+	{
+		Game g = checkInGame(authToken, gameID);
+		g.incrementTurn();
+		String playerID = g.getPlayerList().get(g.getPlayerTurn()).getPlayerID();
+		ClientProxy proxy = new ClientProxy( gameID,playerID);
+		proxy.startPlayerTurn();
 	}
 
 }
