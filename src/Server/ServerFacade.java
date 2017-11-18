@@ -142,10 +142,6 @@ public class ServerFacade implements IServer {
 			}
 		}
 		
-		// get routes
-		// "claim route for ServerModel"
-		// "claim route for player"
-		// call clientProxy for claim route
 
 	}
 
