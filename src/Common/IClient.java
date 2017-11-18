@@ -1,10 +1,9 @@
-package edu.byu.cs.team18.tickettoride.Common;
+package Common;
 
 
 import java.util.List;
 
-import edu.byu.cs.team18.tickettoride.Common.Commands.InGameCommands.ShowDestinationChoicesCommand;
-import edu.byu.cs.team18.tickettoride.Common.Commands.InGameCommands.UpdateFaceUpCommand;
+import Model.*;
 
 public interface IClient {
 
@@ -158,5 +157,11 @@ public interface IClient {
     * @post the chatMessages in the passed-in history will be added to the game's chat history.
      */
     public void updateChatHistory(ChatHistory chatHistory);
+    
+    public void lastRound();
+
+	void updateGame(Game game);
+	
+	public void incrementTurn(int i);
 
 }

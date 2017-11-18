@@ -135,10 +135,18 @@ public class ServerFacade implements IServer {
 		ClientProxy proxy = new ClientProxy(gameID,playerID);
 		proxy.claimRoute(gameID, playerID, returnRoute);
 
+		boolean last = false;
+		if(player.getNumTrainPieces() <= 2){
+			last = true;
+		}
+
 		for(Player id : g.getPlayerList()){
+			proxy = new ClientProxy(gameID, id.getPlayerID());
 			if(!id.getPlayerID().equals(playerID)){
-				proxy = new ClientProxy(gameID, id.getPlayerID());
 				proxy.claimRoute(gameID, playerID, returnRoute);
+			}
+			if(last){
+				proxy.lastRound();
 			}
 		}
 		
@@ -319,6 +327,10 @@ public class ServerFacade implements IServer {
 		String playerID = g.getPlayerList().get(g.getPlayerTurn()).getPlayerID();
 		ClientProxy proxy = new ClientProxy( gameID,playerID);
 		proxy.startPlayerTurn();
+		for(Player p: g.getPlayerList()){
+			proxy = new ClientProxy(gameID, p.getPlayerID());
+			proxy.incrementTurn(g.getPlayerTurn());
+		}
 	}
 
 }

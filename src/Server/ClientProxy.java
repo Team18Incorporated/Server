@@ -2,6 +2,7 @@ package Server;
 
 import java.util.List;
 
+import Common.ClientGame;
 import Common.IClient;
 import Common.ICommand;
 import Model.*;
@@ -130,9 +131,48 @@ public class ClientProxy implements IClient {
 		addCommand(new StartTurnCommand());
 	}
 	
+	public void lastRound(){
+		addCommand(new LastRoundCommand());
+	}
+	
+	public void incrementTurn(int i){
+		addCommand(new IncrementTurnCommand(i));
+	}
+	
 	
 	private void addCommand(ICommand command){
 		ServerModel.getSingleton().getGame(gameID).getPlayer(playerID).addCommand(command);
 	}
+
+	@Override
+	public void updateGame(ClientGame game) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void awardLongestRoute(String playerID) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setPlayerCompletedDestinations(String playerID, int complete) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setPlayerPenalties(String playerID, int penalties) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void incrementTurn() {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 }

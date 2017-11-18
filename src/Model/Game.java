@@ -17,6 +17,9 @@ public class Game {
     private DestinationDeck destinationDeck;
     private int playerTurn;
     
+    private boolean lastRound = false;
+    private int lastTurn;
+    
     private ChatHistory chatHistory;
 
     //CONSTRUCTOR-----------------------------------------------------------------------------------
@@ -142,6 +145,8 @@ public class Game {
     	else
     	{
     		playerTurn++;
+    	}
+    	if(lastRound && ){
     	}
     }
 
