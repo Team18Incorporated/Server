@@ -17,6 +17,7 @@ public class ServerModel {
 	private ArrayList<String> games;
 	private ArrayList<String> joinableGames;
 	private HashMap<String, User> authTokens;
+	
 
 	/*
 	 * Users -username -password -joined games

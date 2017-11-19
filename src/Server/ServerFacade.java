@@ -138,12 +138,20 @@ public class ServerFacade implements IServer {
 		proxy.claimRoute(gameID, playerID, returnRoute);
 		proxy.updateNumTrainPieces(playerID, player.getNumTrainPieces());
 
+		boolean last = false;
+		if(player.getNumTrainPieces() <= 2){
+			last = true;
+		}
+
 		for(Player id : g.getPlayerList()){
+			proxy = new ClientProxy(gameID, id.getPlayerID());
 			if(!id.getPlayerID().equals(playerID)){
-				proxy = new ClientProxy(gameID, id.getPlayerID());
 				proxy.claimRoute(gameID, playerID, returnRoute);
 				proxy.updateNumTrainPieces(playerID, player.getNumTrainPieces());
 				proxy.updateEnemyTrainHand(player.getPlayerID(), player.getHand().size());
+			}
+			if(last){
+				proxy.lastRound();
 			}
 		}
 		
@@ -201,7 +209,6 @@ public class ServerFacade implements IServer {
 		for(Player id: g.getPlayerList()){
 			if(!id.getPlayerID().equals(playerID)){
 				proxy = new ClientProxy(gameID, id.getPlayerID());
-				proxy.updateEnemyDestinationHand(id.getPlayerID(), player.getDestinationCards().size());
 				proxy.updateDestinationDeckSize(g.getNumDestinationDeck());
 			}
 
@@ -232,7 +239,7 @@ public class ServerFacade implements IServer {
 		proxy.updateDestinationHand(player.getDestinationCards());
 		for(Player id: g.getPlayerList()){
 			if(!id.getPlayerID().equals(playerID)){
-				proxy = new ClientProxy(id.getPlayerID(), gameID);
+				proxy = new ClientProxy(gameID,id.getPlayerID());
 				proxy.updateEnemyDestinationHand(id.getPlayerID(), player.getDestinationCards().size());
 			}
 
@@ -321,10 +328,14 @@ public class ServerFacade implements IServer {
 	public void incrementTurn(AuthToken authToken, String gameID)
 	{
 		Game g = checkInGame(authToken, gameID);
-		g.incrementTurn();
+		//g.incrementTurn();
 		String playerID = g.getPlayerList().get(g.getPlayerTurn()).getPlayerID();
 		ClientProxy proxy = new ClientProxy( gameID,playerID);
 		proxy.startPlayerTurn();
+		for(Player p: g.getPlayerList()){
+			proxy = new ClientProxy(gameID, p.getPlayerID());
+			proxy.incrementTurn(g.getPlayerTurn());
+		}
 	}
 
 }

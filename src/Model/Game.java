@@ -17,6 +17,9 @@ public class Game {
     private DestinationDeck destinationDeck;
     private int playerTurn;
     
+    private boolean lastRound = false;
+    private int lastTurn;
+    
     private ChatHistory chatHistory;
 
     //CONSTRUCTOR-----------------------------------------------------------------------------------
@@ -97,7 +100,9 @@ public class Game {
             playerList.get(i).addCardstoHand(trainCardDeck.drawCards(4));
     		
             //add cards to hand and remove from deck
-            playerList.get(i).setDestinationCardChoices(destinationDeck.drawCards(3));
+            ArrayList<DestinationCard> list =destinationDeck.drawCards(3);
+            playerList.get(i).setDestinationCardChoices(list);
+            playerList.get(i).addDestinationCards(list);
             //add cards to hand and remove from deck
         }
         playerTurn = 0;
@@ -143,6 +148,8 @@ public class Game {
     	{
     		playerTurn++;
     	}
+    	/*if(lastRound && ){
+    	}*/
     }
     
     public ArrayList<TrainCard> discardPlayerCards(String playerID, ArrayList<Integer> discard)

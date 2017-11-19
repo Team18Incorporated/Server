@@ -42,7 +42,7 @@ public interface IClient {
     * @post current game will be updated
     *
     * */
-    public void updateGame(Game game);
+    public void updateGame(ClientGame game);
 
     /*updateGame updates parts of the game without passing over the whole Game object
 
@@ -120,6 +120,27 @@ public interface IClient {
     public void updateEnemyScore(String playerID, int score);
 
     /*
+    awards longest route to designated player
+    * @pre playerID matches a player in the model's current game.
+    * @post payer displays longest route
+     */
+    public void awardLongestRoute(String playerID);
+
+    /*
+    set's the number of completed routes for playerID
+    * @pre playerID matches a player in the model's current game, complete>=0
+    * @post payer displays number of completed routes
+     */
+    public void setPlayerCompletedDestinations(String playerID, int complete);
+
+    /*
+    sets number of penalties to player
+    * @pre playerID matches a player in the model's current game, penalties>=0
+    * @post payer displays number of penalties
+     */
+    public void setPlayerPenalties(String playerID, int penalties);
+
+    /*
 	* @pre 0 < authToken&&gameID < 10000
 	* @post returns a command that will display the destination card choices taken from the deck.
      */
@@ -136,5 +157,11 @@ public interface IClient {
     * @post the chatMessages in the passed-in history will be added to the game's chat history.
      */
     public void updateChatHistory(ChatHistory chatHistory);
+    
+    public void lastRound();
+
+	void updateGame(Game game);
+	
+	public void incrementTurn(int i);
 
 }
