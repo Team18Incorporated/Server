@@ -19,7 +19,7 @@ public class Player {
     private Color color;
     private ArrayList<TrainCard> hand;
     private ArrayList<DestinationCard> destinationCards;
-    private int points;
+    private int points=0;
     private ArrayList<Route> claimedRoutes = new ArrayList<>();
     private int numTrainPieces=45;
     private ArrayList<DestinationCard> destinationCardChoices = new ArrayList<>();
@@ -174,6 +174,35 @@ public class Player {
     	}
     	hand.remove(card);
     	return card;
+    }
+    
+    
+    public void addPoints(int length)
+    {
+    	if(length==1)
+    	{
+    		points=points+1;
+    	}
+    	else if(length==2)
+    	{
+    		points=points+2;
+    	}
+    	else if(length==3)
+    	{
+    		points=points+4;
+    	}
+    	else if(length==4)
+    	{
+    		points=points+7;
+    	}
+    	else if(length==5)
+    	{
+    		points=points+10;
+    	}
+    	else if(length==6)
+    	{
+    		points=points+15;
+    	}
     }
 
     
