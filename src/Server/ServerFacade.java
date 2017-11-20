@@ -150,9 +150,9 @@ public class ServerFacade implements IServer {
 			if(!id.getPlayerID().equals(playerID)){
 				proxy.claimRoute(gameID, playerID, returnRoute);
 				proxy.updateNumTrainPieces(playerID, player.getNumTrainPieces());
-				proxy.updateEnemyTrainHand(player.getPlayerID(), player.getHand().size());
 				proxy.updateEnemyScore(player.getPlayerID(), player.getPoints());
 			}
+			proxy.updateEnemyTrainHand(player.getPlayerID(), player.getHand().size());
 			if(last){
 				proxy.lastRound();
 			}
