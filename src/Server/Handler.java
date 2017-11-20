@@ -29,7 +29,7 @@ public class Handler implements HttpHandler {
 	public void handle(HttpExchange exchange) throws IOException {
 		URI uri = exchange.getRequestURI();
 		String path = uri.getPath();
-		if(!path.startsWith("/Update"))System.out.println("Path: " + path + " URI: " + uri.toString());
+		if(!path.startsWith("/Update")|| !path.startsWith("/InGameCommands.Update"))System.out.println("Path: " + path + " URI: " + uri.toString());
 		
 		builder.registerTypeAdapter(ICommand.class, new ICommandAdapter<ICommand>());
 		Gson gson = builder.create();

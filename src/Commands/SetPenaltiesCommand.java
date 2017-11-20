@@ -16,16 +16,6 @@ public class SetPenaltiesCommand implements ICommand {
     }
 
     @Override
-    public String getSuffix() {
-        return "SetPenalties";
-    }
-
-    @Override
-    public String getClassName() {
-        return getClass().getName();
-    }
-
-    @Override
     public void execute() {
         ClientFacade.getClientFacade().setPlayerPenalties(playerID,penalties);
     }

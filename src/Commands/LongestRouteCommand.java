@@ -13,15 +13,6 @@ public class LongestRouteCommand implements ICommand {
         playerID = idIn;
     }
 
-    @Override
-    public String getSuffix() {
-        return "LongestRoute";
-    }
-
-    @Override
-    public String getClassName() {
-        return getClass().getName();
-    }
 
     @Override
     public void execute() {

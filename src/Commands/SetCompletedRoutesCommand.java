@@ -16,16 +16,6 @@ public class SetCompletedRoutesCommand implements ICommand {
     }
 
     @Override
-    public String getSuffix() {
-        return "SetCompletedRoutes";
-    }
-
-    @Override
-    public String getClassName() {
-        return getClass().getName();
-    }
-
-    @Override
     public void execute() {
         ClientFacade.getClientFacade().setPlayerCompletedDestinations(playerID,routes);
     }
