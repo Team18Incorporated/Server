@@ -19,11 +19,12 @@ public class DestinationCard extends Card {
         return startCity;
     }
 
-
     public City getEndCity() {
         return endCity;
     }
 
+    public int getPoints() {return points;}
+    
     public boolean checkComplete(Player player)
     {
         ArrayList<Route> routeList = player.getClaimedRoutes();

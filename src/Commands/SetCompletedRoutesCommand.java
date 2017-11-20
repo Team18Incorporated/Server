@@ -1,6 +1,6 @@
-package edu.byu.cs.team18.tickettoride.Common.Commands;
+package Commands;
 
-import edu.byu.cs.team18.tickettoride.ClientFacade;
+import Common.ICommand;
 
 /**
  * Created by Antman 537 on 11/18/2017.
@@ -15,18 +15,10 @@ public class SetCompletedRoutesCommand implements ICommand {
         routes = routesIn;
     }
 
-    @Override
-    public String getSuffix() {
-        return "SetCompletedRoutes";
-    }
 
     @Override
-    public String getClassName() {
-        return getClass().getName();
-    }
-
-    @Override
-    public void execute() {
-        ClientFacade.getClientFacade().setPlayerCompletedDestinations(playerID,routes);
+    public Object execute() {
+        return null;
+    	//ClientFacade.getClientFacade().setPlayerCompletedDestinations(playerID,routes);
     }
 }

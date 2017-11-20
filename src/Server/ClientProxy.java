@@ -7,6 +7,9 @@ import Common.ClientGame;
 import Common.IClient;
 import Common.ICommand;
 import Model.*;
+import Commands.LongestRouteCommand;
+import Commands.SetCompletedRoutesCommand;
+import Commands.SetPenaltiesCommand;
 import Commands.InGameCommands.*;
 
 public class ClientProxy implements IClient {
@@ -17,6 +20,10 @@ public class ClientProxy implements IClient {
 	public ClientProxy(String GameID, String PlayerID){
 		this.gameID = GameID;
 		this.playerID = PlayerID;
+	}
+	
+	private void addCommand(ICommand command){
+		ServerModel.getSingleton().getGame(gameID).getPlayer(playerID).addCommand(command);
 	}
 
 	@Override
@@ -75,7 +82,6 @@ public class ClientProxy implements IClient {
 
 	@Override
 	public void claimRoute(String gameID, String playerID, Route route) {
-		// TODO Auto-generated method stub
 		addCommand(new ClaimRouteCommand(gameID, playerID, route));
 	}
 
@@ -105,7 +111,6 @@ public class ClientProxy implements IClient {
 
 	@Override
 	public void updateEnemyScore(String playerID, int score) {
-		// TODO Auto-generated method stub
 		addCommand(new UpdateEnemyScoreCommand(playerID, score));
 	}
 
@@ -146,11 +151,6 @@ public class ClientProxy implements IClient {
 		addCommand(new IncrementTurnCommand(i));
 	}
 	
-	
-	private void addCommand(ICommand command){
-		ServerModel.getSingleton().getGame(gameID).getPlayer(playerID).addCommand(command);
-	}
-	
 	public void setPlayerHand(ArrayList<TrainCard> playerHand)
 	{
 		addCommand(new SetPlayerHandCommand(playerHand));
@@ -165,20 +165,22 @@ public class ClientProxy implements IClient {
 
 	@Override
 	public void awardLongestRoute(String playerID) {
-		// TODO Auto-generated method stub
-		
+		addCommand(new LongestRouteCommand(playerID)); 
 	}
 
 	@Override
 	public void setPlayerCompletedDestinations(String playerID, int complete) {
-		// TODO Auto-generated method stub
-		
+		addCommand(new SetCompletedRoutesCommand(playerID, complete));
 	}
 
 	@Override
 	public void setPlayerPenalties(String playerID, int penalties) {
-		// TODO Auto-generated method stub
-		
+		addCommand(new SetPenaltiesCommand(playerID, penalties));
+	}
+
+	@Override
+	public void endgame() {
+		addCommand(new EndgameCommand());
 	}
 
 

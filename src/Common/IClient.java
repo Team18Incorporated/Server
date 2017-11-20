@@ -158,6 +158,8 @@ public interface IClient {
      */
     public void updateChatHistory(ChatHistory chatHistory);
     
+    public void endgame();
+    
     public void lastRound();
 
 	void updateGame(Game game);

@@ -1,6 +1,6 @@
-package edu.byu.cs.team18.tickettoride.Common.Commands;
+package Commands;
 
-import edu.byu.cs.team18.tickettoride.ClientFacade;
+import Common.ICommand;
 
 /**
  * Created by Antman 537 on 11/18/2017.
@@ -13,18 +13,11 @@ public class LongestRouteCommand implements ICommand {
         playerID = idIn;
     }
 
-    @Override
-    public String getSuffix() {
-        return "LongestRoute";
-    }
+    
 
     @Override
-    public String getClassName() {
-        return getClass().getName();
-    }
-
-    @Override
-    public void execute() {
-        ClientFacade.getClientFacade().awardLongestRoute(playerID);
+    public Object execute() {
+    	return null;
+        //ClientFacade.getClientFacade().awardLongestRoute(playerID);
     }
 }

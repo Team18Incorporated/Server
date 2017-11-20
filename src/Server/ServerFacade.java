@@ -122,7 +122,6 @@ public class ServerFacade implements IServer {
 
 	@Override
 	public void claimRoute(AuthToken authToken, String gameID, Route routeIn, ArrayList<Integer> discard) {
-		// TODO IMPLEMENT THIS METHOD
 		Game g = checkInGame(authToken, gameID);
 		if (g == null)
 			return;
@@ -332,7 +331,13 @@ public class ServerFacade implements IServer {
 		Game g = checkInGame(authToken, gameID);
 		if(g.checkLastTurn())
 		{
-			
+			g.awardRoutePoints();
+			g.awardLongestRoute();
+			ClientProxy proxy = null;
+			for (Player p: g.getPlayerList()) {
+				proxy = new ClientProxy(gameID, p.getPlayerID());
+				proxy.endgame();
+			}
 		}
 		else
 		{

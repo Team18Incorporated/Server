@@ -1,6 +1,6 @@
-package edu.byu.cs.team18.tickettoride.Common.Commands;
+package Commands;
 
-import edu.byu.cs.team18.tickettoride.ClientFacade;
+import Common.ICommand;
 
 /**
  * Created by Antman 537 on 11/18/2017.
@@ -15,18 +15,10 @@ public class SetPenaltiesCommand implements ICommand {
         penalties = penaltiesIn;
     }
 
-    @Override
-    public String getSuffix() {
-        return "SetPenalties";
-    }
 
     @Override
-    public String getClassName() {
-        return getClass().getName();
-    }
-
-    @Override
-    public void execute() {
-        ClientFacade.getClientFacade().setPlayerPenalties(playerID,penalties);
+    public Object execute() {
+        return null;
+    	//ClientFacade.getClientFacade().setPlayerPenalties(playerID,penalties);
     }
 }

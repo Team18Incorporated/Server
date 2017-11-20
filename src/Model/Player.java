@@ -20,6 +20,9 @@ public class Player {
     private ArrayList<TrainCard> hand;
     private ArrayList<DestinationCard> destinationCards;
     private int points;
+    private int penalties = 0;
+    private int destinationsCompleted = 0;
+    private boolean hasLongestRoute = false;
     private ArrayList<Route> claimedRoutes = new ArrayList<>();
     private int numTrainPieces=45;
     private ArrayList<DestinationCard> destinationCardChoices = new ArrayList<>();
@@ -176,5 +179,28 @@ public class Player {
     	return card;
     }
 
+    public int getPenalties() {return penalties;}
+    public int getDestinationsCompleted() {return destinationsCompleted;}
+    public boolean hasLongestRoute() {
+    	return hasLongestRoute;
+    }
+  
+    public void setLongestRoute() {
+    	//TODO implement logic or else set
+    }
     
+    public void checkDestinationCards() {
+    	for (int i=0; i<destinationCardChoices.size(); i++) {
+    		DestinationCard temp = destinationCardChoices.get(i);
+    		if (temp.checkComplete(this)) {
+    			points = points + temp.getPoints();
+    			destinationsCompleted++;
+    		}
+    		else {
+    			points = points - temp.getPoints();
+    			if (points<0) {points = 0;}
+    			penalties++;
+    		}
+    	}
+    }
 }

@@ -179,4 +179,14 @@ public class Game {
     	}
     	return false;
     }
+
+    public void awardRoutePoints() {
+    	for (int i=0; i<playerList.size(); i++) {
+    		playerList.get(i).checkDestinationCards();
+    	}
+    }
+
+    public void awardLongestRoute() {
+    	//TODO determine who has longest route
+    }
 }
