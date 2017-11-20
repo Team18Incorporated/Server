@@ -252,7 +252,7 @@ public class ServerFacade implements IServer {
 				proxy.updateDestinationDeckSize(g.getNumDestinationDeck());
 			}*/
 			proxy = new ClientProxy(gameID,id.getPlayerID());
-			proxy.updateEnemyDestinationHand(id.getPlayerID(), player.getDestinationCards().size());
+			proxy.updateEnemyDestinationHand(player.getPlayerID(), player.getDestinationCards().size());
 			proxy.updateDestinationDeckSize(g.getNumDestinationDeck());
 		}
 		// call proxy for each player

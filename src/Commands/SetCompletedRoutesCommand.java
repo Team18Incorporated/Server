@@ -2,6 +2,7 @@ package Commands;
 
 import Common.ICommand;
 
+
 /**
  * Created by Antman 537 on 11/18/2017.
  */
@@ -19,7 +20,7 @@ public class SetCompletedRoutesCommand implements ICommand {
 
     @Override
     public Object execute() {
-        return null;
-    	//ClientFacade.getClientFacade().setPlayerCompletedDestinations(playerID,routes);
-    }
+    	return null;
+    	
+	}
 }

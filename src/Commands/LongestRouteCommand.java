@@ -2,6 +2,8 @@ package Commands;
 
 import Common.ICommand;
 
+
+
 /**
  * Created by Antman 537 on 11/18/2017.
  */
@@ -13,9 +15,10 @@ public class LongestRouteCommand implements ICommand {
         playerID = idIn;
     }
 
+   
+
     @Override
     public Object execute() {
-    	return null;
-        //ClientFacade.getClientFacade().awardLongestRoute(playerID);
+        return null;
     }
 }

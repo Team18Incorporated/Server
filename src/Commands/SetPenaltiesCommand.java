@@ -2,6 +2,7 @@ package Commands;
 
 import Common.ICommand;
 
+
 /**
  * Created by Antman 537 on 11/18/2017.
  */
@@ -15,9 +16,10 @@ public class SetPenaltiesCommand implements ICommand {
         penalties = penaltiesIn;
     }
 
+   
+
     @Override
     public Object execute() {
-        return null;
-    	//ClientFacade.getClientFacade().setPlayerPenalties(playerID,penalties);
+       return null;
     }
 }
