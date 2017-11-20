@@ -182,13 +182,17 @@ public class ServerFacade implements IServer {
 		// call client proxy
 		ClientProxy proxy = new ClientProxy(gameID,playerID);
 		proxy.updateTrainHand(trainCard);
-		proxy.updateTrainDeckSize(g.getNumTrainDeck());
+//		proxy.updateTrainDeckSize(g.getNumTrainDeck());
 		for(Player id : g.getPlayerList()){
+			/*
 			if(!id.getPlayerID().equals(playerID)){
 				proxy = new ClientProxy(gameID, id.getPlayerID());
 				proxy.updateEnemyTrainHand(playerID, player.getHand().size());
 				proxy.updateTrainDeckSize(g.getNumTrainDeck());
-			}
+			}*/
+			proxy = new ClientProxy(gameID, id.getPlayerID());
+			proxy.updateEnemyTrainHand(playerID, player.getHand().size());
+			proxy.updateTrainDeckSize(g.getNumTrainDeck());
 		}
 	}
 
@@ -240,14 +244,16 @@ public class ServerFacade implements IServer {
 		ClientProxy proxy = new ClientProxy(gameID,playerID);
 		
 		proxy.updateDestinationHand(player.getDestinationCards());
-		proxy.updateDestinationDeckSize(g.getNumDestinationDeck());
+	//	proxy.updateDestinationDeckSize(g.getNumDestinationDeck());
 		for(Player id: g.getPlayerList()){
-			if(!id.getPlayerID().equals(playerID)){
+			/*if(!id.getPlayerID().equals(playerID)){
 				proxy = new ClientProxy(gameID,id.getPlayerID());
 				proxy.updateEnemyDestinationHand(id.getPlayerID(), player.getDestinationCards().size());
 				proxy.updateDestinationDeckSize(g.getNumDestinationDeck());
-			}
-
+			}*/
+			proxy = new ClientProxy(gameID,id.getPlayerID());
+			proxy.updateEnemyDestinationHand(id.getPlayerID(), player.getDestinationCards().size());
+			proxy.updateDestinationDeckSize(g.getNumDestinationDeck());
 		}
 		// call proxy for each player
 	}
@@ -274,16 +280,20 @@ public class ServerFacade implements IServer {
 		player.addCardstoHand(cards);
 		// call client proxy
 		ClientProxy proxy = new ClientProxy(gameID,playerID);
-		proxy.updateFaceUp(list);
+	//	proxy.updateFaceUp(list);
 		proxy.updateTrainHand(trainCard);
-		proxy.updateTrainDeckSize(g.getNumTrainDeck());
+	//	proxy.updateTrainDeckSize(g.getNumTrainDeck());
 		for(Player id : g.getPlayerList()){
-			if(!id.getPlayerID().equals(playerID)){
+			/*if(!id.getPlayerID().equals(playerID)){
 				proxy = new ClientProxy(gameID, id.getPlayerID());
 				proxy.updateFaceUp(list);
 				proxy.updateEnemyTrainHand(playerID, player.getHand().size());
 				proxy.updateTrainDeckSize(g.getNumTrainDeck());
-			}
+			}*/
+			proxy = new ClientProxy(gameID, id.getPlayerID());
+			proxy.updateFaceUp(list);
+			proxy.updateEnemyTrainHand(playerID, player.getHand().size());
+			proxy.updateTrainDeckSize(g.getNumTrainDeck());
 		}
 	}
 
