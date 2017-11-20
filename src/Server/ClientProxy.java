@@ -139,12 +139,11 @@ public class ClientProxy implements IClient {
 	}
 
 	public void lastRound(){
-		//addCommand(new LastRoundCommand());
+		addCommand(new LastRoundCommand());
 	}
 	
 	public void incrementTurn(int i){
-		//addCommand(new IncrementTurnCommand(i));
-
+		addCommand(new IncrementTurnCommand(i));
 	}
 	
 	

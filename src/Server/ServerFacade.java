@@ -141,6 +141,8 @@ public class ServerFacade implements IServer {
 		boolean last = false;
 		if(player.getNumTrainPieces() <= 2){
 			last = true;
+			proxy.lastRound();
+			g.markLastTurn(player);
 		}
 
 		for(Player id : g.getPlayerList()){
@@ -328,14 +330,22 @@ public class ServerFacade implements IServer {
 	public void incrementTurn(AuthToken authToken, String gameID)
 	{
 		Game g = checkInGame(authToken, gameID);
-		//g.incrementTurn();
-		String playerID = g.getPlayerList().get(g.getPlayerTurn()).getPlayerID();
-		ClientProxy proxy = new ClientProxy( gameID,playerID);
-		proxy.startPlayerTurn();
-		for(Player p: g.getPlayerList()){
-			proxy = new ClientProxy(gameID, p.getPlayerID());
-			proxy.incrementTurn(g.getPlayerTurn());
+		if(g.checkLastTurn())
+		{
+			
 		}
+		else
+		{
+			g.incrementTurn();
+			String playerID = g.getPlayerList().get(g.getPlayerTurn()).getPlayerID();
+			ClientProxy proxy = new ClientProxy( gameID,playerID);
+			proxy.startPlayerTurn();
+			for(Player p: g.getPlayerList()){
+				proxy = new ClientProxy(gameID, p.getPlayerID());
+				proxy.incrementTurn(g.getPlayerTurn());
+			}
+		}
+
 	}
 
 }

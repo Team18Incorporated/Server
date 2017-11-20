@@ -2,19 +2,26 @@ package Commands.InGameCommands;
 
 import Common.ICommand;
 
+
+/**
+ * Created by price on 11/18/2017.
+ */
+
 public class IncrementTurnCommand implements ICommand {
-	
-	int turn;
 
-	public IncrementTurnCommand(int i) {
-		// TODO Auto-generated constructor stub
-		turn = i;
-	}
+    private int turn;
+    private String className=getClass().getName();
 
-	@Override
-	public Object execute() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    
+    public IncrementTurnCommand( int turn)
+    {
+    	this.turn= turn;
+    }
+
+    @Override
+    public Object execute() {
+        return null;
+    }
+
 
 }

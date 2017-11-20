@@ -18,7 +18,8 @@ public class Game {
     private int playerTurn;
     
     private boolean lastRound = false;
-    private int lastTurn;
+    private int lastTurn=-1;
+  
     
     private ChatHistory chatHistory;
 
@@ -148,8 +149,7 @@ public class Game {
     	{
     		playerTurn++;
     	}
-    	/*if(lastRound && ){
-    	}*/
+    	
     }
     
     public ArrayList<TrainCard> discardPlayerCards(String playerID, ArrayList<Integer> discard)
@@ -160,4 +160,23 @@ public class Game {
     	
     }
 
+    public void markLastTurn(Player player)
+    {
+    	for(int i=0; i<playerList.size(); i++)
+    	{
+    		if(player.getPlayerID().equals(playerList.get(i).getPlayerID()))
+    		{
+    			lastTurn=i;
+    		}
+    	}
+    }
+    
+    public boolean checkLastTurn()
+    {
+    	if(playerTurn==lastTurn)
+    	{
+    		return true;
+    	}
+    	return false;
+    }
 }

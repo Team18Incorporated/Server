@@ -2,16 +2,21 @@ package Commands.InGameCommands;
 
 import Common.ICommand;
 
-public class LastRoundCommand implements ICommand{
 
-	public LastRoundCommand() {
-		// TODO Auto-generated constructor stub
-	}
+/**
+ * Created by price on 11/18/2017.
+ */
 
-	@Override
-	public Object execute() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+public class LastRoundCommand implements ICommand {
+
+	
+	private String className =getClass().getName();
+
+
+    @Override
+    public Object execute() {
+    	return null;
+    }
+
 
 }
