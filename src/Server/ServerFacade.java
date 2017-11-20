@@ -136,6 +136,7 @@ public class ServerFacade implements IServer {
 		proxy.setPlayerHand(playerHand);
 		proxy.claimRoute(gameID, playerID, returnRoute);
 		proxy.updateNumTrainPieces(playerID, player.getNumTrainPieces());
+		proxy.updateScore(player.getPoints());
 
 		boolean last = false;
 		if(player.getNumTrainPieces() <= 2){
@@ -150,6 +151,7 @@ public class ServerFacade implements IServer {
 				proxy.claimRoute(gameID, playerID, returnRoute);
 				proxy.updateNumTrainPieces(playerID, player.getNumTrainPieces());
 				proxy.updateEnemyTrainHand(player.getPlayerID(), player.getHand().size());
+				proxy.updateEnemyScore(player.getPlayerID(), player.getPoints());
 			}
 			if(last){
 				proxy.lastRound();
@@ -238,10 +240,12 @@ public class ServerFacade implements IServer {
 		ClientProxy proxy = new ClientProxy(gameID,playerID);
 		
 		proxy.updateDestinationHand(player.getDestinationCards());
+		proxy.updateDestinationDeckSize(g.getNumDestinationDeck());
 		for(Player id: g.getPlayerList()){
 			if(!id.getPlayerID().equals(playerID)){
 				proxy = new ClientProxy(gameID,id.getPlayerID());
 				proxy.updateEnemyDestinationHand(id.getPlayerID(), player.getDestinationCards().size());
+				proxy.updateDestinationDeckSize(g.getNumDestinationDeck());
 			}
 
 		}

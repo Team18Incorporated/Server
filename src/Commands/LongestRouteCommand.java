@@ -13,8 +13,6 @@ public class LongestRouteCommand implements ICommand {
         playerID = idIn;
     }
 
-    
-
     @Override
     public Object execute() {
     	return null;

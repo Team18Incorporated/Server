@@ -15,7 +15,6 @@ public class SetPenaltiesCommand implements ICommand {
         penalties = penaltiesIn;
     }
 
-
     @Override
     public Object execute() {
         return null;

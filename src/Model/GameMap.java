@@ -25,6 +25,7 @@ public class GameMap {
         route.setOwner(player.getPlayerID());
         player.claimRoute(route);
         player.setNumTrainPieces(player.getNumTrainPieces()-route.getLength());
+        player.addPoints(route.getLength());
         return route;
     }
 

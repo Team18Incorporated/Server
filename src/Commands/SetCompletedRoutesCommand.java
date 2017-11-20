@@ -16,6 +16,7 @@ public class SetCompletedRoutesCommand implements ICommand {
     }
 
 
+
     @Override
     public Object execute() {
         return null;
