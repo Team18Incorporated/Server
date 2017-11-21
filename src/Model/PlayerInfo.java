@@ -3,14 +3,16 @@ package Model;
 import java.util.ArrayList;
 
 public class PlayerInfo {
-
+    
     private String playerID;
     private String playerName;
     private Player.Color color;
     private int numTrainCards;
     private int numDestinationCards;
     private int points;
-    
+    private int penalties = -1;
+    private int destinationsCompleted = -1;
+    private boolean hasLongestRoute = false;
     private int numTrainPieces;
 
     public PlayerInfo(Player player)
@@ -22,6 +24,9 @@ public class PlayerInfo {
         numTrainCards=player.getHand().size();
         numDestinationCards=player.getDestinationCards().size();
         numTrainPieces = player.getNumTrainPieces();
+        penalties=player.getPenalties();
+        destinationsCompleted=player.getDestinationsCompleted();
+        hasLongestRoute=player.hasLongestRoute();
     }
 
     public String getPlayerID() {

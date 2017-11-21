@@ -115,7 +115,7 @@ public class Game {
     {
         TrainCard card = faceUpCards.get(index);
         TrainCard newCard = trainCardDeck.drawCard();
-        faceUpCards.add(index, newCard);
+        faceUpCards.set(index, newCard);
         return card;
     }
     
@@ -188,5 +188,22 @@ public class Game {
 
     public void awardLongestRoute() {
     	//TODO determine who has longest route
+    	
+    	for(Player player : playerList)
+    	{
+    		player.findLongestRoute();
+    	}
+    	int longestRoute =0;
+    	int indexLongest=0;
+    	for(int i=0; i<playerList.size(); i++)
+    	{
+    		if(playerList.get(i).getLongestRouteLength()>longestRoute)
+    		{
+    			longestRoute=playerList.get(i).getLongestRouteLength();
+    			indexLongest=i;
+    		}
+    	}
+    	
+    	playerList.get(indexLongest).setLongestRoute();
     }
 }

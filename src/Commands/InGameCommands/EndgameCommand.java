@@ -1,6 +1,9 @@
 package Commands.InGameCommands;
 
+import java.util.ArrayList;
+
 import Common.ICommand;
+import Model.PlayerInfo;
 
 
 /**
@@ -9,6 +12,15 @@ import Common.ICommand;
 
 public class EndgameCommand implements ICommand {
     
+	 private ArrayList<PlayerInfo> playerList;
+	 private String className = getClass().getName();
+
+	 
+	 public void EndgameCommand(ArrayList<PlayerInfo> playerList)
+	 {
+		 this.playerList=playerList;
+	 }
+	
     @Override
     public Object execute() {
         return null;
