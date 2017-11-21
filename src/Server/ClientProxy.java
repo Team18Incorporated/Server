@@ -179,8 +179,8 @@ public class ClientProxy implements IClient {
 	}
 
 	@Override
-	public void endgame() {
-		addCommand(new EndgameCommand());
+	public void endgame(ArrayList<PlayerInfo> list) {
+		addCommand(new EndgameCommand(list));
 	}
 
 

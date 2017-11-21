@@ -16,10 +16,10 @@ public class EndgameCommand implements ICommand {
 	 private String className = getClass().getName();
 
 	 
-	 public void EndgameCommand(ArrayList<PlayerInfo> playerList)
-	 {
+	 public EndgameCommand(ArrayList<PlayerInfo> list) {
 		 this.playerList=playerList;
-	 }
+	}
+
 	
     @Override
     public Object execute() {

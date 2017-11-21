@@ -10,6 +10,7 @@ import Common.IServer;
 import Model.ChatMessage;
 import Model.Game;
 import Model.Player;
+import Model.PlayerInfo;
 import Model.Route;
 import Model.AuthToken;
 import Model.GameInfo;
@@ -347,10 +348,15 @@ public class ServerFacade implements IServer {
 		{
 			g.awardRoutePoints();
 			g.awardLongestRoute();
+			ArrayList<PlayerInfo> playerList= new ArrayList<>();
+			for(Player p: g.getPlayerList())
+			{
+				playerList.add(new PlayerInfo(p));
+			}
 			ClientProxy proxy = null;
 			for (Player p: g.getPlayerList()) {
 				proxy = new ClientProxy(gameID, p.getPlayerID());
-				proxy.endgame();
+				proxy.endgame(playerList);
 			}
 		}
 		else

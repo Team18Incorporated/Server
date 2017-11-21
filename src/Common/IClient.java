@@ -1,6 +1,7 @@
 package Common;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import Model.*;
@@ -158,7 +159,7 @@ public interface IClient {
      */
     public void updateChatHistory(ChatHistory chatHistory);
     
-    public void endgame();
+    public void endgame(ArrayList<PlayerInfo> list);
     
     public void lastRound();
 
