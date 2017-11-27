@@ -204,6 +204,12 @@ public class Game {
     		}
     	}
     	
-    	playerList.get(indexLongest).setLongestRoute();
+    	for(Player p : playerList)
+    	{
+    		if(p.getLongestRouteLength()==longestRoute)
+    		{
+    			p.setLongestRoute();
+    		}
+    	}
     }
 }

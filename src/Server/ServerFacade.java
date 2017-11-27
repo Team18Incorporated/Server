@@ -26,6 +26,7 @@ import Commands.UpdateFaceUpCommand;
 public class ServerFacade implements IServer {
 
 	private static ServerFacade singleton;
+	private boolean lastPlayerCheck = false;
 
 	public static ServerFacade getSingleton() {
 		if (singleton == null)
@@ -140,7 +141,7 @@ public class ServerFacade implements IServer {
 		proxy.updateScore(player.getPoints());
 
 		boolean last = false;
-		if(player.getNumTrainPieces() <= 2){
+		if(player.getNumTrainPieces() <= 2 && last == false){
 			last = true;
 			proxy.lastRound();
 			g.markLastTurn(player);
@@ -346,18 +347,35 @@ public class ServerFacade implements IServer {
 		Game g = checkInGame(authToken, gameID);
 		if(g.checkLastTurn())
 		{
-			g.awardRoutePoints();
-			g.awardLongestRoute();
-			ArrayList<PlayerInfo> playerList= new ArrayList<>();
-			for(Player p: g.getPlayerList())
+			if(!lastPlayerCheck)
 			{
-				playerList.add(new PlayerInfo(p));
+				lastPlayerCheck=true;
+				g.incrementTurn();
+				String playerID = g.getPlayerList().get(g.getPlayerTurn()).getPlayerID();
+				ClientProxy proxy = new ClientProxy( gameID,playerID);
+				proxy.startPlayerTurn();
+				for(Player p: g.getPlayerList()){
+					proxy = new ClientProxy(gameID, p.getPlayerID());
+					proxy.incrementTurn(g.getPlayerTurn());
+				}
 			}
-			ClientProxy proxy = null;
-			for (Player p: g.getPlayerList()) {
-				proxy = new ClientProxy(gameID, p.getPlayerID());
-				proxy.endgame(playerList);
+			else
+			{
+				g.awardRoutePoints();
+				g.awardLongestRoute();
+				ArrayList<PlayerInfo> playerList= new ArrayList<>();
+				for(Player p: g.getPlayerList())
+				{
+					playerList.add(new PlayerInfo(p));
+				}
+				ClientProxy proxy = null;
+				for (Player p: g.getPlayerList()) {
+					proxy = new ClientProxy(gameID, p.getPlayerID());
+					proxy.endgame(playerList);
+				}
 			}
+			
+			
 		}
 		else
 		{

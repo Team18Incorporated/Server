@@ -121,6 +121,11 @@ public class ServerModel {
 				result = new StartedGameResult(false);
 				return result;
 			}
+			
+			// gameList.put(gameID, new Game(gameInfoTemp.getPlayers()));
+
+			// create new game and add to next function
+			g = new Game(gameInfoTemp.getPlayers(), gameID);
 			gameInfoTemp.start();
 			joinableGames.remove(gameID);
 			// tell other clients game is started
@@ -128,11 +133,6 @@ public class ServerModel {
 				Player p = gameInfoTemp.getPlayers().get(i);
 				users.get(p.getPlayerName()).startGame(gameID);
 			}
-			// gameList.put(gameID, new Game(gameInfoTemp.getPlayers()));
-
-			// create new game and add to next function
-			g = new Game(gameInfoTemp.getPlayers(), gameID);
-			
 
 			gameList.put(gameID, g);
 			

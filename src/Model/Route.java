@@ -67,4 +67,8 @@ public class Route {
         return ownerID != null ? ownerID.equals(route.ownerID) : route.ownerID == null;
 
     }
+    
+    public int getID() {
+        return ID;
+    }
 }

@@ -27,7 +27,7 @@ public class Player {
     private boolean hasLongestRoute = false;
     private int points=0;
     private ArrayList<Route> claimedRoutes = new ArrayList<>();
-    private int numTrainPieces=45;
+    private int numTrainPieces=12;
     private ArrayList<DestinationCard> destinationCardChoices = new ArrayList<>();
     
     private PlayerCommandList commands = new PlayerCommandList();
@@ -334,6 +334,8 @@ public class Player {
     {
     	return longestRouteLength;
     }
+    
+    
     
     public void setLongestRoute() {
     	//TODO implement logic or else set
