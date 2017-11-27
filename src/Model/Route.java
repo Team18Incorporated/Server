@@ -12,6 +12,7 @@ public class Route {
     private CardColor color;
     private String ownerID;
     private ArrayList<Integer> segments;
+    private int ID;
 
 
     public Route (String cityName1, String cityName2, int length, CardColor color1)
@@ -23,14 +24,14 @@ public class Route {
         ownerID=null;
     }
 
-    public Route (City city1, City city2, String color, String length)
+    public Route (City city1, City city2, String color, String length, int ID)
     {
         this.city1=city1;
         this.city2=city2;
         this.length=Integer.parseInt(length);
         this.color= new CardColor(color);
         ownerID=null;
-
+        this.ID = ID;
     }
 
     public City getCity1() {
@@ -62,6 +63,7 @@ public class Route {
         if (!city1.equals(route.city1)) return false;
         if (!city2.equals(route.city2)) return false;
         if (!color.equals(route.color)) return false;
+        if (ID != route.ID) return false;
         return ownerID != null ? ownerID.equals(route.ownerID) : route.ownerID == null;
 
     }
