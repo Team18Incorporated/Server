@@ -74,6 +74,7 @@ public class GameMap {
 		try {
 			stream = url.openStream();
 			Scanner scanner = new Scanner(stream);
+			int i = 0;
 	        while(scanner.hasNextLine())
 	        {
 	            String cityname1 = scanner.next();
@@ -83,8 +84,9 @@ public class GameMap {
 
 	            City city1 = getCity(cityname1);
 	            City city2 = getCity(cityname2);
-	            Route newRoute = new Route(city1, city2, color, length);
+	            Route newRoute = new Route(city1, city2, color, length, i);
 	            routeList.add(newRoute);
+	            i++;
 	            //city1.addConnectedRoute(newRoute);
 	            //city2.addConnectedRoute(newRoute);
 	        }
