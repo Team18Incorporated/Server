@@ -117,7 +117,6 @@ public class ServerFacade implements IServer {
 
 	@Override
 	public StartedGameResult startGame(String gameID, AuthToken token) {
-		// TODO Auto-generated method stub
 		String playerID = ServerModel.getSingleton().getUserFromAuthToken(token).getID();
 		return ServerModel.getSingleton().startGame(gameID, playerID);
 	}
@@ -361,18 +360,7 @@ public class ServerFacade implements IServer {
 			}
 			else
 			{
-				g.awardRoutePoints();
-				g.awardLongestRoute();
-				ArrayList<PlayerInfo> playerList= new ArrayList<>();
-				for(Player p: g.getPlayerList())
-				{
-					playerList.add(new PlayerInfo(p));
-				}
-				ClientProxy proxy = null;
-				for (Player p: g.getPlayerList()) {
-					proxy = new ClientProxy(gameID, p.getPlayerID());
-					proxy.endgame(playerList);
-				}
+				endgame(authToken,gameID);
 			}
 			
 			
@@ -391,4 +379,23 @@ public class ServerFacade implements IServer {
 
 	}
 
+	public void forfeit (AuthToken authToken, String gameID){
+		endgame (authToken,gameID);
+	}
+	
+	private void endgame(AuthToken authToken, String gameID){
+		Game g = checkInGame(authToken, gameID);
+		g.awardRoutePoints();
+		g.awardLongestRoute();
+		ArrayList<PlayerInfo> playerList= new ArrayList<>();
+		for(Player p: g.getPlayerList())
+		{
+			playerList.add(new PlayerInfo(p));
+		}
+		ClientProxy proxy = null;
+		for (Player p: g.getPlayerList()) {
+			proxy = new ClientProxy(gameID, p.getPlayerID());
+			proxy.endgame(playerList);
+		}
+	}	
 }

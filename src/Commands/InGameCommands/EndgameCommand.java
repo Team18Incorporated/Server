@@ -17,7 +17,7 @@ public class EndgameCommand implements ICommand {
 
 	 
 	 public EndgameCommand(ArrayList<PlayerInfo> list) {
-		 this.playerList=playerList;
+		 this.playerList=list;
 	}
 
 	

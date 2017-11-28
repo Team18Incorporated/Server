@@ -15,8 +15,8 @@ Calgary Helena any 4
 Calgary Seattle any 4
 Charleston Raleigh any 2
 Charleston Miami purple 4
-Chicago Pittsburgh orange 3
 Chicago Pittsburgh black 3
+Chicago Pittsburgh orange 3
 Chicago Toronto white 4
 Chicago Duluth red 3
 Chicago Omaha blue 4
@@ -79,7 +79,7 @@ NewYork Washington black 2
 NewYork Washington orange 2
 NewYork Pittsburgh white 2
 NewYork Pittsburgh green 2
-Oklahoma SantaFe blue 3
+OklahomaCity SantaFe blue 3
 Phoenix SantaFe any 3
 Pittsburgh Washington any 2
 Pittsburgh Raleigh any 2
