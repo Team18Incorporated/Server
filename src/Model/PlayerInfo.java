@@ -14,6 +14,7 @@ public class PlayerInfo {
     private int destinationsCompleted = -1;
     private boolean hasLongestRoute = false;
     private int numTrainPieces;
+    
 
     public PlayerInfo(Player player)
     {

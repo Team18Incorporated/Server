@@ -27,6 +27,7 @@ public class ServerFacade implements IServer {
 
 	private static ServerFacade singleton;
 	private boolean lastPlayerCheck = false;
+	private boolean last = false;
 
 	public static ServerFacade getSingleton() {
 		if (singleton == null)
@@ -139,7 +140,7 @@ public class ServerFacade implements IServer {
 		proxy.updateNumTrainPieces(playerID, player.getNumTrainPieces());
 		proxy.updateScore(player.getPoints());
 
-		boolean last = false;
+		
 		if(player.getNumTrainPieces() <= 2 && last == false){
 			last = true;
 			proxy.lastRound();

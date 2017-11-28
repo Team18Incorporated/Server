@@ -27,7 +27,7 @@ public class Player {
     private boolean hasLongestRoute = false;
     private int points=0;
     private ArrayList<Route> claimedRoutes = new ArrayList<>();
-    private int numTrainPieces=12;
+    private int numTrainPieces=6;
     private ArrayList<DestinationCard> destinationCardChoices = new ArrayList<>();
     
     private PlayerCommandList commands = new PlayerCommandList();
@@ -211,8 +211,8 @@ public class Player {
     	}
     }
 
-    public int getPenalties() {return penalties;}
-    public int getDestinationsCompleted() {return destinationsCompleted;}
+    public int getPenalties() {return penaltyPoints;}
+    public int getDestinationsCompleted() {return destinationPoints;}
     public boolean hasLongestRoute() {
     	return hasLongestRoute;
     }
@@ -346,12 +346,12 @@ public class Player {
     	for (int i=0; i<destinationCardChoices.size(); i++) {
     		DestinationCard temp = destinationCardChoices.get(i);
     		if (temp.checkComplete(this)) {
-    			points = points + temp.getPoints();
+    			//points = points + temp.getPoints();
     			destinationPoints+=temp.getPoints();
     			destinationsCompleted++;
     		}
     		else {
-    			points = points - temp.getPoints();
+    			//points = points - temp.getPoints();
     			penaltyPoints-=temp.getPoints();
     			if (points<0) {points = 0;}
     			penalties++;
