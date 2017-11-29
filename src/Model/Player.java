@@ -227,6 +227,7 @@ public class Player {
     	{
     		checkedRoutes.add(r);
     		int bestFromRoute =0;
+    		checkedCities.clear();
     		checkedCities.add(r.getCity1());
     		int firstCityCheck = findLongestContinuousPath(r, checkedCities);
     		checkedCities.clear();
@@ -277,12 +278,12 @@ public class Player {
     		int current =0;
     		if(!r.equals(route))
     		{ 				
-    			if(r.getCity1().equals(cityToCheck))
+    			if(!checkedCities.contains( r.getCity1())&& r.getCity1().equals(cityToCheck))
     			{
     				checkedCities.add(cityToCheck);
     				current = r.getLength()+findLongestContinuousPath(r, checkedCities);
     			}
-    			else if(r.getCity2().equals(cityToCheck))
+    			else if(!checkedCities.contains( r.getCity2()) && r.getCity2().equals(cityToCheck))
     			{
     				checkedCities.add(cityToCheck);
     				current = r.getLength()+findLongestContinuousPath(r, checkedCities);
@@ -343,18 +344,18 @@ public class Player {
     }
     
     public void checkDestinationCards() {
-    	for (int i=0; i<destinationCardChoices.size(); i++) {
-    		DestinationCard temp = destinationCardChoices.get(i);
+    	for (int i=0; i<destinationCards.size(); i++) {
+    		DestinationCard temp = destinationCards.get(i);
     		if (temp.checkComplete(this)) {
     			//points = points + temp.getPoints();
     			destinationPoints+=temp.getPoints();
-    			destinationsCompleted++;
+    			//destinationsCompleted++;
     		}
     		else {
     			//points = points - temp.getPoints();
     			penaltyPoints-=temp.getPoints();
-    			if (points<0) {points = 0;}
-    			penalties++;
+    			/*if (points<0) {points = 0;}
+    			penalties++;*/
     		}
     	}
     }

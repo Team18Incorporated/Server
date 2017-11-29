@@ -26,8 +26,8 @@ import Commands.UpdateFaceUpCommand;
 public class ServerFacade implements IServer {
 
 	private static ServerFacade singleton;
-	private boolean lastPlayerCheck = false;
-	private boolean last = false;
+	
+	
 
 	public static ServerFacade getSingleton() {
 		if (singleton == null)
@@ -141,8 +141,8 @@ public class ServerFacade implements IServer {
 		proxy.updateScore(player.getPoints());
 
 		
-		if(player.getNumTrainPieces() <= 2 && last == false){
-			last = true;
+		if(player.getNumTrainPieces() <= 2 && g.isLast() == false){
+			g.setLast(true);
 			proxy.lastRound();
 			g.markLastTurn(player);
 		}
@@ -155,7 +155,7 @@ public class ServerFacade implements IServer {
 				proxy.updateEnemyScore(player.getPlayerID(), player.getPoints());
 			}
 			proxy.updateEnemyTrainHand(player.getPlayerID(), player.getHand().size());
-			if(last){
+			if(g.isLast()){
 				proxy.lastRound();
 			}
 		}
@@ -347,9 +347,9 @@ public class ServerFacade implements IServer {
 		Game g = checkInGame(authToken, gameID);
 		if(g.checkLastTurn())
 		{
-			if(!lastPlayerCheck)
+			if(!g.isLastPlayer())
 			{
-				lastPlayerCheck=true;
+				g.setLastPlayerCheck(true);
 				g.incrementTurn();
 				String playerID = g.getPlayerList().get(g.getPlayerTurn()).getPlayerID();
 				ClientProxy proxy = new ClientProxy( gameID,playerID);

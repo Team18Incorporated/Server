@@ -30,11 +30,11 @@ public class DestinationCard extends Card {
         ArrayList<Route> routeList = player.getClaimedRoutes();
         for(int i=0; i<routeList.size(); i++)
         {
-            if(routeList.get(i).getCity1()==startCity)
+            if(routeList.get(i).getCity1().equals(startCity))
             {
                 return checkRoute(startCity, routeList.get(i), routeList, i);
             }
-            else if(routeList.get(i).getCity2()==startCity)
+            else if(routeList.get(i).getCity2().equals(startCity))
             {
                 return checkRoute(startCity, routeList.get(i), routeList, i);
             }
@@ -47,26 +47,26 @@ public class DestinationCard extends Card {
         ArrayList<Route> listcopy= routeList;
         listcopy.remove(index);
         City checkCity=null;
-        if(route.getCity1()==currentCity)
+        if(route.getCity1().equals(currentCity))
         {
             checkCity=route.getCity2();
         }
-        else if(route.getCity2()==currentCity)
+        else if(route.getCity2().equals(currentCity))
         {
             checkCity=route.getCity1();
         }
 
-        if(checkCity==endCity)
+        if(checkCity.equals(endCity))
         {
             return true;
         }
         for(int i=0; i<listcopy.size(); i++)
         {
-            if(listcopy.get(i).getCity1()==checkCity)
+            if(listcopy.get(i).getCity1().equals(checkCity))
             {
                 return checkRoute(checkCity, listcopy.get(i), listcopy, i);
             }
-            else if(listcopy.get(i).getCity2()==checkCity)
+            else if(listcopy.get(i).getCity2().equals(checkCity))
             {
                 return checkRoute(checkCity, listcopy.get(i), listcopy, i);
             }

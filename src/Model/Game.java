@@ -19,6 +19,8 @@ public class Game {
     
     private boolean lastRound = false;
     private int lastTurn=-1;
+    private boolean last=false;
+    private boolean lastPlayerCheck = false;
   
     
     private ChatHistory chatHistory;
@@ -85,7 +87,17 @@ public class Game {
     	}
     	return null;
     }
+    
+    public boolean isLast()
+    {
+    	return last;
+    }
 
+    public void setLast(boolean last)
+    {
+    	this.last=last;
+    }
+    
     private void startGame()
     {
     	trainCardDeck = new TrainDeck();
@@ -150,6 +162,15 @@ public class Game {
     		playerTurn++;
     	}
     	
+    }
+    public boolean isLastPlayer()
+    {
+    	return lastPlayerCheck;
+    }
+    
+    public void setLastPlayerCheck(boolean in)
+    {
+    	lastPlayerCheck=in;
     }
     
     public ArrayList<TrainCard> discardPlayerCards(String playerID, ArrayList<Integer> discard)
