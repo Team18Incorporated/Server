@@ -398,5 +398,6 @@ public class ServerFacade implements IServer {
 			proxy = new ClientProxy(gameID, p.getPlayerID());
 			proxy.endgame(playerList);
 		}
+		ServerModel.getSingleton().endGame(gameID);
 	}	
 }

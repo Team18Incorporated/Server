@@ -77,17 +77,14 @@ public class ServerModel {
 	}
 
 	public boolean checkAuthToken(AuthToken authToken) {
-		// TODO Auto-generated method stub
 		return authTokens.containsKey(authToken.getToken());
 	}
 
 	public User getUserFromAuthToken(AuthToken authToken) {
-		// TODO Auto-generated method stub
 		return authTokens.get(authToken.getToken());
 	}
 
 	public GameInfo join(String gameID, User userFromAuthToken) {
-		// TODO Auto-generated method stub
 		users.get(userFromAuthToken.getUsername()).join(gameID);
 		GameInfo temp = gameInfo.get(gameID);
 		temp.addPlayer(new Player(userFromAuthToken.getID(), userFromAuthToken
@@ -107,12 +104,10 @@ public class ServerModel {
 	}
 
 	public Object getOpenGames() {
-		// TODO Auto-generated method stub
 		return joinableGames;
 	}
 
 	public StartedGameResult startGame(String gameID, String playerID) {
-		// TODO Auto-generated method stub
 		StartedGameResult result;
 		GameInfo gameInfoTemp = gameInfo.get(gameID);
 		Game g = null;
@@ -146,6 +141,11 @@ public class ServerModel {
 		System.out.println("Here");
 
 		return result;
+	}
+	
+	public void endGame(String gameID) {
+		gameList.remove(gameID);
+		gameInfo.remove(gameID);
 	}
 
 	public GameInfo getGameInfo(String id) {
