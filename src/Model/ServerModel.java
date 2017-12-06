@@ -123,13 +123,23 @@ public class ServerModel {
 			g = new Game(gameInfoTemp.getPlayers(), gameID);
 			gameInfoTemp.start();
 			joinableGames.remove(gameID);
+			gameList.put(gameID, g);
 			// tell other clients game is started
 			for (int i = 0; i < gameInfoTemp.getPlayers().size(); i++) {
 				Player p = gameInfoTemp.getPlayers().get(i);
 				users.get(p.getPlayerName()).startGame(gameID);
+				ArrayList<DestinationCard> cards =(ArrayList<DestinationCard>) g.drawDestinationCards();
+				p.addDestinationCards(cards);
+				ClientProxy proxy = new ClientProxy( gameID,p.getPlayerID());
+				proxy.showDestinationCardChoices(cards);
+			}
+			for (int i = 0; i < gameInfoTemp.getPlayers().size(); i++) {
+				Player p = gameInfoTemp.getPlayers().get(i);
+				ClientProxy proxy = new ClientProxy( gameID,p.getPlayerID());
+				proxy.updateDestinationDeckSize(g.getNumDestinationDeck());
 			}
 
-			gameList.put(gameID, g);
+			
 			
 			Player p = gameInfoTemp.getPlayers().get(g.getPlayerTurn());
 			ClientProxy proxy = new ClientProxy(g.getGameID(),p.getPlayerID());
