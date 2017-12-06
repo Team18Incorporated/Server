@@ -93,8 +93,11 @@ public class TrainDeck {
 	
 	public TrainCard drawCard()
 	{
-		TrainCard card = deckList.get(0);
-		deckList.remove(0);
+		TrainCard card = null;
+		if (deckList.size()>0) {
+			card = deckList.get(0);
+			deckList.remove(0);
+		}
 		return card;
 	}
 

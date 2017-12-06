@@ -172,6 +172,7 @@ public class ServerFacade implements IServer {
 		// check if user is in game
 		// get game and get card from faceup
 		TrainCard trainCard = g.drawTrainCard();
+		if (trainCard==null) return;
 		Player player = null;
 		for(Player p : g.getPlayerList())
 			if(p.getPlayerID() == playerID)
@@ -263,13 +264,13 @@ public class ServerFacade implements IServer {
 	@Override
 	public void drawFromFaceUp(AuthToken authToken, String gameID,
 			int card) {
-		// TODO IMPLEMENT THIS METHOD
 		Game g = checkInGame(authToken, gameID);
 		if(g == null) return;
 		String playerID = ServerModel.getSingleton().getUserFromAuthToken(authToken).getID();
 		// check if user is in game
 		// get game and get card from faceup
 		TrainCard trainCard = g.drawFaceUpCard(card);
+		if (trainCard == null) return;
 		ArrayList<TrainCard> cards = new ArrayList<TrainCard>();
 		cards.add(trainCard);
 		// remove from faceup
