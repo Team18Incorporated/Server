@@ -2,6 +2,8 @@
 
 package Common;
 
+import java.util.List;
+
 import Model.*;
 
 public interface IGameDAO {
