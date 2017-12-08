@@ -1,8 +1,8 @@
 package plugin;
 
-<<<<<<< HEAD:src/plugin/SQL_GameDAO.java
+import Common.ICommand;
+import Common.IGameDAO;
 import Common.IUserDAO;
-=======
 import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -11,7 +11,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 
->>>>>>> 8949713b58e78d6421af902a4ea815cbd6a6ce14:src/Common/SQL_GameDAO.java
 import Model.AuthToken;
 import Model.Game;
 import Model.User;
@@ -65,7 +64,7 @@ public class SQL_GameDAO implements IGameDAO {
 
 	public List<Game> loadGames()
 	{
-		
+		return null;
 	}
 
 	public void deleteGame(String gameID)
@@ -75,7 +74,7 @@ public class SQL_GameDAO implements IGameDAO {
 
 	public List<ICommand> loadCommands(String gameID)
 	{
-		
+		return null;
 	}
 
 	public void clearCommands(String gameID)
