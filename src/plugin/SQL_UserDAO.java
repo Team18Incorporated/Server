@@ -1,8 +1,10 @@
-package Common;
+package plugin;
 
 import Model.AuthToken;
 import Model.User;
 import java.sql.*;
+
+import Common.IUserDAO;
 
 public class SQL_UserDAO implements IUserDAO {
 

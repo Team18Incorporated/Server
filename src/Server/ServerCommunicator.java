@@ -3,9 +3,12 @@ package Server;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
-
 import com.sun.net.httpserver.HttpServer;
 
+import Common.IGameDAO;
+import Common.IUserDAO;
+//TODO: add functionality when set outside program
+import plugin.*;
 public class ServerCommunicator {
 
 	public static  int SERVER_PORT_NUMBER = 8080;
@@ -19,6 +22,8 @@ public class ServerCommunicator {
 	public static final String trim_DESIGNATOR = "/trim";
 	public static final String parseInteger_DESIGNATOR = "/parseInteger";
 	
+	private IGameDAO gameDAO;
+	private IUserDAO userDAO;
 	
 	
 	private HttpServer server;
