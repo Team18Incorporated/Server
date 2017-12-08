@@ -182,21 +182,22 @@ public class ServerModel {
 	
 	private void storeGame(Game game)
 	{
-		//WILL STORE GAME ON DATABASE
+		gameDAO.storeGame(game);
 	}
 	
 	public void storeCommand(ICommand command, String gameID)
 	{
-		//WILL STORE COMMANDS ON DATABASE
 		Game g = gameList.get(gameID);
 		if(maxNumCommands==g.getNumCommandsStored())
 		{
 			storeGame(g);
 			g.resetNumCommandsStored();
+			gameDAO.clearCommands(gameID);
+
 		}
 		else
 		{
-			//store the command on DB
+			gameDAO.addCommand(command)
 			g.incrementNumCommandsStored();
 		}
 			
@@ -204,7 +205,7 @@ public class ServerModel {
 	}
 	private void deleteGame(String gameID)
 	{
-		//WILL DELETE GAME FROM DATABASE
+		gameDAO.deleteGame(gameID)
 	}
 	
 	
@@ -213,6 +214,12 @@ public class ServerModel {
 		//sets up DB based on type
 		
 		//might not need
+	}
+
+	public void clearDBs()
+	{
+		userDAO.clear();
+		gameDAO.clear();
 	}
 	
 	public void setUserDAO(IUserDAO userDAO)
