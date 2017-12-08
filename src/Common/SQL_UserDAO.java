@@ -43,7 +43,7 @@ public class SQL_UserDAO implements IUserDAO {
                     "(" +
                     "username varchar(255) NOT NULL," +
                     "password varchar(255) NOT NULL," +
-                    "user BLOB NOT NULL" +
+                    "user BLOB NOT NULL," +
                     "PRIMARY KEY (username)" + 
                     ");";
             statement.executeUpdate(createStatement);
@@ -64,15 +64,16 @@ public class SQL_UserDAO implements IUserDAO {
 		login(user, authToken);
 		
 		Connection connection = null;
-		Statement statement = null;
+		PreparedStatement statement = null;  
+		String s = "INSERT INTO Users (username, password, user) " +
+        		"VALUES (\"" + user.getUsername() + "\",\"" + user.getPassword() + "\", " +
+        		"?" + ");";
 		try {
 			Class.forName("org.sqlite.JDBC");
             connection = DriverManager.getConnection("jdbc:sqlite:test.sqlite");
-            statement = connection.createStatement();
-            String CreateStatement = "INSERT INTO Users (username, password, user) " +
-            		"VALUES (\"" + user.getUsername() + "\",\"" + user.getPassword() + "\", " +
-            		user + ");";
-            statement.executeUpdate(CreateStatement);
+            statement = connection.prepareStatement(s);
+            statement.setBlob(1, (Blob) user);
+            statement.executeUpdate();
             statement.close();
             connection.close();
 		}catch (ClassNotFoundException e) {
