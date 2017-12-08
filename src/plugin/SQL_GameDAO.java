@@ -31,6 +31,7 @@ public class SQL_GameDAO implements IGameDAO {
                     "(" +
                     "gameID varchar(255) NOT NULL," +
                     "game BLOB NOT NULL," +
+                    "commands BLOB NOT NULL,"+
                     "PRIMARY KEY (gameID)" + 
                     ");";
             statement.executeUpdate(createStatement);
@@ -48,13 +49,14 @@ public class SQL_GameDAO implements IGameDAO {
   	{
   		Connection c = null;
         PreparedStatement statement = null;
-        String s = "INSERT INTO Games (gameID, game) " +
-                "VALUES (\"" + game.getGameID() + "\","  + "?" + ");";
+        String s = "INSERT INTO Games (gameID, game, commands) " +
+                "VALUES (\"" + game.getGameID() + "\","  + "?" + "," + "?);";
         try {
             Class.forName("org.sqlite.JDBC");
             c = DriverManager.getConnection("jdbc:sqlite:test.sqlite");
             statement = c.prepareStatement(s);
             statement.setBlob(1, (Blob) game);
+            statement.setBlob(2, (Blob) new ArrayList<ICommand>());
             statement.executeUpdate();
             statement.close();
             c.close();
@@ -117,19 +119,70 @@ public class SQL_GameDAO implements IGameDAO {
 	@Override
 	public List<ICommand> loadCommands(String gameID)
 	{
-		return null;
+		List<ICommand> commands = null;
+		Connection c = null;
+		Statement statement = null;
+		String s = "SELECT commands FROM Games WHERE gameID = \"" + gameID +"\";";
+		try {
+			Class.forName("org.sqlite.JDBC");
+            c = DriverManager.getConnection("jdbc:sqlite:test.sqlite");
+            statement = c.createStatement();
+            ResultSet rs = statement.executeQuery(s);
+	        commands = (ArrayList<ICommand>) rs.getBlob("commands");
+            statement.close();
+            c.close();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException se){
+            se.printStackTrace();
+        }
+		return commands;
 	}
 
 	@Override
 	public void clearCommands(String gameID)
 	{
-		
+		Connection c = null;
+		PreparedStatement statement = null;
+		String s = "UPDATE Games SET commands=? WHERE gameID = \"" + gameID +"\";";
+		try {
+			Class.forName("org.sqlite.JDBC");
+            c = DriverManager.getConnection("jdbc:sqlite:test.sqlite");
+            statement = c.prepareStatement(s);
+            List<ICommand> commands = loadCommands(gameID);
+            commands.clear();
+            statement.setBlob(1, (Blob) commands);
+            statement.executeUpdate();
+            statement.close();
+            c.close();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException se){
+            se.printStackTrace();
+        }
 	}
 
 	@Override
 	public void addCommand(ICommand command, String gameID) {
 		// TODO Auto-generated method stub
-		
+		List<ICommand> commands = loadCommands(gameID);
+		commands.add(command);
+		Connection c = null;
+		PreparedStatement statement = null;
+		String s = "UPDATE Games SET commands=? WHERE gameID = \"" + gameID +"\";";
+		try {
+			Class.forName("org.sqlite.JDBC");
+            c = DriverManager.getConnection("jdbc:sqlite:test.sqlite");
+            statement = c.prepareStatement(s);
+            statement.setBlob(1, (Blob) commands);
+            statement.executeUpdate();
+            statement.close();
+            c.close();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException se){
+            se.printStackTrace();
+        }
 	}
 
 	@Override
