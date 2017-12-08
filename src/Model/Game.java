@@ -21,6 +21,7 @@ public class Game {
     private int lastTurn=-1;
     private boolean last=false;
     private boolean lastPlayerCheck = false;
+    private int numCommandsStored=0;
   
     
     private ChatHistory chatHistory;
@@ -232,5 +233,18 @@ public class Game {
     			p.setLongestRoute();
     		}
     	}
+    }
+    
+    public void incrementNumCommandsStored()
+    {
+    	numCommandsStored++;
+    }
+    public void resetNumCommandsStored()
+    {
+    	numCommandsStored=0;
+    }
+    public int getNumCommandsStored()
+    {
+    	return numCommandsStored;
     }
 }
