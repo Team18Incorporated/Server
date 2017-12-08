@@ -1,5 +1,6 @@
-package Common;
+package plugin;
 
+import Common.IUserDAO;
 import Model.AuthToken;
 import Model.User;
 
