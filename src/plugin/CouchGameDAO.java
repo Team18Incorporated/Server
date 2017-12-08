@@ -97,13 +97,76 @@ public class CouchGameDAO implements IGameDAO {
 	@Override
 	public List<ICommand> loadCommands(String gameID) {
 		// TODO Auto-generated method stub
-		return null;
+		return (List<ICommand>) database.getDocument("commands").getProperty(gameID);
 	}
 
 	@Override
 	public void clearCommands(String gameID) {
 		// TODO Auto-generated method stub
+		Document doc = database.getDocument("commands");
+		try {
+			doc.update(new Document.DocumentUpdater() {
 
+				@Override
+				public boolean update(UnsavedRevision newRevision) {
+					Map<String, Object> properties = newRevision
+							.getProperties();
+					properties.remove(gameID);
+					newRevision.setUserProperties(properties);
+					return true;
+				}
+				
+			});
+		}
+		catch (CouchbaseLiteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public void addCommand(ICommand command, String gameID) {
+		// TODO Auto-generated method stub
+		Document doc = database.getDocument("commands");
+		try {
+			doc.update(new Document.DocumentUpdater() {
+
+				@Override
+				public boolean update(UnsavedRevision newRevision) {
+					Map<String, Object> properties = newRevision
+							.getProperties();
+					List<ICommand> commands = (List<ICommand>) properties.get(gameID);
+					if (commands == null) commands = new ArrayList<ICommand>();
+					commands.add(command);
+					properties.put(gameID, commands);
+					newRevision.setUserProperties(properties);
+					return true;
+				}
+				
+			});
+		}
+		catch (CouchbaseLiteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public void clear() {
+		// TODO Auto-generated method stub
+		try {
+			database.getDocument("games").delete();
+		} catch (CouchbaseLiteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			database.getDocument("commands").delete();
+		} catch (CouchbaseLiteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 
 }
