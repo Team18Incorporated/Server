@@ -19,7 +19,7 @@ import Model.User;
 
 public class SQL_GameDAO implements IGameDAO {
 
-	public void createGames()
+	public SQL_GameDAO()
 	{
 		Connection c = null;
         Statement statement = null;
@@ -27,7 +27,7 @@ public class SQL_GameDAO implements IGameDAO {
             Class.forName("org.sqlite.JDBC");
             c = DriverManager.getConnection("jdbc:sqlite:test.sqlite");
             statement = c.createStatement();
-            String createStatement = "CREATE TABLE if not exists Users " +
+            String createStatement = "CREATE TABLE if not exists Games " +
                     "(" +
                     "gameID varchar(255) NOT NULL," +
                     "game BLOB NOT NULL," +
@@ -43,6 +43,7 @@ public class SQL_GameDAO implements IGameDAO {
         }
 	}
 	
+	@Override
   	public void storeGame(Game game)
   	{
   		Connection c = null;
@@ -63,7 +64,8 @@ public class SQL_GameDAO implements IGameDAO {
             se.printStackTrace();
         }
   	}
-
+	
+	@Override
 	public List<Game> loadGames()
 	{
 		List<Game> games = new ArrayList<Game>();
@@ -92,6 +94,7 @@ public class SQL_GameDAO implements IGameDAO {
 		return games;
 	}
 
+	@Override
 	public void deleteGame(String gameID)
 	{
 		Connection c = null;
@@ -111,14 +114,42 @@ public class SQL_GameDAO implements IGameDAO {
         }
 	}
 
+	@Override
 	public List<ICommand> loadCommands(String gameID)
 	{
 		return null;
 	}
 
+	@Override
 	public void clearCommands(String gameID)
 	{
 		
+	}
+
+	@Override
+	public void addCommand(ICommand command, String gameID) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void clear() {
+		// TODO Auto-generated method stub
+		Connection c = null;
+        PreparedStatement statement = null;
+        String s = "DELETE FROM Games;";
+        try {
+            Class.forName("org.sqlite.JDBC");
+            c = DriverManager.getConnection("jdbc:sqlite:test.sqlite");
+            statement = c.prepareStatement(s);
+            statement.executeUpdate();
+            statement.close();
+            c.close();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException se){
+            se.printStackTrace();
+        }
 	}
 
 }

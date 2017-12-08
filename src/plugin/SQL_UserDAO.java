@@ -8,7 +8,13 @@ import Common.IUserDAO;
 
 public class SQL_UserDAO implements IUserDAO {
 
-	public void createAuthTokens()
+	public SQL_UserDAO()
+	{
+		createAuthTokens();
+		createUsers();
+	}
+	
+	private void createAuthTokens()
 	{
 		Connection c = null;
         Statement statement = null;
@@ -33,7 +39,7 @@ public class SQL_UserDAO implements IUserDAO {
         }
 	}
 	
-	public void createUsers()
+	private void createUsers()
 	{
 		Connection c = null;
         Statement statement = null;
@@ -101,6 +107,51 @@ public class SQL_UserDAO implements IUserDAO {
             statement.close();
             connection.close();
 		}catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException se){
+            se.printStackTrace();
+        }
+	}
+
+	@Override
+	public void clear() {
+		// TODO Auto-generated method stub
+		clearUsers();
+		clearAuthTokens();
+	}
+	
+	private void clearUsers()
+	{
+		Connection c = null;
+        PreparedStatement statement = null;
+        String s = "DELETE FROM Users;";
+        try {
+            Class.forName("org.sqlite.JDBC");
+            c = DriverManager.getConnection("jdbc:sqlite:test.sqlite");
+            statement = c.prepareStatement(s);
+            statement.executeUpdate();
+            statement.close();
+            c.close();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException se){
+            se.printStackTrace();
+        }
+	}
+	
+	private void clearAuthTokens()
+	{
+		Connection c = null;
+        PreparedStatement statement = null;
+        String s = "DELETE FROM AuthTokens;";
+        try {
+            Class.forName("org.sqlite.JDBC");
+            c = DriverManager.getConnection("jdbc:sqlite:test.sqlite");
+            statement = c.prepareStatement(s);
+            statement.executeUpdate();
+            statement.close();
+            c.close();
+        } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (SQLException se){
             se.printStackTrace();
