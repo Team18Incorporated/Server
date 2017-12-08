@@ -1,11 +1,16 @@
-package Common;
+package plugin;
 
+import Common.ICommand;
+import Common.IGameDAO;
+import Common.IUserDAO;
 import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 import Model.AuthToken;
@@ -61,17 +66,54 @@ public class SQL_GameDAO implements IGameDAO {
 
 	public List<Game> loadGames()
 	{
-		
+		List<Game> games = new ArrayList<Game>();
+		Connection c = null;
+		Statement statement = null;
+		try {
+			Class.forName("org.sqlite.JDBC");
+            c = DriverManager.getConnection("jdbc:sqlite:test.sqlite");
+            statement = c.createStatement();
+            ResultSet rs = statement.executeQuery("SELECT game FROM Games;");
+            if(rs.isClosed() == true)
+            {
+                return games;
+            }
+            while(rs.next())
+            {
+               games.add((Game) rs.getBlob("game"));
+            }
+            statement.close();
+            c.close();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException se){
+            se.printStackTrace();
+        }		
+		return games;
 	}
 
 	public void deleteGame(String gameID)
 	{
-		
+		Connection c = null;
+        PreparedStatement statement = null;
+        String s = "DELETE FROM Games WHERE gameID = " + gameID + ";";
+        try {
+            Class.forName("org.sqlite.JDBC");
+            c = DriverManager.getConnection("jdbc:sqlite:test.sqlite");
+            statement = c.prepareStatement(s);
+            statement.executeUpdate();
+            statement.close();
+            c.close();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException se){
+            se.printStackTrace();
+        }
 	}
 
 	public List<ICommand> loadCommands(String gameID)
 	{
-		
+		return null;
 	}
 
 	public void clearCommands(String gameID)

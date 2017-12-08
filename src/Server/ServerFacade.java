@@ -6,7 +6,10 @@ import java.util.List;
 import java.util.UUID;
 
 import Model.DestinationCard;
+import Common.ICommand;
+import Common.IGameDAO;
 import Common.IServer;
+import Common.IUserDAO;
 import Model.ChatMessage;
 import Model.Game;
 import Model.Player;
@@ -401,4 +404,28 @@ public class ServerFacade implements IServer {
 		}
 		ServerModel.getSingleton().endGame(gameID);
 	}	
+	
+	public void storeCommand(ICommand command, String gameID)
+	{
+		ServerModel.getSingleton().storeCommand(command, gameID);
+	}
+	
+	public void setMaxNumCommands(int num)
+	{
+		ServerModel.getSingleton().setMaxNumCommands(num);
+	}
+	
+	public void setUpPersistenceProvider(String type)
+	{
+		ServerModel.getSingleton().setUpPersistenceProvider(type);
+	}
+	
+	public void setUserDAO(IUserDAO userDAO)
+	{
+		ServerModel.getSingleton().setUserDAO(userDAO);
+	}
+	public void setGameDAO(IGameDAO gameDAO)
+	{
+		ServerModel.getSingleton().setGameDAO(gameDAO);
+	}
 }

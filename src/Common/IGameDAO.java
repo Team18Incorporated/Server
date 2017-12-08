@@ -18,5 +18,9 @@ public interface IGameDAO {
 	public List<ICommand> loadCommands(String gameID);
 
 	public void clearCommands(String gameID);
+	
+	public void addCommand(ICommand command, String gameID);
+	
+	public void clear();
 
 }

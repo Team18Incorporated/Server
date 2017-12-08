@@ -5,6 +5,9 @@ import java.util.HashMap;
 import java.util.Vector;
 
 import Commands.InGameCommands.StartTurnCommand;
+import Common.ICommand;
+import Common.IGameDAO;
+import Common.IUserDAO;
 import Server.ClientProxy;
 
 public class ServerModel {
@@ -17,6 +20,11 @@ public class ServerModel {
 	private ArrayList<String> games;
 	private ArrayList<String> joinableGames;
 	private HashMap<String, User> authTokens;
+	private int maxNumCommands;
+	
+	private IUserDAO userDAO;
+	private IGameDAO gameDAO;
+	
 	
 
 	/*
@@ -165,5 +173,54 @@ public class ServerModel {
 	public Game getGame(String gameID) {
 		// TODO Auto-generated method stub
 		return gameList.get(gameID);
+	}
+	
+	public void setMaxNumCommands(int num)
+	{
+		maxNumCommands=num;
+	}
+	
+	private void storeGame(Game game)
+	{
+		//WILL STORE GAME ON DATABASE
+	}
+	
+	public void storeCommand(ICommand command, String gameID)
+	{
+		//WILL STORE COMMANDS ON DATABASE
+		Game g = gameList.get(gameID);
+		if(maxNumCommands==g.getNumCommandsStored())
+		{
+			storeGame(g);
+			g.resetNumCommandsStored();
+		}
+		else
+		{
+			//store the command on DB
+			g.incrementNumCommandsStored();
+		}
+			
+			
+	}
+	private void deleteGame(String gameID)
+	{
+		//WILL DELETE GAME FROM DATABASE
+	}
+	
+	
+	public void setUpPersistenceProvider(String type)
+	{
+		//sets up DB based on type
+		
+		//might not need
+	}
+	
+	public void setUserDAO(IUserDAO userDAO)
+	{
+		this.userDAO=userDAO;
+	}
+	public void setGameDAO(IGameDAO gameDAO)
+	{
+		this.gameDAO=gameDAO;
 	}
 }
