@@ -63,13 +63,14 @@ public class ServerCommunicator {
 	
 	/*
 	 * uses input dbType to create factory of given type
-	 * @pre: dbType must be the name of the factory class
+	 * @pre: dbType must be the name of the factory type only, the factory name should be 
+	 * in the format TypeFactory
 	 * @post: loads the databases to the serverModel
 	 */
 	private static void createFactory(String dbType) {
 		Class<?> c = null;
 		IDAOFactory factory = null;
-		String url = "plugin."+dbType;
+		String url = "plugin."+dbType+"Factory";
 		try {
 			c = Class.forName(url);
 		}
