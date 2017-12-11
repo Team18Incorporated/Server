@@ -99,6 +99,8 @@ public class ServerCommunicator {
 			if (args.length>1) {
 				ServerFacade.getSingleton().setMaxNumCommands(Integer.parseInt(args[1]));
 			}
+			
+			ServerFacade.getSingleton().loadGames();
 		}
 		new ServerCommunicator().run();
 	}

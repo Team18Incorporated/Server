@@ -230,4 +230,20 @@ public class ServerModel {
 	{
 		this.gameDAO=gameDAO;
 	}
+	public void loadGames()
+	{
+		ArrayList<Game> tempGameList=(ArrayList) gameDAO.loadGames();
+		ArrayList<ICommand> tempCommandList=(ArrayList) gameDAO.loadCommands();
+		for(Game g: tempGameList)
+		{
+			gameList.put(g.getGameID(), g);
+			gameDAO.clearCommands(g.getGameID());
+		}	
+		for(ICommand command: tempCommandList)
+		{
+			command.execute();
+		}
+		
+		
+	}
 }

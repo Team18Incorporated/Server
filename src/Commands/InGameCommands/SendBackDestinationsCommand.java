@@ -22,6 +22,7 @@ public class SendBackDestinationsCommand implements ICommand {
     public Object execute()
     {
         ServerFacade.getSingleton().sendBackDestinations(authToken, gameID, list);
+	ServerFacade.getSingleton().storeCommands(this, gameID);
         return null;
     }
 

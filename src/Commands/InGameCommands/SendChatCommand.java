@@ -20,6 +20,7 @@ public class SendChatCommand implements ICommand {
     @Override
     public Object execute() {
         ServerFacade.getSingleton().sendChat(authToken, message, gameID);
+	ServerFacade.getSingleton().storeCommands(this, gameID);
         return null;
     }
 

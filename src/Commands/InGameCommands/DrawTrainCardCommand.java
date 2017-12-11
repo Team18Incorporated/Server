@@ -20,6 +20,7 @@ public class DrawTrainCardCommand implements ICommand {
     public Object execute()
     {
         ServerFacade.getSingleton().drawTrainCard(authToken, gameID);
+	ServerFacade.getSingleton().storeCommands(this, gameID);
         return null;
     }
 

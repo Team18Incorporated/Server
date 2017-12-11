@@ -26,6 +26,7 @@ public class ClaimRouteCommand implements ICommand {
     @Override
     public Object execute() {
         ServerFacade.getSingleton().claimRoute(authToken, gameID, route, discard);
+	ServerFacade.getSingleton().storeCommands(this, gameID);
 		return null;
     }
     

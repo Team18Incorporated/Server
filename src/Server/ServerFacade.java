@@ -428,4 +428,8 @@ public class ServerFacade implements IServer {
 	{
 		ServerModel.getSingleton().setGameDAO(gameDAO);
 	}
-}
+
+	public void loadGames()
+	{
+		ServerModel.getSingleton().loadGames();
+	}
