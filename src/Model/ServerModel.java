@@ -197,7 +197,7 @@ public class ServerModel {
 		}
 		else
 		{
-			gameDAO.addCommand(command)
+			gameDAO.addCommand(command);
 			g.incrementNumCommandsStored();
 		}
 			
@@ -205,7 +205,7 @@ public class ServerModel {
 	}
 	private void deleteGame(String gameID)
 	{
-		gameDAO.deleteGame(gameID)
+		gameDAO.deleteGame(gameID);
 	}
 	
 	

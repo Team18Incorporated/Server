@@ -1,8 +1,13 @@
 package Server;
 
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.net.InetSocketAddress;
+
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.sun.net.httpserver.HttpServer;
 
 import Common.IDAOFactory;
@@ -70,14 +75,29 @@ public class ServerCommunicator {
 	private static void createFactory(String dbType) {
 		Class<?> c = null;
 		IDAOFactory factory = null;
-		String url = "plugin."+dbType+"Factory";
+		JsonParser parser = new JsonParser();
 		try {
+			Object object = parser.parse(new FileReader("Config.json")); 
+			JsonObject jsonObject = (JsonObject)object;
+			String plugin = jsonObject.get("Plugin").toString();
+			String url = plugin+dbType+"Factory";
 			c = Class.forName(url);
 		}
+		catch(FileNotFoundException fe)
+        {
+            fe.printStackTrace();
+            return;
+        }
 		catch (ClassNotFoundException e) {
 			e.printStackTrace();
 			return;
 		}
+		catch(Exception e)
+        {
+            e.printStackTrace();
+            return;
+        }
+		
 		try {
 			factory = (IDAOFactory) c.newInstance();
 		}

@@ -8,7 +8,7 @@ public class CouchFactory implements IDAOFactory {
 
 	@Override
 	public IUserDAO createUserDAO() {
-		return null;
+		return new CouchUserDAO();
 	}
 
 	@Override
