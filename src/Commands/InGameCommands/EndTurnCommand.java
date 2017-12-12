@@ -20,7 +20,7 @@ public class EndTurnCommand implements ICommand {
     @Override
     public Object execute() {
     	ServerFacade.getSingleton().incrementTurn(token, gameID);
-	ServerFacade.getSingleton().storeCommands(this, gameID);
+	ServerFacade.getSingleton().storeCommand(this, gameID);
 		return null;
 
     }

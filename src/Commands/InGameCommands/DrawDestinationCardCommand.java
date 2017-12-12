@@ -21,7 +21,7 @@ public class DrawDestinationCardCommand implements ICommand{
     public Object execute()
     {
         ServerFacade.getSingleton().drawDestinationCard(authToken, gameID);
-	ServerFacade.getSingleton().storeCommands(this, gameID);
+	ServerFacade.getSingleton().storeCommand(this, gameID);
         return null;
     }
 

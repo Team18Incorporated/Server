@@ -21,7 +21,7 @@ public class DrawFromFaceUpCommand implements ICommand {
     public Object execute()
     {
         ServerFacade.getSingleton().drawFromFaceUp(authToken, gameID, card);
-	ServerFacade.getSingleton().storeCommands(this, gameID);
+	ServerFacade.getSingleton().storeCommand(this, gameID);
         return null;
     }
 

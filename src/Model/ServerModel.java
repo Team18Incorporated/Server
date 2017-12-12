@@ -197,7 +197,7 @@ public class ServerModel {
 		}
 		else
 		{
-			gameDAO.addCommand(command);
+			gameDAO.addCommand(command,gameID);
 			g.incrementNumCommandsStored();
 		}
 			
