@@ -1,7 +1,10 @@
 package plugin;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
+
+import javafx.util.Pair;
 
 import com.couchbase.lite.*;
 import com.google.gson.Gson;
@@ -107,6 +110,18 @@ public class CouchUserDAO implements IUserDAO{
 	public void clear() {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public List<User> loadUsers() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Pair<String, String>> loadAuthTokens() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
