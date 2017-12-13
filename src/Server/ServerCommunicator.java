@@ -119,7 +119,7 @@ public class ServerCommunicator {
             return;
         }
 		
-		try {
+		/*try {
 			factory = (IDAOFactory) c.newInstance();
 		}
 		catch (InstantiationException e) {
@@ -129,7 +129,7 @@ public class ServerCommunicator {
 		catch (IllegalAccessException e) {
 			e.printStackTrace();
 			return;
-		}
+		}*/
 		ServerFacade.getSingleton().setUserDAO(factory.createUserDAO());
 		ServerFacade.getSingleton().setGameDAO(factory.createGameDAO());
 	}
