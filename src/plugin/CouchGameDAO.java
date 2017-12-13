@@ -64,10 +64,14 @@ public class CouchGameDAO implements IGameDAO {
 		// TODO Auto-generated method stub
 		Document doc = database.getDocument("games");
 		Map<String, Object> properties = doc.getProperties();
-		Map<String, Game> newMap = properties.entrySet().stream()
+		if(properties != null && properties.size() > 0) {
+			Map<String, Game> newMap = properties.entrySet().stream()
 				.collect(Collectors.toMap(Map.Entry::getKey, e-> (Game)e.getValue()));
-		List<Game> games = new ArrayList<Game>(newMap.values());
-		return games;
+
+			List<Game> games = new ArrayList<Game>(newMap.values());
+			return games;
+		}
+		return new ArrayList<Game>();
 	}
 
 	@Override
