@@ -28,9 +28,8 @@ public class SQL_UserDAO implements IUserDAO {
             String createStatement = "CREATE TABLE if not exists AuthTokens " +
                     "(" +
                     "token varchar(255) NOT NULL," +
-                    "username varchar(255) NOT NULL," +
-                    "PRIMARY KEY (token)," +
-                    "FOREIGN KEY (username) REFERENCES Users(username)" +
+                    "userID varchar(255) NOT NULL," +
+                    "PRIMARY KEY (token)" +
                     ");";
             statement.executeUpdate(createStatement);
             statement.close();
@@ -106,8 +105,8 @@ public class SQL_UserDAO implements IUserDAO {
 			Class.forName("org.sqlite.JDBC");
             connection = DriverManager.getConnection("jdbc:sqlite:test.sqlite");
             statement = connection.createStatement();
-    		String s = "INSERT INTO AuthTokens (token,username) " +
-                    "VALUES (\"" + authToken.getToken() + "\",\"" + user.getUsername() + "\");";
+    		String s = "INSERT INTO AuthTokens (token,userID) " +
+                    "VALUES (\"" + authToken.getToken() + "\",\"" + user.getID() + "\");";
             statement.executeUpdate(s);
             statement.close();
             connection.close();
