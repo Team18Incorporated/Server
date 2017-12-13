@@ -1,8 +1,11 @@
 package plugin;
 
 import Model.AuthToken;
+import Model.Game;
 import Model.User;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import Common.IUserDAO;
 
@@ -158,6 +161,32 @@ public class SQL_UserDAO implements IUserDAO {
         } catch (SQLException se){
             se.printStackTrace();
         }
+	}
+
+	@Override
+	public List<User> loadUsers() {
+		// TODO Auto-generated method stub
+		List<User> users = new ArrayList<User>(); 
+		Connection c = null;
+		Statement statement = null;
+		try {
+			Class.forName("org.sqlite.JDBC");
+            c = DriverManager.getConnection("jdbc:sqlite:test.sqlite");
+            statement = c.createStatement();
+            ResultSet rs = statement.executeQuery("SELECT user FROM Users;");
+           
+            while(rs.next())
+            {
+               users.add((User) rs.getBlob("user"));
+            }
+            statement.close();
+            c.close();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException se){
+            se.printStackTrace();
+        }		
+		return users;
 	}
 	
 }
