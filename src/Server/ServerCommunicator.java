@@ -1,10 +1,15 @@
 package Server;
 
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Method;
 import java.net.InetSocketAddress;
+import java.net.URL;
+import java.net.URLClassLoader;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -79,19 +84,35 @@ public class ServerCommunicator {
 		try {
 			Object object = parser.parse(new FileReader("Config.json")); 
 			JsonObject jsonObject = (JsonObject)object;
-			String plugin = jsonObject.get("Plugin").toString();
-			String url = plugin+dbType+"Factory";
-			c = Class.forName(url);
+			String plugin = jsonObject.get("Plugin").getAsString();
+			File pluginDir = new File (plugin);
+			URL url = pluginDir.toURI().toURL();
+
+		    Class[] parameters = new Class[]{URL.class};
+	    	URLClassLoader sysLoader = (URLClassLoader)
+	    			ClassLoader.getSystemClassLoader();
+	    	Class sysClass = URLClassLoader.class;
+	    	try
+	        {
+	            Method method = sysClass.getDeclaredMethod("addURL", parameters);
+	            method.setAccessible(true);
+	            method.invoke(sysLoader,new Object[]{ url });
+
+	            Constructor cs = ClassLoader.getSystemClassLoader().loadClass("plugin."+dbType+"Factory").getConstructor(); 
+	            factory = (IDAOFactory)cs.newInstance();
+	        }
+	        catch(Exception ex)
+	        {
+	            System.err.println(ex.getMessage());
+	        }
+			//String url = plugin+dbType+"Factory";
+			//c = Class.forName(url);
 		}
 		catch(FileNotFoundException fe)
         {
             fe.printStackTrace();
             return;
         }
-		catch (ClassNotFoundException e) {
-			e.printStackTrace();
-			return;
-		}
 		catch(Exception e)
         {
             e.printStackTrace();
