@@ -4,10 +4,14 @@ import Model.AuthToken;
 import Model.Game;
 import Model.User;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.ObjectInputStream;
-import javafx.util.Pair;
+import java.io.ObjectOutputStream;
 
+import javafx.util.Pair;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -88,9 +92,20 @@ public class SQL_UserDAO implements IUserDAO {
 			Class.forName("org.sqlite.JDBC");
             connection = DriverManager.getConnection("jdbc:sqlite:test.sqlite");
             statement = connection.prepareStatement(s);
-            Blob blobbo = (Blob) user;
-            //statement.setBlob(1, blobbo);
-            statement.setBinaryStream(1, blobbo.getBinaryStream());
+            ByteArrayOutputStream baos=null;           
+            try {
+            	baos = new ByteArrayOutputStream();                 
+                ObjectOutputStream objOstream = new ObjectOutputStream(baos);
+				objOstream.writeObject(user);
+				objOstream.flush();                 
+	            objOstream.close(); 
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}                   
+                              
+            byte[] bArray = baos.toByteArray(); 
+            statement.setBytes(1, bArray);
             statement.executeUpdate();
             statement.close();
             connection.close();
@@ -184,7 +199,11 @@ public class SQL_UserDAO implements IUserDAO {
             {
             	ObjectInputStream ois=null;
 				try {
-					ois = new ObjectInputStream(rs.getBlob("user").getBinaryStream());
+					//ois = new ObjectInputStream(rs.getBlob(1).getBinaryStream());
+					
+					byte[] blob = rs.getBytes(1);
+					ByteArrayInputStream in = new ByteArrayInputStream(blob);
+					ois = new ObjectInputStream(in);
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -219,7 +238,7 @@ public class SQL_UserDAO implements IUserDAO {
 			Class.forName("org.sqlite.JDBC");
             c = DriverManager.getConnection("jdbc:sqlite:test.sqlite");
             statement = c.createStatement();
-            ResultSet rs = statement.executeQuery("SELECT * FROM Users;");
+            ResultSet rs = statement.executeQuery("SELECT * FROM AuthTokens;");
            
             while(rs.next())
             {

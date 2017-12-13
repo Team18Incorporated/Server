@@ -15,5 +15,7 @@ public interface IUserDAO {
 	
 	public List<Pair<String, String>> loadAuthTokens();
 	
+	public void updateUser(User user);
+	
 	public void clear();
 }

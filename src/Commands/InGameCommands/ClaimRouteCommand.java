@@ -11,7 +11,7 @@ import Server.ServerFacade;
  * Created by abram on 10/20/2017.
  */
 
-public class ClaimRouteCommand implements ICommand {
+public class ClaimRouteCommand implements ICommand{
 
     private AuthToken authToken;
     private String gameID;

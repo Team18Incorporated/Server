@@ -1,11 +1,12 @@
 package Model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Vector;
 
 import Common.*;
 
-public class User {
+public class User implements Serializable{
 	
 	private String username;
 	private String password;

@@ -1,12 +1,13 @@
 package Model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
 import Common.*;
 import Commands.CommandList;
 
-public class PlayerCommandList {
+public class PlayerCommandList implements Serializable{
 	private ArrayList<DateCommand> commands= new ArrayList<>();
 	
 	public void addCommand(ICommand command){

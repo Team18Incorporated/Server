@@ -1,12 +1,13 @@
 package Model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by abram on 10/25/2017.
  */
 
-public class ChatMessage {
+public class ChatMessage implements Serializable{
     private String message;
     private String messageID;
     private String playerName;

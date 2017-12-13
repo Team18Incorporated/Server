@@ -1,5 +1,6 @@
 package Model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -8,7 +9,7 @@ import java.util.List;
  * Created by abram on 10/25/2017.
  */
 
-public class ChatHistory {
+public class ChatHistory implements Serializable{
     private List<ChatMessage> history;
     
 

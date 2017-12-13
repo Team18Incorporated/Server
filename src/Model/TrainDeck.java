@@ -1,12 +1,13 @@
 package Model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 
 
-public class TrainDeck {
+public class TrainDeck implements Serializable{
 
 	ArrayList<TrainCard> deckList;
 	ArrayList<TrainCard> discardList;

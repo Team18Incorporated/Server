@@ -3,6 +3,12 @@ package plugin;
 import Common.ICommand;
 import Common.IGameDAO;
 import Common.IUserDAO;
+
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -55,8 +61,34 @@ public class SQL_GameDAO implements IGameDAO {
             Class.forName("org.sqlite.JDBC");
             c = DriverManager.getConnection("jdbc:sqlite:test.sqlite");
             statement = c.prepareStatement(s);
-            statement.setBlob(1, (Blob) game);
-            statement.setBlob(2, (Blob) new ArrayList<ICommand>());
+            ByteArrayOutputStream baos=null;           
+            try {
+            	baos = new ByteArrayOutputStream();                 
+                ObjectOutputStream objOstream = new ObjectOutputStream(baos);
+				objOstream.writeObject(game);
+				objOstream.flush();                 
+	            objOstream.close(); 
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}                   
+                              
+            byte[] bArray = baos.toByteArray(); 
+            statement.setBytes(1, bArray);
+            baos=null;           
+            try {
+            	baos = new ByteArrayOutputStream();                 
+                ObjectOutputStream objOstream = new ObjectOutputStream(baos);
+				objOstream.writeObject(new ArrayList<ICommand>());
+				objOstream.flush();                 
+	            objOstream.close(); 
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}                   
+                              
+            byte[] bArray2 = baos.toByteArray(); 
+            statement.setBytes(2, bArray2);
             statement.executeUpdate();
             statement.close();
             c.close();
@@ -81,7 +113,25 @@ public class SQL_GameDAO implements IGameDAO {
            
             while(rs.next())
             {
-               games.add((Game) rs.getBlob("game"));
+            	ObjectInputStream ois=null;
+				try {
+					//ois = new ObjectInputStream(rs.getBlob(1).getBinaryStream());
+					
+					byte[] blob = rs.getBytes(1);
+					ByteArrayInputStream in = new ByteArrayInputStream(blob);
+					ois = new ObjectInputStream(in);
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+               try {
+				games.add((Game) ois.readObject());
+				ois.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
             }
             statement.close();
             c.close();
@@ -125,7 +175,25 @@ public class SQL_GameDAO implements IGameDAO {
             c = DriverManager.getConnection("jdbc:sqlite:test.sqlite");
             statement = c.createStatement();
             ResultSet rs = statement.executeQuery(s);
-	        commands = (ArrayList<ICommand>) rs.getBlob("commands");
+            ObjectInputStream ois=null;
+			try {
+				//ois = new ObjectInputStream(rs.getBlob(1).getBinaryStream());
+				
+				byte[] blob = rs.getBytes(1);
+				ByteArrayInputStream in = new ByteArrayInputStream(blob);
+				ois = new ObjectInputStream(in);
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+           try {
+        	   commands = (ArrayList<ICommand>)  ois.readObject();
+			ois.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
             statement.close();
             c.close();
         } catch (ClassNotFoundException e) {
@@ -148,7 +216,20 @@ public class SQL_GameDAO implements IGameDAO {
             statement = c.prepareStatement(s);
             List<ICommand> commands = loadCommands(gameID);
             commands.clear();
-            statement.setBlob(1, (Blob) commands);
+            ByteArrayOutputStream baos=null;           
+            try {
+            	baos = new ByteArrayOutputStream();                 
+                ObjectOutputStream objOstream = new ObjectOutputStream(baos);
+				objOstream.writeObject(commands);
+				objOstream.flush();                 
+	            objOstream.close(); 
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}                   
+                              
+            byte[] bArray = baos.toByteArray(); 
+            statement.setBytes(1, bArray);
             statement.executeUpdate();
             statement.close();
             c.close();
@@ -171,7 +252,20 @@ public class SQL_GameDAO implements IGameDAO {
 			Class.forName("org.sqlite.JDBC");
             c = DriverManager.getConnection("jdbc:sqlite:test.sqlite");
             statement = c.prepareStatement(s);
-            statement.setBlob(1, (Blob) commands);
+            ByteArrayOutputStream baos=null;           
+            try {
+            	baos = new ByteArrayOutputStream();                 
+                ObjectOutputStream objOstream = new ObjectOutputStream(baos);
+				objOstream.writeObject(commands);
+				objOstream.flush();                 
+	            objOstream.close(); 
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}                   
+                              
+            byte[] bArray = baos.toByteArray(); 
+            statement.setBytes(1, bArray);
             statement.executeUpdate();
             statement.close();
             c.close();

@@ -1,6 +1,7 @@
 package Model;
 
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -11,7 +12,7 @@ import com.sun.xml.internal.bind.v2.schemagen.xmlschema.List;
 
 
 
-public class Player {
+public class Player implements Serializable{
 
     private String playerID;
     private String playerName;

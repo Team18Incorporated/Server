@@ -433,4 +433,9 @@ public class ServerFacade implements IServer {
 	{
 		ServerModel.getSingleton().loadGames();
 	}
+	
+	public void loadUsers()
+	{
+		ServerModel.getSingleton().loadUsers();
+	}
 }

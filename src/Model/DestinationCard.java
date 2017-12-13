@@ -1,9 +1,10 @@
 package Model;
 
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class DestinationCard extends Card {
+public class DestinationCard extends Card implements Serializable{
 
     City startCity;
     City endCity;

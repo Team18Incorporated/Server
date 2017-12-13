@@ -148,8 +148,9 @@ public class ServerCommunicator {
 
 					
 			}
-			
+			ServerFacade.getSingleton().loadUsers();
 			ServerFacade.getSingleton().loadGames();
+			
 		}
 		new ServerCommunicator().run();
 	}

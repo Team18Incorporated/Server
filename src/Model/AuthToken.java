@@ -1,8 +1,9 @@
 package Model;
 
+import java.io.Serializable;
 import java.util.UUID;
 
-public class AuthToken {
+public class AuthToken implements Serializable{
 	private String token;
 
 	public AuthToken() {

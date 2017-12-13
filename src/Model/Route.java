@@ -1,10 +1,11 @@
 package Model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 
 
-public class Route {
+public class Route implements Serializable{
 
     private City city1;
     private City city2;

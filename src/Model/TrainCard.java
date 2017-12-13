@@ -1,8 +1,10 @@
 package Model;
 
+import java.io.Serializable;
 
 
-public class TrainCard extends Card {
+
+public class TrainCard extends Card implements Serializable{
 
     private CardColor color;
 

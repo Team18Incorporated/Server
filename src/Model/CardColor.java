@@ -1,8 +1,10 @@
 package Model;
 
+import java.io.Serializable;
 
 
-public class CardColor {
+
+public class CardColor implements Serializable{
     String color;
 
     public CardColor(String color) {
