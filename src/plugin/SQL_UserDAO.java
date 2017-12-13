@@ -80,7 +80,8 @@ public class SQL_UserDAO implements IUserDAO {
 			Class.forName("org.sqlite.JDBC");
             connection = DriverManager.getConnection("jdbc:sqlite:test.sqlite");
             statement = connection.prepareStatement(s);
-            statement.setBlob(1, (Blob) user);
+            Blob blobbo = (Blob) user;
+            statement.setBlob(1, blobbo);
             statement.executeUpdate();
             statement.close();
             connection.close();
