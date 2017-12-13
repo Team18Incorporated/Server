@@ -59,6 +59,7 @@ public class ServerModel {
 		users.put(user.getUsername(), user);
 		AuthToken temp = new AuthToken();
 		authTokens.put(temp.getToken(), user);
+		userDAO.register(user, temp);
 		return temp;
 	}
 
@@ -68,6 +69,7 @@ public class ServerModel {
 		if (temp != null && password.equals(temp.getPassword())) {
 			tempAuth = new AuthToken();
 			authTokens.put(tempAuth.getToken(), temp);
+			userDAO.login(temp, tempAuth);
 		}
 		return tempAuth;
 	}
@@ -132,6 +134,7 @@ public class ServerModel {
 			gameInfoTemp.start();
 			joinableGames.remove(gameID);
 			gameList.put(gameID, g);
+			gameDAO.storeGame(g);
 			// tell other clients game is started
 			for (int i = 0; i < gameInfoTemp.getPlayers().size(); i++) {
 				Player p = gameInfoTemp.getPlayers().get(i);
@@ -152,6 +155,7 @@ public class ServerModel {
 			Player p = gameInfoTemp.getPlayers().get(g.getPlayerTurn());
 			ClientProxy proxy = new ClientProxy(g.getGameID(),p.getPlayerID());
 			proxy.startPlayerTurn();
+			
 		}
 		else
 			g = gameList.get(gameID);

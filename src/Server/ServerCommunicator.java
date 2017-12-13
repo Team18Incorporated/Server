@@ -79,7 +79,7 @@ public class ServerCommunicator {
 		try {
 			Object object = parser.parse(new FileReader("Config.json")); 
 			JsonObject jsonObject = (JsonObject)object;
-			String plugin = jsonObject.get("Plugin").toString();
+			String plugin = jsonObject.get("Plugin").getAsString();
 			String url = plugin+dbType+"Factory";
 			c = Class.forName(url);
 		}
