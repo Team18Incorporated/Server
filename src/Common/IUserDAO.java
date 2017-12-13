@@ -1,5 +1,7 @@
 package Common;
 
+import java.util.List;
+
 import Model.*;
 
 public interface IUserDAO {
@@ -8,7 +10,7 @@ public interface IUserDAO {
 
 	public void login(User user, AuthToken authToken);
 	
-	public void loadUsers();
+	public List<User> loadUsers();
 	
 	public void clear();
 }
