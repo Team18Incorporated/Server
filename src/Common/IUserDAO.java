@@ -8,5 +8,7 @@ public interface IUserDAO {
 
 	public void login(User user, AuthToken authToken);
 	
+	public void loadUsers();
+	
 	public void clear();
 }

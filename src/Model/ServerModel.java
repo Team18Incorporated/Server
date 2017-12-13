@@ -250,9 +250,11 @@ public class ServerModel {
 				command.execute();
 			}
 
-		}
-		
-		
+		}		
+	}
+	
+	public loadUsers()
+	{
 		
 	}
 }

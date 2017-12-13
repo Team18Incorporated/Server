@@ -81,7 +81,8 @@ public class SQL_UserDAO implements IUserDAO {
             connection = DriverManager.getConnection("jdbc:sqlite:test.sqlite");
             statement = connection.prepareStatement(s);
             Blob blobbo = (Blob) user;
-            statement.setBlob(1, blobbo);
+            //statement.setBlob(1, blobbo);
+            statement.setBinaryStream(1, blobbo.getBinaryStream());
             statement.executeUpdate();
             statement.close();
             connection.close();
