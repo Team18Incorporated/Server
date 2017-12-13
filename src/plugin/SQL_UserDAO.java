@@ -3,6 +3,9 @@ package plugin;
 import Model.AuthToken;
 import Model.Game;
 import Model.User;
+
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -176,7 +179,21 @@ public class SQL_UserDAO implements IUserDAO {
            
             while(rs.next())
             {
-               users.add((User) rs.getBlob("user"));
+            	ObjectInputStream ois=null;
+				try {
+					ois = new ObjectInputStream(rs.getBlob("user").getBinaryStream());
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+               try {
+				users.add((User) ois.readObject());
+				ois.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+               
             }
             statement.close();
             c.close();
@@ -188,4 +205,6 @@ public class SQL_UserDAO implements IUserDAO {
 		return users;
 	}
 	
+	
+
 }

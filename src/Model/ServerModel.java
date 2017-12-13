@@ -262,10 +262,10 @@ public class ServerModel {
 			users.put(u.getUsername(), u);
 		}
 		
-		ArrayList<Pair<AuthToken, String>> tokens = (ArrayList)userDAO.loadAuthTokens();
+		ArrayList<Pair<String, String>> tokens = (ArrayList)userDAO.loadAuthTokens();
 		for(int i=0; i< tokens.size(); i++)
 		{
-			authTokens.put(tokens.get(i).getKey().getToken(), users.get(tokens.get(i).getValue()));
+			authTokens.put(tokens.get(i).getKey(), users.get(tokens.get(i).getValue()));
 		}
 	}
 }

@@ -13,7 +13,7 @@ public interface IUserDAO {
 	
 	public List<User> loadUsers();
 	
-	public List<Pair<AuthToken, String>> loadAuthTokens();
+	public List<Pair<String, String>> loadAuthTokens();
 	
 	public void clear();
 }
