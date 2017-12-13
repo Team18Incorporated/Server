@@ -140,7 +140,13 @@ public class ServerCommunicator {
 		if(args.length > 0) {
 			createFactory(args[0]);
 			if (args.length>1) {
-				ServerFacade.getSingleton().setMaxNumCommands(Integer.parseInt(args[1]));
+				try{
+					ServerFacade.getSingleton().setMaxNumCommands(Integer.parseInt(args[1]));
+				}catch(Exception e){
+					//clear database since its not an int
+				}
+
+					
 			}
 			
 			ServerFacade.getSingleton().loadGames();

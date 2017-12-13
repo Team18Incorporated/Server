@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.Map;
 
 import com.couchbase.lite.*;
+import com.google.gson.Gson;
 
 import Common.IUserDAO;
 import Model.AuthToken;
@@ -12,6 +13,7 @@ import Model.User;
 public class CouchUserDAO implements IUserDAO{
 	
 	Database database;
+	Gson gson = new Gson();
 
 	public CouchUserDAO() {
 		// TODO Auto-generated constructor stub
@@ -43,7 +45,7 @@ public class CouchUserDAO implements IUserDAO{
 				public boolean update(UnsavedRevision newRevision) {
 					Map<String, Object> properties = newRevision
 							.getProperties();
-					properties.put(id, user);
+					properties.put(id, gson.toJson(user));
 					newRevision.setUserProperties(properties);
 					return true;
 				}

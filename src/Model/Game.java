@@ -7,7 +7,7 @@ import Server.ClientProxy;
 
 
 
-public class Game {
+public class Game implements java.io.Serializable{
 
     private List<Player> playerList;
     private String gameID; //could make ID's into something other than Strings

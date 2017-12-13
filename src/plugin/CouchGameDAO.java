@@ -11,6 +11,7 @@ import com.couchbase.lite.*;
 import Common.ICommand;
 import Common.IGameDAO;
 import Model.Game;
+import Server.ByteUtil;
 
 public class CouchGameDAO implements IGameDAO {
 	
@@ -65,7 +66,8 @@ public class CouchGameDAO implements IGameDAO {
 		Document doc = database.getDocument("games");
 		Map<String, Object> properties = doc.getProperties();
 		if(properties != null && properties.size() > 0) {
-			Map<String, Game> newMap = properties.entrySet().stream()
+			Map<String, Game> newMap;
+			newMap = properties.entrySet().stream()
 				.collect(Collectors.toMap(Map.Entry::getKey, e-> (Game)e.getValue()));
 
 			List<Game> games = new ArrayList<Game>(newMap.values());
