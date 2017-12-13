@@ -78,10 +78,7 @@ public class SQL_GameDAO implements IGameDAO {
             c = DriverManager.getConnection("jdbc:sqlite:test.sqlite");
             statement = c.createStatement();
             ResultSet rs = statement.executeQuery("SELECT game FROM Games;");
-            if(rs.isClosed() == true)
-            {
-                return games;
-            }
+           
             while(rs.next())
             {
                games.add((Game) rs.getBlob("game"));
