@@ -3,6 +3,8 @@ package plugin;
 import Model.AuthToken;
 import Model.Game;
 import Model.User;
+import javafx.util.Pair;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -188,4 +190,31 @@ public class SQL_UserDAO implements IUserDAO {
 		return users;
 	}
 	
+	@Override
+	public List<Pair<String, String>> loadAuthTokens()
+	{
+		List<Pair<String,String>> tokens = new ArrayList<Pair<String,String>>();
+		Connection c = null;
+		Statement statement = null;
+		try {
+			Class.forName("org.sqlite.JDBC");
+            c = DriverManager.getConnection("jdbc:sqlite:test.sqlite");
+            statement = c.createStatement();
+            ResultSet rs = statement.executeQuery("SELECT * FROM Users;");
+           
+            while(rs.next())
+            {
+            	String t = rs.getString("token");
+            	String ID = rs.getString("userID");
+            	tokens.add(new Pair<String,String>(t,ID));
+            }
+            statement.close();
+            c.close();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException se){
+            se.printStackTrace();
+        }		
+		return tokens;
+	}
 }
