@@ -124,4 +124,10 @@ public class CouchUserDAO implements IUserDAO{
 		return null;
 	}
 
+	@Override
+	public void updateUser(User user) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

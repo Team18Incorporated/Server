@@ -43,6 +43,8 @@ public class User implements Serializable{
 		// TODO Auto-generated method stub
 		if(!gameLobbys.contains(gameID))
 			gameLobbys.add(gameID);
+		ServerModel.getSingleton().updateUser(this);
+
 	}
 
 	public void leave(String gameID) {
@@ -64,6 +66,7 @@ public class User implements Serializable{
 		// TODO Auto-generated method stub
 		if(gameLobbys.contains(gameID)) gameLobbys.remove(gameID);
 		startedGames.add(gameID);
+		ServerModel.getSingleton().updateUser(this);
 	}
 
 }

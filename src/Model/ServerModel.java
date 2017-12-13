@@ -268,4 +268,9 @@ public class ServerModel {
 			authTokens.put(tokens.get(i).getKey(), users.get(tokens.get(i).getValue()));
 		}
 	}
+	
+	public void updateUser(User user)
+	{
+		userDAO.updateUser(user);
+	}
 }
