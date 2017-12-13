@@ -256,4 +256,36 @@ public class SQL_UserDAO implements IUserDAO {
 		return tokens;
 	}
 
+	public void updateUser(User user)
+	{
+		Connection c = null;
+		PreparedStatement statement = null;
+		String s = "UPDATE Users SET user=? WHERE username = \"" + user.getUsername() +"\";";
+		try {
+			Class.forName("org.sqlite.JDBC");
+            c = DriverManager.getConnection("jdbc:sqlite:test.sqlite");
+            statement = c.prepareStatement(s);
+            ByteArrayOutputStream baos=null;           
+            try {
+            	baos = new ByteArrayOutputStream();                 
+                ObjectOutputStream objOstream = new ObjectOutputStream(baos);
+				objOstream.writeObject(user);
+				objOstream.flush();                 
+	            objOstream.close(); 
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}                   
+                              
+            byte[] bArray = baos.toByteArray(); 
+            statement.setBytes(1, bArray);
+            statement.executeUpdate();
+            statement.close();
+            c.close();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException se){
+            se.printStackTrace();
+        }
+	}
 }
