@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Vector;
 
+import javafx.util.Pair;
 import Commands.InGameCommands.StartTurnCommand;
 import Common.ICommand;
 import Common.IGameDAO;
@@ -253,8 +254,18 @@ public class ServerModel {
 		}		
 	}
 	
-	public loadUsers()
+	public void loadUsers()
 	{
+		ArrayList<User> temp = (ArrayList)userDAO.loadUsers();
+		for(User u :temp)
+		{
+			users.put(u.getUsername(), u);
+		}
 		
+		ArrayList<Pair<AuthToken, String>> tokens = (ArrayList)userDAO.loadAuthTokens();
+		for(int i=0; i< tokens.size(); i++)
+		{
+			authTokens.put(tokens.get(i).getKey().getToken(), users.get(tokens.get(i).getValue()));
+		}
 	}
 }
