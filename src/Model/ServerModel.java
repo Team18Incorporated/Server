@@ -218,12 +218,6 @@ public class ServerModel {
 		//might not need
 	}
 
-	public void clearDBs()
-	{
-		userDAO.clear();
-		gameDAO.clear();
-	}
-	
 	public void setUserDAO(IUserDAO userDAO)
 	{
 		this.userDAO=userDAO;
@@ -273,5 +267,11 @@ public class ServerModel {
 	public void updateUser(User user)
 	{
 		userDAO.updateUser(user);
+	}
+	
+	public void clearDB()
+	{
+		userDAO.clear();
+		gameDAO.clear();
 	}
 }

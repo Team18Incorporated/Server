@@ -446,4 +446,9 @@ public class ServerFacade implements IServer {
 	{
 		ServerModel.getSingleton().loadUsers();
 	}
+	
+	public void clearDB()
+	{
+		ServerModel.getSingleton().clearDB();
+	}
 }

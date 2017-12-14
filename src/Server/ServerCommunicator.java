@@ -145,6 +145,13 @@ public class ServerCommunicator {
 				}catch(Exception e){
 					//clear database since its not an int
 				}
+				if(args.length>2)
+				{
+					if(args[2].equals("clear"))
+					{
+						ServerFacade.getSingleton().clearDB();
+					}
+				}
 
 					
 			}
