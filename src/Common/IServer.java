@@ -9,6 +9,7 @@ import Model.ChatMessage;
 import Model.GameInfo;
 import Model.Route;
 import Model.StartedGameResult;
+import Model.User;
 import Commands.CommandList;
 import Commands.ShowDestinationChoicesCommand;
 import Commands.UpdateFaceUpCommand;
@@ -21,7 +22,7 @@ public interface IServer {
 	 * @Pre: user&&password !=null && != ""
 	 * @Post: 0 < int authToken < 10000 || exception
 	 */
-	public AuthToken userLogin(String user, String password);
+	public User userLogin(String user, String password);
 	/*
 	 * Registers a new user and logs them in. Returns authToken
 	 * Throws existingUser exception

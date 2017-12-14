@@ -1,8 +1,10 @@
 package plugin;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import javafx.util.Pair;
 
@@ -11,6 +13,7 @@ import com.google.gson.Gson;
 
 import Common.IUserDAO;
 import Model.AuthToken;
+import Model.Game;
 import Model.User;
 
 public class CouchUserDAO implements IUserDAO{
@@ -114,7 +117,17 @@ public class CouchUserDAO implements IUserDAO{
 
 	@Override
 	public List<User> loadUsers() {
-		// TODO Auto-generated method stub
+		Document doc = database.getDocument("games");
+		Map<String, Object> properties = doc.getProperties();
+		if(properties != null && properties.size() > 0) {
+			Map<String, Game> newMap;
+			newMap = properties.entrySet().stream()
+				.collect(Collectors.toMap(Map.Entry::getKey, e-> (Game)e.getValue()));
+
+			List<Game> games = new ArrayList<Game>(newMap.values());
+			//return games;
+		}
+		
 		return null;
 	}
 

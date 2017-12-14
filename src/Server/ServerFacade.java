@@ -43,7 +43,7 @@ public class ServerFacade implements IServer {
 	}
 
 	@Override
-	public AuthToken userLogin(String user, String password) {
+	public User userLogin(String user, String password) {
 		// TODO Auto-generated method stub
 		return ServerModel.getSingleton().login(user, password);
 	}
@@ -110,8 +110,8 @@ public class ServerFacade implements IServer {
 	@Override
 	public Object unstartedGames(AuthToken authToken) {
 		// TODO Auto-generated method stub
-		ArrayList<String> ids = (ArrayList<String>) ServerModel.getSingleton()
-				.getUserFromAuthToken(authToken).getUnstartedGames();
+		User user= ServerModel.getSingleton().getUserFromAuthToken(authToken);
+		ArrayList<String> ids = (ArrayList<String>) user.getUnstartedGames();
 		ArrayList<GameInfo> games = new ArrayList<GameInfo>();
 		for (int i = 0; i < ids.size(); i++) {
 			games.add(ServerModel.getSingleton().getGameInfo(ids.get(i)));
@@ -281,7 +281,7 @@ public class ServerFacade implements IServer {
 		List<TrainCard> list = g.getFaceUpCards();
 		Player player = null;
 		for(Player p : g.getPlayerList())
-			if(p.getPlayerID() == playerID)
+			if(p.getPlayerID().equals(playerID))
 				player = p;
 		player.addCardstoHand(cards);
 		// call client proxy
@@ -307,16 +307,20 @@ public class ServerFacade implements IServer {
 		// check
 		boolean inGame = false;
 		User u = ServerModel.getSingleton().getUserFromAuthToken(authToken);
-		ArrayList<String>gameList = (ArrayList<String>) u.getInProgressGames();
-		for (String id : gameList) {
-			if (id.equals(gameID))
-				inGame = true;
+		if(u!=null)
+		{
+			ArrayList<String>gameList = (ArrayList<String>) u.getInProgressGames();
+			for (String id : gameList) {
+				if (id.equals(gameID))
+					inGame = true;
+			}
+			if (!inGame)
+				return null;
+			// get game from ServerModel
+			Game g = ServerModel.getSingleton().getGame(gameID);
+			return g;
 		}
-		if (!inGame)
-			return null;
-		// get game from ServerModel
-		Game g = ServerModel.getSingleton().getGame(gameID);
-		return g;
+		return null;
 	}
 
 	@Override
@@ -337,13 +341,17 @@ public class ServerFacade implements IServer {
 	public CommandList getHistory(AuthToken authToken, String gameID, int index) {
 		// TODO Auto-generated method stub
 		Game g = checkInGame(authToken, gameID);
-		String playerID = ServerModel.getSingleton().getUserFromAuthToken(authToken).getID();
-		if(g == null) return new CommandList();
-		Player player = null;
-		for(Player p : g.getPlayerList())
-			if(p.getPlayerID() == playerID)
-				player = p;
-		return player.getCommands(index);
+		if(g!=null)
+		{
+			String playerID = ServerModel.getSingleton().getUserFromAuthToken(authToken).getID();
+			if(g == null) return new CommandList();
+			Player player = null;
+			for(Player p : g.getPlayerList())
+				if(p.getPlayerID().equals(playerID))
+					player = p;
+			return player.getCommands(index);
+		}
+		return null;
 	}
 	
 	public void incrementTurn(AuthToken authToken, String gameID)

@@ -1,11 +1,12 @@
 package Model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 
 
-public class GameList {
+public class GameList implements Serializable{
 
     private List<GameInfo> gameList;
 
