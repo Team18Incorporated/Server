@@ -152,7 +152,7 @@ public class CouchGameDAO implements IGameDAO {
 				public boolean update(UnsavedRevision newRevision) {
 					Map<String, Object> properties = newRevision
 							.getProperties();
-					List<ICommand> commands = (List<ICommand>) properties.get(gameID);
+					List<ICommand> commands = (List<ICommand>) gsonCommand.fromJson((String) properties.get(gameID),new TypeToken<List<ICommand>>(){}.getType());
 					if (commands == null) commands = new ArrayList<ICommand>();
 					commands.add(command);
 					properties.put(gameID, gsonCommand.toJson(commands, new TypeToken<List<ICommand>>(){}.getType()));
