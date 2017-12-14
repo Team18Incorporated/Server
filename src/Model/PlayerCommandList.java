@@ -47,7 +47,7 @@ public class PlayerCommandList implements Serializable{
 		return new CommandList(resultList, returnIndex); //late);
 	}
 	
-	private class DateCommand{
+	private class DateCommand implements Serializable{
 
 		private ICommand command;
 		private Date date;

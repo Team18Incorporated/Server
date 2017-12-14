@@ -83,9 +83,9 @@ public class ServerFacade implements IServer {
 					ServerModel.getSingleton().getUserFromAuthToken(authToken));
 	}
 
+	
 	@Override
 	public Object openGames() {
-		// TODO Auto-generated method stub
 		ArrayList<String> ids = (ArrayList<String>) ServerModel.getSingleton()
 				.getOpenGames();
 		ArrayList<GameInfo> games = new ArrayList<GameInfo>();

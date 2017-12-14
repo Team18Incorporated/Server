@@ -30,8 +30,29 @@ public class GameInfo implements Serializable{
             playerNames.add(this.playerList.get(i).getPlayerName());
         }
     }
+    
+    public GameInfo(Game game){
+    	gameName = game.getName();
+    	gameID = game.getGameID();
+    	playerList = (ArrayList<Player>) game.getPlayerList();
+    	hasStarted = true;
+    	
+    	numPlayers=this.playerList.size();
+    	if (numPlayers==5){
+    		maxPlayers = true;
+    	}
+    	playerNames = new ArrayList<String>();
+        for(int i=0; i<numPlayers; i++)
+        {
+            playerNames.add(this.playerList.get(i).getPlayerName());
+        }
+    }
 
     //METHODS---------------------------------------------------------------------------------------
+    public String getName(){
+    	return gameName;
+    }
+    
     public int getNumPlayers() {
         return numPlayers;
     }

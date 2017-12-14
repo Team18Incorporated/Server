@@ -25,7 +25,7 @@ public class ClientGame {
     	
     	playerList = new ArrayList<PlayerInfo>();
     	for(Player p : g.getPlayerList()){
-    		if(p.getPlayerID()== playerID)
+    		if(p.getPlayerID().equals(playerID))
     			currentPlayer = p;
     		playerList.add(new PlayerInfo(p));
     	}

@@ -11,6 +11,7 @@ public class Game implements java.io.Serializable{
 
     private List<Player> playerList;
     private String gameID; //could make ID's into something other than Strings
+    private String gameName;
     private GameMap map;
     private ArrayList<TrainCard> faceUpCards;
     private TrainDeck trainCardDeck;
@@ -27,15 +28,19 @@ public class Game implements java.io.Serializable{
     private ChatHistory chatHistory;
 
     //CONSTRUCTOR-----------------------------------------------------------------------------------
-    public Game(ArrayList<Player> playerList, String gameID)
+    public Game(ArrayList<Player> playerList, String gameID, String name)
     {
     	this.gameID = gameID;
         this.playerList=playerList;
+        gameName = name;
         startGame();
     }
 
     //METHODS---------------------------------------------------------------------------------------
 
+    public String getName(){
+    	return gameName;
+    }
 
     public List<Player> getPlayerList() {
         return playerList;

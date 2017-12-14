@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Vector;
 
 import Common.*;
+import Server.ServerFacade;
 
 public class User implements Serializable{
 	
@@ -70,7 +71,19 @@ public class User implements Serializable{
 	
 	public void addAuthToken(AuthToken authToken)
 	{
-		authToken=authToken;
+		this.authToken=authToken;
 	}
 
+	/*
+	 * checks that a game has a record, removes it if not
+	 */
+	public void orphanGameKiller(){
+		for (int i=0; i<gameLobbys.size(); i++){
+			GameInfo temp = ServerModel.getSingleton().getGameInfo(gameLobbys.get(i));
+			if (temp==null){
+				gameLobbys.remove(i);
+				i--;
+			}
+		}
+	}
 }

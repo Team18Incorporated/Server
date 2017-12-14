@@ -128,11 +128,8 @@ public class ServerModel {
 				result = new StartedGameResult(false);
 				return result;
 			}
-			
-			// gameList.put(gameID, new Game(gameInfoTemp.getPlayers()));
-
 			// create new game and add to next function
-			g = new Game(gameInfoTemp.getPlayers(), gameID);
+			g = new Game(gameInfoTemp.getPlayers(), gameID, gameInfoTemp.getName());
 			gameInfoTemp.start();
 			joinableGames.remove(gameID);
 			gameList.put(gameID, g);
@@ -161,7 +158,7 @@ public class ServerModel {
 		else
 			g = gameList.get(gameID);
 		result = new StartedGameResult(true, g, playerID);
-		System.out.println("Here");
+		//System.out.println("Here");
 
 		return result;
 	}
@@ -250,8 +247,9 @@ public class ServerModel {
 			{
 				command.execute();
 			}
+			gameInfo.put(g.getGameID(), new GameInfo(g));
 
-		}		
+		}
 	}
 	
 	public void loadUsers()
@@ -260,6 +258,7 @@ public class ServerModel {
 		for(User u :temp)
 		{
 			users.put(u.getUsername(), u);
+			u.orphanGameKiller();
 		}
 		
 		ArrayList<Pair<String, String>> tokens = (ArrayList)userDAO.loadAuthTokens();
@@ -268,6 +267,8 @@ public class ServerModel {
 			authTokens.put(tokens.get(i).getKey(), users.get(tokens.get(i).getValue()));
 		}
 	}
+	
+	
 	
 	public void updateUser(User user)
 	{
