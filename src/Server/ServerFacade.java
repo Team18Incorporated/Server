@@ -215,7 +215,7 @@ public class ServerFacade implements IServer {
 		for(Player p : g.getPlayerList())
 			if(p.getPlayerID() == playerID)
 				player = p;
-		player.addDestinationCards((ArrayList<DestinationCard>) cards);
+		//player.addDestinationCards((ArrayList<DestinationCard>) cards);
 		ClientProxy proxy = new ClientProxy( gameID,playerID);
 		proxy.showDestinationCardChoices(cards);
 		proxy.updateDestinationDeckSize(g.getNumDestinationDeck());
@@ -231,7 +231,7 @@ public class ServerFacade implements IServer {
 
 	@Override
 	public void sendBackDestinations(AuthToken authToken, String gameID,
-			List<DestinationCard> list) {
+			List<DestinationCard> list, List<DestinationCard> discardlist) {
 		// check if user in game
 		Game g = checkInGame(authToken, gameID);
 		if (g == null)
@@ -246,7 +246,7 @@ public class ServerFacade implements IServer {
 		for(Player p : g.getPlayerList())
 			if(p.getPlayerID() == playerID)
 				player = p;
-		player.discard((ArrayList<DestinationCard>)list);
+		player.addDestinationCards((ArrayList)list);
 		ClientProxy proxy = new ClientProxy(gameID,playerID);
 		
 		proxy.updateDestinationHand(player.getDestinationCards());

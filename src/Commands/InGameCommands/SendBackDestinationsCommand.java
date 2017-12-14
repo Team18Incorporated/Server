@@ -14,6 +14,7 @@ public class SendBackDestinationsCommand implements ICommand {
     private AuthToken authToken;
     private String gameID;
     private List<DestinationCard> list;
+    private List<DestinationCard> discardlist;
     private String className=getClass().getName();
 
 
@@ -21,7 +22,7 @@ public class SendBackDestinationsCommand implements ICommand {
     @Override
     public Object execute()
     {
-        ServerFacade.getSingleton().sendBackDestinations(authToken, gameID, list);
+        ServerFacade.getSingleton().sendBackDestinations(authToken, gameID, list, discardlist);
 	ServerFacade.getSingleton().storeCommand(this, gameID);
         return null;
     }

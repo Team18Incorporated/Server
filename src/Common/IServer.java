@@ -98,7 +98,7 @@ public interface IServer {
 	* @pre 0 < authToken&&gameID < 10000
 	* @post returns a list of commands
 	 */
-	public void sendBackDestinations(AuthToken authToken, String gameID, List<DestinationCard> list);
+	public void sendBackDestinations(AuthToken authToken, String gameID, List<DestinationCard> list, List<DestinationCard> discardlist);
 
 	/*
 	* @pre 0 < authToken&&gameID < 10000
