@@ -1,5 +1,5 @@
 {
 
-    "Plugin": "plugins."
+    "Plugin": "file:///users/ugrad/d/dasolomo/git/Server/plugins/"
 }
 

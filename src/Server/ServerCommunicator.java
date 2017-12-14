@@ -86,28 +86,14 @@ public class ServerCommunicator {
 			JsonObject jsonObject = (JsonObject)object;
 			String plugin = jsonObject.get("Plugin").getAsString();
 
-			File pluginDir = new File (plugin);
-			URL url = pluginDir.toURI().toURL();
-
-		    Class[] parameters = new Class[]{URL.class};
-	    	URLClassLoader sysLoader = (URLClassLoader)
-	    			ClassLoader.getSystemClassLoader();
-	    	Class sysClass = URLClassLoader.class;
-	    	try
-	        {
-	            Method method = sysClass.getDeclaredMethod("addURL", parameters);
-	            method.setAccessible(true);
-	            method.invoke(sysLoader,new Object[]{ url });
-
-	            Constructor cs = ClassLoader.getSystemClassLoader().loadClass("plugin."+dbType+"Factory").getConstructor(); 
-	            factory = (IDAOFactory)cs.newInstance();
-	        }
-	        catch(Exception ex)
-	        {
-	            System.err.println(ex.getMessage());
-	        }
-			//String url = plugin+dbType+"Factory";
-			//c = Class.forName(url);
+			//File pluginDir = new File (plugin);
+			URL[] url = new URL[]{new URL(plugin+dbType+".jar")};//pluginDir.toURI().toURL();
+			URLClassLoader sysLoader = new URLClassLoader(url);
+			c=sysLoader.loadClass("plugin."+dbType+"Factory");
+			Constructor<?> constructor = c.getConstructor();
+			factory=(IDAOFactory) constructor.newInstance();
+			
+		   
 
 		}
 		catch(FileNotFoundException fe)
@@ -121,17 +107,7 @@ public class ServerCommunicator {
             return;
         }
 		
-		/*try {
-			factory = (IDAOFactory) c.newInstance();
-		}
-		catch (InstantiationException e) {
-			e.printStackTrace();
-			return;
-		}
-		catch (IllegalAccessException e) {
-			e.printStackTrace();
-			return;
-		}*/
+
 		ServerFacade.getSingleton().setUserDAO(factory.createUserDAO());
 		ServerFacade.getSingleton().setGameDAO(factory.createGameDAO());
 	}
@@ -143,7 +119,7 @@ public class ServerCommunicator {
 				try{
 					ServerFacade.getSingleton().setMaxNumCommands(Integer.parseInt(args[1]));
 				}catch(Exception e){
-					//clear database since its not an int
+
 				}
 				if(args.length>2)
 				{

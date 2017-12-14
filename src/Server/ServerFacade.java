@@ -133,7 +133,7 @@ public class ServerFacade implements IServer {
 		String playerID = ServerModel.getSingleton().getUserFromAuthToken(authToken).getID();
 		Player player = null;
 		for(Player p : g.getPlayerList())
-			if(p.getPlayerID() == playerID)
+			if(p.getPlayerID().equals(playerID))
 				player = p;
 		Route returnRoute = g.getMap().claimRoute(routeIn, player);
 		ClientProxy proxy = new ClientProxy(gameID,playerID);
@@ -178,7 +178,7 @@ public class ServerFacade implements IServer {
 		if (trainCard==null) return;
 		Player player = null;
 		for(Player p : g.getPlayerList())
-			if(p.getPlayerID() == playerID)
+			if(p.getPlayerID().equals( playerID))
 				player = p;
 		ArrayList<TrainCard> cards = new ArrayList<TrainCard>();
 		cards.add(trainCard);
@@ -213,7 +213,7 @@ public class ServerFacade implements IServer {
 		List<DestinationCard> cards = g.drawDestinationCards();
 		Player player = null;
 		for(Player p : g.getPlayerList())
-			if(p.getPlayerID() == playerID)
+			if(p.getPlayerID().equals(playerID))
 				player = p;
 		//player.addDestinationCards((ArrayList<DestinationCard>) cards);
 		ClientProxy proxy = new ClientProxy( gameID,playerID);
@@ -244,7 +244,7 @@ public class ServerFacade implements IServer {
 
 		Player player = null;
 		for(Player p : g.getPlayerList())
-			if(p.getPlayerID() == playerID)
+			if(p.getPlayerID().equals(playerID))
 				player = p;
 		player.addDestinationCards((ArrayList)list);
 		ClientProxy proxy = new ClientProxy(gameID,playerID);

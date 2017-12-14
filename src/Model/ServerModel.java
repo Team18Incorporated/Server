@@ -187,12 +187,17 @@ public class ServerModel {
 		gameDAO.storeGame(game);
 	}
 	
+	private void updateGame(Game game)
+	{
+		gameDAO.updateGame(game);
+	}
+	
 	public void storeCommand(ICommand command, String gameID)
 	{
 		Game g = gameList.get(gameID);
 		if(maxNumCommands==g.getNumCommandsStored())
 		{
-			storeGame(g);
+			updateGame(g);
 			g.resetNumCommandsStored();
 			gameDAO.clearCommands(gameID);
 

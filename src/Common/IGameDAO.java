@@ -22,5 +22,7 @@ public interface IGameDAO {
 	public void addCommand(ICommand command, String gameID);
 	
 	public void clear();
+	
+	public void updateGame(Game game);
 
 }
