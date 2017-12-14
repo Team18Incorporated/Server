@@ -142,7 +142,7 @@ public class ServerModel {
 				Player p = gameInfoTemp.getPlayers().get(i);
 				users.get(p.getPlayerName()).startGame(gameID);
 				ArrayList<DestinationCard> cards =(ArrayList<DestinationCard>) g.drawDestinationCards();
-				p.addDestinationCards(cards);
+				//p.addDestinationCards(cards);
 				ClientProxy proxy = new ClientProxy(gameID,p.getPlayerID());
 				proxy.showDestinationCardChoices(cards);
 			}

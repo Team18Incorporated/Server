@@ -20,7 +20,7 @@ import Common.IGameDAO;
 import Common.IUserDAO;
 import Model.ServerModel;
 //TODO: add functionality when set outside program
-import plugin.*;
+//import plugin.*;
 public class ServerCommunicator {
 
 	public static  int SERVER_PORT_NUMBER = 8080;
