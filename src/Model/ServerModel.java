@@ -135,28 +135,27 @@ public class ServerModel {
 			gameInfoTemp.start();
 			joinableGames.remove(gameID);
 			gameList.put(gameID, g);
-			gameDAO.storeGame(g);
 			// tell other clients game is started
 			for (int i = 0; i < gameInfoTemp.getPlayers().size(); i++) {
 				Player p = gameInfoTemp.getPlayers().get(i);
 				users.get(p.getPlayerName()).startGame(gameID);
 				ArrayList<DestinationCard> cards =(ArrayList<DestinationCard>) g.drawDestinationCards();
-				//p.addDestinationCards(cards);
+				p.addDestinationCards(cards);
 				ClientProxy proxy = new ClientProxy(gameID,p.getPlayerID());
 				proxy.showDestinationCardChoices(cards);
 			}
-			for (int i = 0; i < gameInfoTemp.getPlayers().size(); i++) {
-				Player p = gameInfoTemp.getPlayers().get(i);
+			for (int i = 0; i < g.getPlayerList().size(); i++) {
+				Player p = g.getPlayerList().get(i);
 				ClientProxy proxy = new ClientProxy( gameID,p.getPlayerID());
 				proxy.updateDestinationDeckSize(g.getNumDestinationDeck());
 			}
 
 			
 			
-			Player p = gameInfoTemp.getPlayers().get(g.getPlayerTurn());
+			Player p = g.getPlayerList().get(g.getPlayerTurn());
 			ClientProxy proxy = new ClientProxy(g.getGameID(),p.getPlayerID());
 			proxy.startPlayerTurn();
-			
+			gameDAO.storeGame(g);
 		}
 		else
 			g = gameList.get(gameID);

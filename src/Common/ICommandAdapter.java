@@ -26,7 +26,7 @@ public class ICommandAdapter<T> implements JsonDeserializer<T>, JsonSerializer<T
 
         final JsonObject jsonObject = jsonElement.getAsJsonObject();
         final JsonPrimitive prim = (JsonPrimitive) jsonObject.get(CLASSNAME);
-        final String className = "edu.byu.cs.team18.tickettoride.Common."+prim.getAsString();
+        final String className = "Commands."+prim.getAsString();
         final Class<T> clazz = getClassInstance(className);
         return deserializationContext.deserialize(jsonObject.get(DATA), clazz);
     }
