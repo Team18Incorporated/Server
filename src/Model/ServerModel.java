@@ -64,15 +64,16 @@ public class ServerModel {
 		return temp;
 	}
 
-	public AuthToken login(String username, String password) {
+	public User login(String username, String password) {
 		User temp = (User) users.get(username);
 		AuthToken tempAuth = null;
 		if (temp != null && password.equals(temp.getPassword())) {
 			tempAuth = new AuthToken();
+			temp.addAuthToken(tempAuth);
 			authTokens.put(tempAuth.getToken(), temp);
 			userDAO.login(temp, tempAuth);
 		}
-		return tempAuth;
+		return temp;
 	}
 
 	public GameInfo newGame(String name, User user) {

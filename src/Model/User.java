@@ -11,7 +11,7 @@ public class User implements Serializable{
 	private String username;
 	private String password;
 	private String id;
-	private ArrayList<AuthToken> authTokens;
+	private AuthToken authToken;
 	private ArrayList<String> startedGames;
 	private ArrayList<String> gameLobbys;
 
@@ -20,7 +20,6 @@ public class User implements Serializable{
 		username = user;
 		this.password = password;
 		this.id = id;
-		authTokens = new ArrayList<>();
 		startedGames = new ArrayList<>();
 		gameLobbys = new ArrayList<>();
 		}
@@ -67,6 +66,11 @@ public class User implements Serializable{
 		if(gameLobbys.contains(gameID)) gameLobbys.remove(gameID);
 		startedGames.add(gameID);
 		ServerModel.getSingleton().updateUser(this);
+	}
+	
+	public void addAuthToken(AuthToken authToken)
+	{
+		authToken=authToken;
 	}
 
 }

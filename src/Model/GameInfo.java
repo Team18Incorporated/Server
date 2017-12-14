@@ -1,12 +1,13 @@
 package Model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.UUID;
 
 import com.sun.xml.internal.bind.v2.schemagen.xmlschema.List;
 
 
-public class GameInfo {
+public class GameInfo implements Serializable{
 
     private String gameID;
     private String gameName;
