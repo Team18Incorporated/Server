@@ -2,11 +2,13 @@ package plugin;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 import com.couchbase.lite.*;
+import com.google.gson.Gson;
 
 import Common.ICommand;
 import Common.IGameDAO;
@@ -16,6 +18,7 @@ import Server.ByteUtil;
 public class CouchGameDAO implements IGameDAO {
 	
 	Database database;
+	Gson gson = new Gson();
 	
 	public CouchGameDAO(){
 
@@ -46,7 +49,7 @@ public class CouchGameDAO implements IGameDAO {
 				public boolean update(UnsavedRevision newRevision) {
 					Map<String, Object> properties = newRevision
 							.getProperties();
-					properties.put(game.getGameID(), game);
+					properties.put(game.getGameID(), gson.toJson(game));
 					newRevision.setUserProperties(properties);
 					return true;
 				}
@@ -66,9 +69,12 @@ public class CouchGameDAO implements IGameDAO {
 		Document doc = database.getDocument("games");
 		Map<String, Object> properties = doc.getProperties();
 		if(properties != null && properties.size() > 0) {
+			Map<String, Object> newRevision = new HashMap<String, Object>(properties);
+			newRevision.remove("_id");
+			newRevision.remove("_rev");
 			Map<String, Game> newMap;
-			newMap = properties.entrySet().stream()
-				.collect(Collectors.toMap(Map.Entry::getKey, e-> (Game)e.getValue()));
+			newMap = newRevision.entrySet().stream()
+				.collect(Collectors.toMap(Map.Entry::getKey, e-> (Game)gson.fromJson((String) e.getValue(), Game.class)));
 
 			List<Game> games = new ArrayList<Game>(newMap.values());
 			return games;
@@ -103,7 +109,8 @@ public class CouchGameDAO implements IGameDAO {
 	@Override
 	public List<ICommand> loadCommands(String gameID) {
 		// TODO Auto-generated method stub
-		return (List<ICommand>) database.getDocument("commands").getProperty(gameID);
+		List<ICommand> list = (List<ICommand>) database.getDocument("commands").getProperty(gameID);
+		return list != null? list : new ArrayList<ICommand>();
 	}
 
 	@Override
@@ -144,7 +151,7 @@ public class CouchGameDAO implements IGameDAO {
 					List<ICommand> commands = (List<ICommand>) properties.get(gameID);
 					if (commands == null) commands = new ArrayList<ICommand>();
 					commands.add(command);
-					properties.put(gameID, commands);
+					properties.put(gameID, (commands));
 					newRevision.setUserProperties(properties);
 					return true;
 				}
