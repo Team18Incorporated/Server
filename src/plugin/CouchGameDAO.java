@@ -9,8 +9,10 @@ import java.util.stream.Collectors;
 
 import com.couchbase.lite.*;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import Common.ICommand;
+import Common.ICommandAdapter;
 import Common.IGameDAO;
 import Model.Game;
 import Server.ByteUtil;
@@ -19,6 +21,7 @@ public class CouchGameDAO implements IGameDAO {
 	
 	Database database;
 	Gson gson = new Gson();
+	Gson gsonCommand = new GsonBuilder().registerTypeAdapter(ICommand.class, new ICommandAdapter<ICommand>()).create();
 	
 	public CouchGameDAO(){
 
@@ -109,7 +112,7 @@ public class CouchGameDAO implements IGameDAO {
 	@Override
 	public List<ICommand> loadCommands(String gameID) {
 		// TODO Auto-generated method stub
-		List<ICommand> list = (List<ICommand>) database.getDocument("commands").getProperty(gameID);
+		List<ICommand> list = (List<ICommand>) gsonCommand.fromJson((String) database.getDocument("commands").getProperty(gameID),ICommand.class);
 		return list != null? list : new ArrayList<ICommand>();
 	}
 
