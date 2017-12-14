@@ -21,8 +21,7 @@ import Server.ByteUtil;
 public class CouchGameDAO implements IGameDAO {
 	
 	Database database;
-	Gson gson = new Gson();
-	Gson gsonCommand = new GsonBuilder().registerTypeAdapter(ICommand.class, new ICommandAdapter<ICommand>()).create();
+	Gson gson = new GsonBuilder().registerTypeAdapter(ICommand.class, new ICommandAdapter<ICommand>()).create();
 	
 	public CouchGameDAO(){
 
@@ -113,7 +112,7 @@ public class CouchGameDAO implements IGameDAO {
 	@Override
 	public List<ICommand> loadCommands(String gameID) {
 		// TODO Auto-generated method stub
-		List<ICommand> list = (List<ICommand>) gsonCommand.fromJson((String) database.getDocument("commands").getProperty(gameID),new TypeToken<List<ICommand>>(){}.getType());
+		List<ICommand> list = (List<ICommand>) gson.fromJson((String) database.getDocument("commands").getProperty(gameID),new TypeToken<List<ICommand>>(){}.getType());
 		return list != null? list : new ArrayList<ICommand>();
 	}
 
@@ -152,10 +151,10 @@ public class CouchGameDAO implements IGameDAO {
 				public boolean update(UnsavedRevision newRevision) {
 					Map<String, Object> properties = newRevision
 							.getProperties();
-					List<ICommand> commands = (List<ICommand>) gsonCommand.fromJson((String) properties.get(gameID),new TypeToken<List<ICommand>>(){}.getType());
+					List<ICommand> commands = (List<ICommand>) gson.fromJson((String) properties.get(gameID),new TypeToken<List<ICommand>>(){}.getType());
 					if (commands == null) commands = new ArrayList<ICommand>();
 					commands.add(command);
-					properties.put(gameID, gsonCommand.toJson(commands, new TypeToken<List<ICommand>>(){}.getType()));
+					properties.put(gameID, gson.toJson(commands, new TypeToken<List<ICommand>>(){}.getType()));
 					newRevision.setUserProperties(properties);
 					return true;
 				}

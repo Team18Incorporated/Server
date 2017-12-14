@@ -175,6 +175,27 @@ public class CouchUserDAO implements IUserDAO{
 	@Override
 	public void updateUser(User user) {
 		// TODO Auto-generated method stub
+		String id = user.getUsername();
+		Document doc = database.getDocument("users");
+		try {
+			doc.update(new Document.DocumentUpdater() {
+
+				@Override
+				public boolean update(UnsavedRevision newRevision) {
+					Map<String, Object> properties = newRevision
+							.getProperties();
+					properties.put(id, gson.toJson(user));
+					newRevision.setUserProperties(properties);
+					return true;
+				}
+				
+			});
+		}
+		catch (CouchbaseLiteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 		
 	}
 
